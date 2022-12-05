@@ -1,27 +1,120 @@
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  // columnas del grid
+  .col1{
+
+      background-color: #ffffff;
+      text-align: center;
+  }
+  .col2{
+
+      background-color: #ffffff;
+      border: solid 1px #fff;
+      color: #fff;
+      text-align: center;
+      //margin-top: 30px;
+   }
+
+   .card1{
+
+      width: 100%;
+      height: 20vh;
+   }
+
+   //imagenes en el grid
+    .img-card-informativo{
+
+      width: 100%;
+      height: 10rem;
+    }
+    .img-card-post{
+
+      width: 100%;
+      height: 40vh;
+    }
+
+    //botones en el grid
+    .ver-mas{
+
+      color:#3AAB94;
+      display: block;
+    }
+
+    //ion definicicones
+  .col{
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-top: 26%;
+      min-width: 20vh;
+  }
+  .col2{
+    margin-left: 10%;
+    margin-right: 10%;
+   // margin-top: 10%;
+    min-width: 20vh;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+  .grid{
+      margin-left: 10%;
+      margin-right: 10%;
+      display: grid;
+  }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+  ion-card-title{
 
-  color: #8c8c8c;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 15px;
+  }
 
-  margin: 0;
-}
+  ion-searchbar{
+      --border-radius: 20px;
+      display: block;
+      width: 70%;
+      margin-left: 15%;
+  }
 
-#container a {
-  text-decoration: none;
-}
+  .grid {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .card {
+    background-color: var(--bg);
+    box-shadow: 0 0.4rem 1.2rem rgba(8, 20, 39, 0.2);
+    padding: 8rem 4rem;
+    border-radius: 2rem;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+
+  }
+
+  .btn:hover {
+    box-shadow: 0 0.4rem 1rem rgba(8, 20, 39, 0.4);
+    background: var(--blue-dark);
+    transform: scale(0.98);
+  }
+
+  .grid {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+//card de informacion
+  .grid1 {
+
+    width:100%;
+    margin: 0 auto;
+  }
+  .grid1{
+    display: grid;
+    grid-gap: 20px;
+    margin-right: 15%;
+    margin-left: 15%;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+  }
+
+
+
+

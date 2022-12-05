@@ -24,3 +24,38 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+//banner
+.hero {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.center {
+margin: 0;
+position: absolute;
+left: 50%;
+width: 100%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+}
+.titulo-banner{
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top:60%;
+    right:38%;
+    //font-size: 10vh;
+    color: rgb(255, 255, 255);
+  }
+
+  //descripcion pagina
+  h1{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5vh;
+    color: rgb(0, 0, 0);
+}
