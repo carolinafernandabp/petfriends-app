@@ -1,0 +1,80 @@
+
+<ion-content>
+
+  <ion-grid [fixed]="true" class="principal" >
+    <ion-row>
+      <ion-col>
+        <img  class="responsive-banner" alt="" src="../../assets/icon/perro2.jpg">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+   <!------
+      <ng-container  *ngIf="(user.roles$ | async) as roles">
+        <ng-container *ngIf="roles.admin">
+
+        -->
+
+  <ng-container>
+    <ng-container>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button >
+          <ion-icon name="chevron-up-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top" >
+          <ion-fab-button routerLink="/create-publicacion">
+            <ion-icon name="document"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="paw" routerLink="/create-ficha"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </ng-container>
+  </ng-container>
+
+
+
+<ion-toolbar>
+
+  <ion-segment
+  (ionChange)="segmentChanged($event)" value="MASCOTA">
+    <ion-segment-button value="MASCOTA">
+      <ion-label>Mascotas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="NOTICIA">
+      <ion-label>Noticias</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+<ion-grid [fixed]="true" class="secondary" >
+  <ion-row>
+    <ion-col>
+      <ion-col>
+        <ion-col>
+          <ion-col>
+            <div *ngIf="optionSelected == 'MASCOTA'">
+              <app-list-publicacion [publicaciones] = "mascotaPublicacion$ | async"
+                                    (publicacionEdited) = "reloadPublicaciones()"
+                                    (publicacionesDelete) = "reloadPublicaciones()"></app-list-publicacion>
+            </div>
+            <div *ngIf="optionSelected == 'NOTICIA'">
+              <app-list-publicacion [publicaciones] = "noticiaPublicacion$ | async"
+              (publicacionEdited) = "reloadPublicaciones()"
+              (publicacionesDelete) = "reloadPublicaciones()"></app-list-publicacion>
+            </div>
+          </ion-col>
+        </ion-col>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+</ion-content>
+
+
+
+

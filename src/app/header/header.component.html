@@ -1,0 +1,44 @@
+<ion-header class="mobile-header">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-menu-button menu="myMenu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="person" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-row class="header ion-align-items-center" >
+  <ion-col size="2" class="ion-align-items-center" >
+
+  </ion-col>
+  <ion-col size="8" class="ion-text-left">
+    <!-- En el inicio mostraremos las publicaciones creadas por las organizaciones amigas, ya sea de mascotas o noticias-->
+    <ion-button fill="clear" color="dark" routerLink="/" routerDirection="root" routerLinkActive="active-item"
+      [routerLinkActiveOptions]="{exact: true}">
+      Adoptar
+    </ion-button>
+    <!--Organizaciones amigas creadas-->
+    <ion-button fill="clear" color="dark" routerLink="/org-amigas" routerDirection="root" routerLinkActive="active-item">
+      Solicitud
+    </ion-button>
+    <!------->
+    <ion-button fill="clear" color="dark" routerLink="/about" routerDirection="root" routerLinkActive="active-item">
+      Donar
+    </ion-button>
+     <!-- Button with dropdown mostraremos  -->
+
+  </ion-col>
+
+  <ion-col size="2" class="ion-text-right">
+    <ion-button fill="clear" color="dark">
+      <ion-icon slot="icon-only" name="person"></ion-icon>
+    </ion-button>
+  </ion-col>
+
+
+</ion-row>

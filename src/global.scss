@@ -25,37 +25,36 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@500&display=swap');
 
-//banner
-.hero {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-.center {
-margin: 0;
-position: absolute;
-left: 50%;
-width: 100%;
--ms-transform: translate(-50%, -50%);
-transform: translate(-50%, -50%);
-}
-.titulo-banner{
-    font-family: 'Quicksand', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top:60%;
-    right:38%;
-    //font-size: 10vh;
-    color: rgb(255, 255, 255);
+.principal {
+  // background-color: #ffffff;
+   border: none;
+   color: rgb(255, 255, 255);
+   display: grid;
+
   }
 
-  //descripcion pagina
-  h1{
-    font-family: 'Quicksand', sans-serif;
-    font-size: 2.5vh;
-    color: rgb(0, 0, 0);
+  .secondary {
+   //background-color: #af1d1d;
+   border: solid 1px #fff;
+   color: #fff;
+   text-align: center;
+  }
+
+  .responsive-banner {
+   min-width: 100%;
+   max-width: 100%;
+   min-height: 410px;
+   max-height: 410px;
+   background-image: linear-gradient(to bottom right, #D45BA1, #A784E0);
+ }
+
+.toast-success{
+  --background: #2dd36f;
 }
+
+.toast-danger{
+  --background: #eb445a;
+}
+

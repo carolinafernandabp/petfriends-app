@@ -1,0 +1,32 @@
+<ion-grid>
+  <section class="grid">
+    <ion-card *ngFor="let publicacion of publicaciones ">
+      <ion-card-header>
+        <ion-card-subtitle>User</ion-card-subtitle>
+      </ion-card-header>
+      <ion-img alt="image">{{publicacion.image}}</ion-img>
+      <ion-card-header>
+        <ion-card-title>{{publicacion.titulo}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{publicacion.description}}
+      </ion-card-content>
+
+      <ion-button fill="clear" [routerLink]="['/publicaciones', publicacion.url]">Ver más</ion-button>
+<!-------
+      <ng-container *ngIf="(user.roles$ | async) as roles">
+        <ng-container *ngIf="roles.admin">
+ --->
+          <ng-container>
+            <ng-container>
+              <ion-text color="tertiary" class="ion-text-center">
+              </ion-text>
+              <ion-button expand="block" size="small" fill="solid" (click)="presentModal()">Editar</ion-button>
+            <ion-button expand="block" size="small" fill="outline" (click)="onDeleteCourse(publicacion)">Eliminar </ion-button>
+        </ng-container>
+    </ng-container>
+
+    </ion-card>
+  </section>
+</ion-grid>
+
+
