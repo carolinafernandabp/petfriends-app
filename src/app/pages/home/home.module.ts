@@ -8,7 +8,6 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
-import { MenuPageRoutingModule } from '../menu/menu-routing.module';
 
 @NgModule({
   imports: [
@@ -17,6 +16,7 @@ import { MenuPageRoutingModule } from '../menu/menu-routing.module';
     IonicModule,
     HomePageRoutingModule,
     AllcomponentsModule
+
   ],
   declarations: [HomePage]
 })

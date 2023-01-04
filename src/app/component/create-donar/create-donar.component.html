@@ -1,0 +1,81 @@
+
+  <ion-grid [fixed]="true">
+    <ion-grid [fixed]="true">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-title>Datos de transferencia</ion-title>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-row>
+      <ion-col>
+      <ion-col >
+        <form [formGroup]="form" novalidate>
+          <ion-item fill="outline">
+          <ion-label position="stacked">Nombre</ion-label>
+            <ion-input placeholder="nombre"  formControlName="nombre" type="text"></ion-input>
+            <ion-note slot="helper" *ngIf="!form.controls.nombre.valid && form.controls.nombre.touched"></ion-note>
+            <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 50 caracteres</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline">
+          <ion-label position="stacked" >Rut</ion-label>
+            <ion-input placeholder="rut"  formControlName="rut" type="text" ></ion-input>
+            <ion-note slot="helper" *ngIf="!form.controls.rut.valid && form.controls.rut.touched">Campo obligatorio</ion-note>
+            <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
+        </ion-item>
+
+        <ion-list>
+          <ion-item fill="outline">
+            <ion-label position="stacked">Banco</ion-label>
+            <ion-select placeholder="Especie"  interface="popover"  formControlName="banco">
+              <ion-select-option value="PERRO">Perro</ion-select-option>
+              <ion-select-option value="GATO">Gato</ion-select-option>
+              <ion-select-option value="OTRO">Otro</ion-select-option>
+            </ion-select>
+            <ion-note slot="helper" *ngIf="!form.controls.banco.valid && form.controls.banco.touched"></ion-note>
+          <ion-note slot="error"></ion-note>
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item fill="outline">
+            <ion-label position="stacked">Tipo</ion-label>
+            <ion-select placeholder="Especie"  interface="popover"  formControlName="tipo">
+              <ion-select-option value="PERRO">Perro</ion-select-option>
+              <ion-select-option value="GATO">Gato</ion-select-option>
+              <ion-select-option value="OTRO">Otro</ion-select-option>
+            </ion-select>
+            <ion-note slot="helper" *ngIf="!form.controls.tipo.valid && form.controls.tipo.touched"></ion-note>
+          <ion-note slot="error"></ion-note>
+          </ion-item>
+        </ion-list>
+
+        <ion-item fill="outline">
+          <ion-label position="stacked" >Número de cuenta</ion-label>
+            <ion-input placeholder="número de cuenta"  formControlName="cuenta" type="text" ></ion-input>
+            <ion-note slot="helper" *ngIf="!form.controls.cuenta.valid && form.controls.cuenta.touched">Campo obligatorio</ion-note>
+            <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline">
+          <ion-label position="stacked" >Correo</ion-label>
+            <ion-input placeholder="correo"  formControlName="correo" type="text" ></ion-input>
+            <ion-note slot="helper" *ngIf="!form.controls.correo.valid && form.controls.correo.touched">Campo obligatorio</ion-note>
+            <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
+        </ion-item>
+
+
+        <ion-item lines="none"></ion-item>
+          <ion-button lines="none"  [disabled]="!form.valid"
+              (click)="onCreateDonacion()">
+            Crear Publicación
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-col>
+    </ion-row>
+  </ion-grid>

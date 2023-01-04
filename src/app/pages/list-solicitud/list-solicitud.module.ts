@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FichaPageRoutingModule } from './ficha-routing.module';
+import { ListSolicitudPageRoutingModule } from './list-solicitud-routing.module';
 
-import { FichaPage } from './ficha.page';
-import { CreatePublicacionComponent } from 'src/app/component/create-publicacion/create-publicacion.component';
+import { ListSolicitudPage } from './list-solicitud.page';
 import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
 
 @NgModule({
@@ -15,9 +14,9 @@ import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    FichaPageRoutingModule,
+    ListSolicitudPageRoutingModule,
     AllcomponentsModule
   ],
-  declarations: [FichaPage]
+  declarations: [ListSolicitudPage]
 })
-export class FichaPageModule {}
+export class ListSolicitudPageModule {}

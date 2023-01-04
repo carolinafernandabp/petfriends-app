@@ -8,6 +8,7 @@ import { PublicacionPageRoutingModule } from './publicacion-routing.module';
 
 import { PublicacionPage } from './publicacion.page';
 import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
+import { CreateFichaComponent } from 'src/app/component/create-ficha/create-ficha.component';
 
 @NgModule({
   imports: [

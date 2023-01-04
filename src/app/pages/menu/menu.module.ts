@@ -8,10 +8,6 @@ import { MenuPageRoutingModule } from './menu-routing.module';
 
 import { MenuPage } from './menu.page';
 import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
-import { HomePageRoutingModule } from '../home/home-routing.module';
-import { SolicitudPageRoutingModule } from '../solicitud/solicitud-routing.module';
-import { DonarPageRoutingModule } from '../donar/donar-routing.module';
-
 @NgModule({
   imports: [
     CommonModule,

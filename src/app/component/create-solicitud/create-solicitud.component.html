@@ -1,0 +1,53 @@
+
+  <ion-grid [fixed]="true">
+    <ion-grid [fixed]="true">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-title>Solicitud</ion-title>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-row>
+      <ion-col>
+      <ion-col >
+        <form [formGroup]="form" novalidate>
+          <ion-list>
+            <ion-item fill="outline">
+              <ion-label position="stacked"> Categoría </ion-label>
+              <ion-select placeholder="Categoría"  interface="popover"  formControlName="category">
+                <ion-select-option value="MASCOTA">Voluntario</ion-select-option>
+                <ion-select-option value="NOTICIA">Padrino</ion-select-option>
+              </ion-select>
+              <ion-note slot="helper" *ngIf="!form.controls.category.valid && form.controls.category.touched"></ion-note>
+            <ion-note slot="error">Por favor seleccione una categoría</ion-note>
+            </ion-item>
+          </ion-list>
+
+        <ion-item fill="outline">
+          <ion-label position="stacked" >Descripción</ion-label>
+            <ion-input placeholder="Descripción"  formControlName="description" type="text" ></ion-input>
+            <ion-note slot="helper" *ngIf="!form.controls.description.valid && form.controls.description.touched">Campo obligatorio</ion-note>
+            <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline">
+          <ion-label position="stacked" >Telefono</ion-label>
+            <ion-input placeholder="Descripción"  formControlName="telefono" type="number" ></ion-input>
+            <ion-note slot="helper" *ngIf="!form.controls.telefono.valid && form.controls.telefono.touched">Campo obligatorio</ion-note>
+            <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
+        </ion-item>
+
+        <ion-item lines="none"></ion-item>
+          <ion-button lines="none"  [disabled]="!form.valid"
+              (click)="onCreateSolicitud()">
+            Crear Publicación
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+

@@ -20,16 +20,12 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './component/header/header.component';
-import { CreatePublicacionComponent } from './component/create-publicacion/create-publicacion.component';
-import { EditPublicacionComponent } from './component/edit-publicacion/edit-publicacion.component';
-import { ListPublicacionComponent } from './component/list-publicacion/list-publicacion.component';
 import { AllcomponentsModule } from './component/allcomponents.module';
-;
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
