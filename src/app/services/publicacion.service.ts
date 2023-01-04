@@ -5,8 +5,7 @@ import firebase from "firebase/compat";
 import {from, Observable, of} from "rxjs";
 import {concatMap, map, tap} from "rxjs/operators";
 import { Publicacion } from "../models/publicacion";
-import { convertSnaps } from "./db-utils";
-
+import { convertSnaps} from "../services/db-util"
 
 
 import OrderByDirection = firebase.firestore.OrderByDirection;
@@ -86,4 +85,3 @@ export class PublicacionService {
     }
 
 }
-

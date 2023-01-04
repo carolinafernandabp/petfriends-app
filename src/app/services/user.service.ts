@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {UserRoles} from "../models/user-roles";
+import { User } from "../models/user-roles";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 
@@ -17,7 +17,7 @@ export class UserService {
 
     pictureUrl$: Observable<string> | any;
 
-    roles$ : Observable<UserRoles>;
+    roles$ : Observable<User>;
 
     constructor(
         private afAuth: AngularFireAuth,
