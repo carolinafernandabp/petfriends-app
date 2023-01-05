@@ -1,25 +1,22 @@
-<ion-grid>
-  <section class="grid">
-    <ion-card *ngFor="let publicacion of publicaciones ">
-      <ion-card-header>
-        <ion-card-subtitle>User</ion-card-subtitle>
-      </ion-card-header>
-      <ion-img alt="image">{{publicacion.image}}</ion-img>
+<ion-col class="grid">
+  <section >
+    <ion-card *ngFor="let publicacion of publicaciones">
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
       <ion-card-header>
         <ion-card-title>{{publicacion.titulo}}</ion-card-title>
+        <ion-card-subtitle></ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content>{{publicacion.description}}
+      <ion-card-content>
+        {{publicacion.description}}
       </ion-card-content>
-      <ion-button fill="clear" [routerLink]="['/publicaciones', publicacion.url]">Ver más</ion-button>
-          <ng-container>
-            <ng-container>
-              <ion-text color="tertiary" class="ion-text-center">
-              </ion-text>
-              <ion-button expand="block" size="small" fill="solid" (click)="presentModal()">Editar</ion-button>
-            <ion-button expand="block" size="small" fill="outline" (click)="onDeleteCourse(publicacion)">Eliminar </ion-button>
-        </ng-container>
-    </ng-container>
-
+      <ion-button color success>hola</ion-button>
     </ion-card>
   </section>
-</ion-grid>
+</ion-col>
+
+
+
+
+
+
+

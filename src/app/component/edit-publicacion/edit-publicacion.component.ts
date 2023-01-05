@@ -10,44 +10,55 @@ import { PublicacionService } from 'src/app/services/publicacion.service';
   styleUrls: ['./edit-publicacion.component.scss'],
 })
 export class EditPublicacionComponent implements OnInit {
+  name!: string;
 
-  @Input() titulo!: string;
-  @Input() description!: string;
+  //form : FormGroup;
 
-  form : FormGroup;
-
-  publicacion!: Publicacion;
+  //publicacion!: Publicacion;
 
 
-  constructor( private modalCtrl: ModalController,
+  constructor(private modalCtrl: ModalController,
               private fb : FormBuilder,
               private publicacionService : PublicacionService,) {
 
+                /*
                 this.publicacion = this.publicacion;
 
                 this.form = this.fb.group({
-                  titulo:[this.publicacion.titulo, Validators.required]
+                titulo:[this.publicacion.titulo, Validators.required],
+                descripction:[this.publicacion.description, Validators.required]
 
                 })
-
+*/
               }
 
   ngOnInit() {}
+  /*
 
+  close(){
+    this.modalCtrl.dismiss();
+  }
 
   save(){
+
     const changes = this.form.value;
     this.publicacionService.updatePublicacion(this.publicacion.id ,changes)
     .subscribe(() =>{
 
-
+      this.modalCtrl.dismiss(changes);
     })
 
   }
 
-//correcto
-  close(){
-    this.modalCtrl.dismiss();
+  */
+  cancel() {
+    return this.modalCtrl.dismiss(null, 'cancel');
   }
+
+  confirm() {
+    return this.modalCtrl.dismiss(this.name, 'confirm');
+  }
+
+
 
 }

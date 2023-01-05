@@ -1,10 +1,10 @@
 <app-header></app-header>
 <ion-content>
 <div class="hero"></div>
-<ion-grid>
-  <ion-row class="ion-justify-content-center">
-    <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
 
+<ion-grid [fixed]="true" >
+  <ion-row>
+    <ion-col>
       <ion-toolbar>
         <ion-segment scrollable="true" [value]="optionSelected"
         (ionChange)="segmentChanged($event)" value="MASCOTA">
@@ -16,26 +16,26 @@
           </ion-segment-button>
         </ion-segment>
       </ion-toolbar>
-
-      <section class="grid">
-        <div class="card">
-          <div *ngIf="optionSelected == 'MASCOTA'">
-            <app-list-publicacion [publicaciones]="mascotaPublicacion$ | async"
-            (publicacionEdited)="reloadPublicaciones()"
-            (publicacionDeleted)="reloadPublicaciones()"></app-list-publicacion>
-          </div>
-          <div *ngIf="optionSelected == 'NOTICIA'">
-            <app-list-publicacion [publicaciones]="noticiaPublicacion$ | async"
-            (publicacionEdited)="reloadPublicaciones()"
-            (publicacionDeleted)="reloadPublicaciones()"></app-list-publicacion>
-          </div>
-        </div>
-      </section>
-
     </ion-col>
   </ion-row>
 </ion-grid>
 
+<ion-grid [fixed]="true" >
+  <ion-row>
+          <div *ngIf="optionSelected == 'MASCOTA'">
+            <app-list-publicacion [publicaciones]="mascotaPublicacion$ | async"
+
+            (publicacionDeleted)="reloadPublicaciones()"></app-list-publicacion>
+          </div>
+          <div *ngIf="optionSelected == 'NOTICIA'">
+            <app-list-publicacion [publicaciones]="noticiaPublicacion$ | async"
+            (publicacionDeleted)="reloadPublicaciones()"></app-list-publicacion>
+          </div>
+  </ion-row>
+</ion-grid>
+
+
+<!----------------Org Amiga-->
 <ng-container>
   <ng-container>
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
@@ -50,10 +50,30 @@
           <ion-icon name="paw" routerLink="/ficha"></ion-icon>
         </ion-fab-button>
         <ion-fab-button>
-          <ion-icon name="document" routerLink="/solicitud"></ion-icon>
+          <ion-icon name="document" routerLink="/list-solicitud"></ion-icon> <!---ver solicitudes-->
         </ion-fab-button>
         <ion-fab-button>
           <ion-icon name="heart" routerLink="/donar"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
+</ng-container>
+
+<!----------------Petfriends-->
+
+<ng-container>
+  <ng-container>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+      <ion-fab-button >
+        <ion-icon name="chevron-up-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top" >
+        <ion-fab-button routerLink="/solicitud">
+          <ion-icon name="document"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="paw" routerLink="/list-donar"></ion-icon>
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ListDonarPageRoutingModule } from './list-donar-routing.module';
 
 import { ListDonarPage } from './list-donar.page';
+import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListDonarPageRoutingModule
+    ListDonarPageRoutingModule,
+    AllcomponentsModule
   ],
   declarations: [ListDonarPage]
 })

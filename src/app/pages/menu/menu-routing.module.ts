@@ -37,6 +37,11 @@ const routes: Routes = [
         path: 'list-solicitud',
         loadChildren: () => import('../list-solicitud/list-solicitud.module').then( m => m.ListSolicitudPageModule)
       },
+      {
+        path: 'list-donar',
+        loadChildren: () => import('../list-donar/list-donar.module').then( m => m.ListDonarPageModule)
+      },
+
 
 
 
