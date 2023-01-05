@@ -34,8 +34,15 @@
         </ion-item>
 
         <ion-item fill="outline">
+          <ion-label position="stacked" >Disponibilidad</ion-label>
+            <ion-input placeholder="Descripción"  formControlName="disponibilidad" type="text" ></ion-input>
+            <ion-note slot="helper" *ngIf="!form.controls.disponibilidad.valid && form.controls.disponibilidad.touched">Campo obligatorio</ion-note>
+            <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline">
           <ion-label position="stacked" >Telefono</ion-label>
-            <ion-input placeholder="Descripción"  formControlName="telefono" type="number" ></ion-input>
+            <ion-input placeholder="Descripción"  formControlName="telefono" type="text" ></ion-input>
             <ion-note slot="helper" *ngIf="!form.controls.telefono.valid && form.controls.telefono.touched">Campo obligatorio</ion-note>
             <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
         </ion-item>

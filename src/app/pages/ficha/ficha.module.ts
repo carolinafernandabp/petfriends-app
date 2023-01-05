@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FichaPageRoutingModule } from './ficha-routing.module';
 
 import { FichaPage } from './ficha.page';
-import { CreatePublicacionComponent } from 'src/app/component/create-publicacion/create-publicacion.component';
+
 import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
 
 @NgModule({

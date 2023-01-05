@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { catchError, tap } from 'rxjs';
+import { catchError, concatMap, last, tap, throwError } from 'rxjs';
 import { Donacion } from 'src/app/models/donar';
 import { DonarService } from 'src/app/services/donar.service';
 
@@ -34,6 +34,34 @@ export class CreateDonarComponent implements OnInit {
               private storage: AngularFireStorage,
               private toastController: ToastController) { }
 
+               uploadThumbnail(event:any) {
+
+      const file: File = event.target.files[0];
+
+      console.log(file.name);
+
+      const filePath = `fichas/${this.donarId}/${file.name}`;
+
+      const task = this.storage.upload(filePath, file, {
+          cacheControl: "max-age=2592000,public"
+      });
+
+
+      task.snapshotChanges()
+          .pipe(
+              last(),
+              concatMap(() => this.storage.ref(filePath).getDownloadURL()),
+              tap(url => this.iconUrl = url),
+              catchError(err => {
+                  console.log(err);
+                  alert("Could not create thumbnail url.");
+                  return throwError(err);
+              })
+
+          )
+          .subscribe();
+
+      }
   ngOnInit() {
 
     this.donarId = this.afs.createId();

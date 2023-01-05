@@ -5,7 +5,6 @@ import firebase from "firebase/compat";
 import {from, Observable, of} from "rxjs";
 import {concatMap, map, tap} from "rxjs/operators";
 import { Donacion } from "../models/donar";
-import { Publicacion } from "../models/publicacion";
 import { convertSnaps} from "../services/db-util"
 
 
@@ -51,10 +50,10 @@ export class DonarService {
                     let save$: Observable<any>;
 
                     if (donarId) {
-                        save$ = from(this.db.doc(`publicaciones/${donarId}`).set(donacion));
+                        save$ = from(this.db.doc(`donaciones/${donarId}`).set(donacion));
                     }
                     else {
-                        save$ = from(this.db.collection("publicaciones").add(donacion));
+                        save$ = from(this.db.collection("donaciones").add(donacion));
                     }
 
                     return save$

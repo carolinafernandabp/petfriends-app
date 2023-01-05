@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { catchError, concatMap, last, tap, throwError } from 'rxjs';
 import { Solicitud} from '../../models/solicitud';
-import { PublicacionService } from 'src/app/services/publicacion.service';
+import { SolicitudService } from 'src/app/services/solicitud.service';
 
 @Component({
   selector: 'app-create-solicitud',
@@ -27,7 +27,7 @@ export class CreateSolicitudComponent implements OnInit {
     });
 
   constructor(private fb: FormBuilder,
-              private publicacionService: PublicacionService,
+              private solicitudService : SolicitudService,
               private afs: AngularFirestore,
               private router: Router,
               private storage: AngularFireStorage,
@@ -81,7 +81,7 @@ export class CreateSolicitudComponent implements OnInit {
 
   };
 
-    this.publicacionService.createPublicacion(newSolicitud, this.solicitudId)
+    this.solicitudService.createSolicitud(newSolicitud, this.solicitudId)
         .pipe(
             tap(async solicitud => {
               const toast = await  this.toastController.create({

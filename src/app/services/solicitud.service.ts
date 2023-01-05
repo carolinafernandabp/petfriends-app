@@ -53,7 +53,7 @@ export class SolicitudService {
                         save$ = from(this.db.doc(`solicitudes/${solicitudId}`).set(solicitud));
                     }
                     else {
-                        save$ = from(this.db.collection("solicitud").add(solicitud));
+                        save$ = from(this.db.collection("solicitudes").add(solicitud));
                     }
 
                     return save$

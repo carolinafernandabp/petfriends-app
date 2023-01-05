@@ -6,8 +6,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { ListSolicitudPageRoutingModule } from './list-solicitud-routing.module';
 
-import { ListSolicitudPage } from './list-solicitud.page';
+
 import { AllcomponentsModule } from 'src/app/component/allcomponents.module';
+import { ListSolicitudPage } from './list-solicitud.page';
 
 @NgModule({
   imports: [
