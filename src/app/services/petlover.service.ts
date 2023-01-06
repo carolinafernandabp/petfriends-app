@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/compat
 import {  UserInterface } from "../models/user-roles";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { first, map } from "rxjs/operators"
+import { map } from "rxjs/operators"
 
 @Injectable({
     providedIn: "root"
@@ -56,7 +56,7 @@ export class PetloverService {
 
 
 
-    isUserAdmin(userUid: any) {
+    isUserPetlover(userUid: any) {
       return this.afs.doc<UserInterface>(`users-petlover/${userUid}`).valueChanges();
     }
 

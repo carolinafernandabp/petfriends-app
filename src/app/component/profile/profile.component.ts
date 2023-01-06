@@ -26,8 +26,9 @@ export class ProfileComponent implements OnInit {
       if (user) {
         this.user.name = user.displayName;
         this.user.email = user.email;
-        this.user.photoUrl = user.photoURL;
+        this.user.photoUrl = user.photoUrl;
         this.providerId = user.providerData[0].providerId;
+        console.log('USER', this.providerId);
       }
     })
   }

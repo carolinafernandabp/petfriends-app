@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 import { MenuPage } from './menu.page';
 
@@ -59,9 +60,25 @@ const routes: Routes = [
         loadChildren: () => import('../login-usuario/login-usuario.module').then( m => m.LoginUsuarioPageModule)
       },
       {
+        path: 'login-petlover',
+        loadChildren: () => import('../login-petlover/login-petlover.module').then( m => m.LoginPetloverPageModule)
+      },
+      {
         path: 'home-organizacion',
         loadChildren: () => import('../home-organizacion/home-organizacion.module').then( m => m.HomeOrganizacionPageModule)
       },
+      {
+        path: 'home-petlover',
+        loadChildren: () => import('../home-petlover/home-petlover.module').then( m => m.HomePetloverPageModule)
+      },
+      {
+        path: 'perfil',
+        loadChildren: () => import('../perfil/perfil.module').then( m => m.PerfilPageModule),
+        canActivate: [AuthGuard]
+      },
+
+
+
 
 
 

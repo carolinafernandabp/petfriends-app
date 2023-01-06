@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
 
               public email: string = '';
               public password: string = '';
+              public roles!: {
+                    organizacion: true;
+  };
 
   ngOnInit() {}
 
@@ -29,8 +32,23 @@ export class LoginComponent implements OnInit {
   onLogout() {
     this.authService.logoutUser();
   }
+
+  /*
+
+  onLoginRedirect(): void {
+    if( this.roles ){
+      this.router.navigate(['home-organizacion']);
+    }else{
+      this.router.navigate(['home-petlover']);
+    }
+
+  }
+*/
+
   onLoginRedirect(): void {
     this.router.navigate(['home-organizacion']);
   }
+
+
 
 }

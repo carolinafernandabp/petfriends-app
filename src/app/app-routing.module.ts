@@ -10,10 +10,6 @@ const routes: Routes = [
   path: '',
   loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule)
 },
-  {
-    path: 'home-petlover',
-    loadChildren: () => import('./pages/home-petlover/home-petlover.module').then( m => m.HomePetloverPageModule)
-  },
 
 
 

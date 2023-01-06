@@ -17,10 +17,10 @@ import { CreateDonarComponent } from './create-donar/create-donar.component';
 import { EditDonarComponent } from './edit-donar/edit-donar.component';
 import { ListDonarComponent } from './list-donar/list-donar.component';
 import { RegistroComponent } from './registro-organizacion/registro.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login-organizacion/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistroPetComponent } from './registro-pet/registro-pet.component';
-
+import { LoginPetComponent } from './login-pet/login-petlover.component';
 
 
 @NgModule({
@@ -41,6 +41,7 @@ import { RegistroPetComponent } from './registro-pet/registro-pet.component';
     RegistroComponent,
     RegistroPetComponent,
     LoginComponent,
+    LoginPetComponent,
     ProfileComponent
 ],
 
@@ -68,6 +69,7 @@ import { RegistroPetComponent } from './registro-pet/registro-pet.component';
     RegistroComponent,
     RegistroPetComponent,
     LoginComponent,
+    LoginPetComponent,
     ProfileComponent
 ]
 })

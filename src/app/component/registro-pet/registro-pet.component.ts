@@ -29,8 +29,10 @@ export class RegistroPetComponent implements OnInit {
 
       ngOnInit() {}
 
-      onUpload(e: { target: { files: any[]; }; }) {
-      // console.log('subir', e.target.files[0]);
+      onUpload(e :any) {
+       //console.log('subir', e.target.files[0]);
+
+
       const id = Math.random().toString(36).substring(2);
       const file = e.target.files[0];
       const filePath = `uploads/profile_${id}`;
@@ -38,6 +40,7 @@ export class RegistroPetComponent implements OnInit {
       const task = this.storage.upload(filePath, file);
       this.uploadPercent = task.percentageChanges();
       task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
+
       }
 
       onAddUser() {
@@ -49,7 +52,7 @@ export class RegistroPetComponent implements OnInit {
           displayName: '',
           photoURL: this.inputImageUser.nativeElement.value
         }).then(() => {
-          this.router.navigate(['/solicitud']);
+          this.router.navigate(['/login-petlover']);
         }).catch((error: any) => console.log('error', error));
       }
       });
@@ -57,6 +60,6 @@ export class RegistroPetComponent implements OnInit {
       }
 
       onLoginRedirect(): void {
-      this.router.navigate(['/login-usuario']);
+      this.router.navigate(['/login-petlover']);
       }
 }

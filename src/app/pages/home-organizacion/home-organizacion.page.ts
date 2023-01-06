@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeOrganizacionPage implements OnInit {
 
+
   mascotaPublicacion$ : Observable<Publicacion[]> | any;
 
   noticiaPublicacion$ : Observable<Publicacion[]> | any;

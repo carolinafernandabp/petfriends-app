@@ -6,9 +6,8 @@
         <div class="card_register">
           <div class="card">
             <div class="card-body text-center">
-
               <form #formRegister="ngForm" (ngSubmit)="onAddUser()">
-                <h1 class="h3 mb-3 font-weight-normal">Register 2</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
                 <div class="form-group">
                   <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="email" required minlength="8">
@@ -18,6 +17,15 @@
                   <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="password" required minlength="5"
                     maxlength="10">
                 </div>
+                <hr>
+
+                <div class="form-group">
+                  <h5>Seleccionar image:</h5>
+                  <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
+                </div>
+                <div class="progress">
+                </div>
+
 
                 <input #imageUser type="hidden" [value]="urlImage | async">
                 <button *ngIf="urlImage | async; else btnDisabled" type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
@@ -30,8 +38,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
-
 </section>
