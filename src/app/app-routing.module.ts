@@ -11,8 +11,8 @@ const routes: Routes = [
   loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule)
 },
   {
-    path: 'list-donar',
-    loadChildren: () => import('./pages/list-donar/list-donar.module').then( m => m.ListDonarPageModule)
+    path: 'home-petlover',
+    loadChildren: () => import('./pages/home-petlover/home-petlover.module').then( m => m.HomePetloverPageModule)
   },
 
 

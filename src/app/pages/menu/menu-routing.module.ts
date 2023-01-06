@@ -41,6 +41,32 @@ const routes: Routes = [
         path: 'list-donar',
         loadChildren: () => import('../list-donar/list-donar.module').then( m => m.ListDonarPageModule)
       },
+      {
+        path: 'registro-usuario',
+        loadChildren: () => import('../registro-usuario/registro-usuario.module').then( m => m.RegistroUsuarioPageModule)
+      },
+      {
+        path: 'registro-petlover',
+        loadChildren: () => import('../registro-petlover/registro-petlover.module').then( m => m.RegistroPetloverPageModule)
+      },
+
+      {
+        path: 'tipo-usuario',
+        loadChildren: () => import('../tipo-usuario/tipo-usuario.module').then( m => m.TipoUsuarioPageModule)
+      },
+      {
+        path: 'login-usuario',
+        loadChildren: () => import('../login-usuario/login-usuario.module').then( m => m.LoginUsuarioPageModule)
+      },
+      {
+        path: 'home-organizacion',
+        loadChildren: () => import('../home-organizacion/home-organizacion.module').then( m => m.HomeOrganizacionPageModule)
+      },
+
+
+
+
+
 
 
 

@@ -1,11 +1,14 @@
 export interface Roles {
-  usuario?: boolean;
-  petlover?: boolean;
+  petlover?:boolean;
+  organizacion?: boolean;
   admin?: boolean;
 }
 
-export interface User {
-  uid: string;
-  email: string;
+export interface UserInterface {
+  id?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  photoUrl?: string;
   roles: Roles;
 }

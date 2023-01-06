@@ -5,8 +5,11 @@
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button *ngIf="!isLogged" routerLink="/login-usuario">
         <ion-icon slot="icon-only" name="person" ></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isLogged"  (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -16,24 +19,39 @@
   <ion-col size="2">
  <!-------img------>
   </ion-col>
+
   <ion-col size="8" class="ion-text-left">
     <ion-button fill="clear" color="dark" routerLink="/" routerDirection="root" routerLinkActive="active-item"
     [routerLinkActiveOptions]="{exact: true}">
     Home
   </ion-button>
+
   <!--------------->
-  <ion-button fill="clear" color="dark" routerLink="/list-solicitud" routerDirection="root" routerLinkActive="active-item">
+  <ion-button *ngIf="isLogged"  fill="clear" color="dark" routerLink="/list-solicitud" routerDirection="root" routerLinkActive="active-item">
     Solicitud
   </ion-button>
 <!--------------->
-  <ion-button fill="clear" color="dark" routerLink="/list-donar" routerDirection="root" routerLinkActive="active-item">
+
+  <ion-button  *ngIf="isLogged" fill="clear" color="dark" routerLink="/list-donar" routerDirection="root" routerLinkActive="active-item">
     Donación
   </ion-button>
+
   </ion-col>
-  <ion-col size="2">
-    <ion-button fill="clear" color="dark">
+
+  <!---------iniciar sesión-->
+  <ion-col size="2" >
+    <ion-button  fill="clear" color="dark" routerLink="/login-usuario" routerDirection="root" routerLinkActive="active-item">
       <ion-icon slot="icon-only" name="person"></ion-icon>
     </ion-button>
   </ion-col>
+
+
+    <ion-col size="2" *ngIf="isLogged" >
+      <ion-button fill="clear" color="dark" (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+
 </ion-row>
 

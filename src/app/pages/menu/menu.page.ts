@@ -55,4 +55,5 @@ export class MenuPage implements OnInit {
     this.toggleMenu(newWidth);
   }
 
+
 }

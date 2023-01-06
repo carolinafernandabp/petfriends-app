@@ -9,7 +9,7 @@ import { first, map } from "rxjs/operators"
 @Injectable({
     providedIn: "root"
 })
-export class UserService {
+export class PetloverService {
 
 
     constructor( public afsAuth : AngularFireAuth,
@@ -43,12 +43,12 @@ export class UserService {
     }
 
     private updateUserData(user: { uid: any; email: any; }) {
-      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users-organizacion/${user.uid}`);
+      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users-petlover/${user.uid}`);
       const data: UserInterface = {
         id: user.uid,
         email: user.email,
         roles: {
-          organizacion: true
+          petlover: true
         }
       }
       return userRef.set(data, { merge: true })
@@ -57,7 +57,7 @@ export class UserService {
 
 
     isUserAdmin(userUid: any) {
-      return this.afs.doc<UserInterface>(`users-organizacion/${userUid}`).valueChanges();
+      return this.afs.doc<UserInterface>(`users-petlover/${userUid}`).valueChanges();
     }
 
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { CreatePublicacionComponent } from './create-publicacion/create-publicacion.component';
 import { EditPublicacionComponent } from './edit-publicacion/edit-publicacion.component';
@@ -16,6 +16,11 @@ import { ListSolicitudComponent } from './list-solicitud/list-solicitud.componen
 import { CreateDonarComponent } from './create-donar/create-donar.component';
 import { EditDonarComponent } from './edit-donar/edit-donar.component';
 import { ListDonarComponent } from './list-donar/list-donar.component';
+import { RegistroComponent } from './registro-organizacion/registro.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RegistroPetComponent } from './registro-pet/registro-pet.component';
+
 
 
 @NgModule({
@@ -32,13 +37,19 @@ import { ListDonarComponent } from './list-donar/list-donar.component';
     ListSolicitudComponent,
     CreateDonarComponent,
     EditDonarComponent,
-    ListDonarComponent],
+    ListDonarComponent,
+    RegistroComponent,
+    RegistroPetComponent,
+    LoginComponent,
+    ProfileComponent
+],
 
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports:[
     HeaderComponent,
@@ -53,6 +64,11 @@ import { ListDonarComponent } from './list-donar/list-donar.component';
     ListSolicitudComponent,
     CreateDonarComponent,
     EditDonarComponent,
-    ListDonarComponent]
+    ListDonarComponent,
+    RegistroComponent,
+    RegistroPetComponent,
+    LoginComponent,
+    ProfileComponent
+]
 })
 export class AllcomponentsModule { }

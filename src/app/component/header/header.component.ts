@@ -1,4 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +8,9 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+
+  public isLogged: boolean = false;
+
 
   @Input()title!: string;
 
@@ -15,10 +20,33 @@ export class HeaderComponent implements OnInit {
   productbtn!: ElementRef;
 
 
+  constructor(private userService : UserService,
+              private router: Router) { }
 
-  constructor() { }
+  async ngOnInit() {
 
-  ngOnInit() {}
+    this.getCurrentUser();
+  }
+
+  logout(){
+
+    this.userService.logoutUser();
+    this.router.navigate(['login-usuario']);
+    console.log('sesión cerrada');
+  }
+
+  getCurrentUser() {
+    this.userService.isAuth().subscribe(auth => {
+      if (auth) {
+        console.log('user logged');
+        this.isLogged = true;
+      } else {
+        console.log('NOT user logged');
+        this.isLogged = false;
+      }
+    });
+  }
+
 
   hideDropdown(event: { clientX: any; clientY: any; }) {
 
