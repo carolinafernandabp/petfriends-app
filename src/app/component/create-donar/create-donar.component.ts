@@ -75,9 +75,9 @@ export class CreateDonarComponent implements OnInit {
 
       nombre: val.nombre as string,
       rut: val.rut as string,
-      banco: val.banco as string,
+      banco: [val.banco as string],
       tipo: val.tipo as string,
-      cuenta: val.cuenta as string,
+      cuenta: val.cuenta as any,
       correo: val.correo as string
   };
 

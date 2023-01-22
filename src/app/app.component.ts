@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthTokenService } from './services/auth-token.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor( ) {}
+
+
+  constructor(public user: UserService,
+                private token: AuthTokenService ) {}
+
+    logout() {
+      this.user.logout();
+  }
 }

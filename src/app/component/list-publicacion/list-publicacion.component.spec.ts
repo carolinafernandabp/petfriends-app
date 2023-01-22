@@ -10,7 +10,8 @@ describe('ListPublicacionComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ListPublicacionComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
+
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListPublicacionComponent);

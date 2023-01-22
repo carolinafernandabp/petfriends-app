@@ -40,10 +40,21 @@
             <ion-note slot="error">Debe ingrear un mínimo de 5 a un máximo de 200 caracteres</ion-note>
         </ion-item>
 
-        <ion-item lines="none">
+        <ion-item lines="none" class="course-image-upload">
           <ion-label position="stacked" >Cargar imagen</ion-label>
-          <ion-input type="file" formControlName="image"></ion-input>
+          <img  alt="imagen"
+               [src]="iconUrl"
+               *ngIf="iconUrl">
+
+          <ion-input type="file" (change)="uploadThumbnail($event)"></ion-input>
+           <div class="upload-progress" *ngIf="(percentageChanges$ | async) as percentage">
+               <ion-progress-bar class="progress-bar"
+                                 mode="md"
+                [value]="percentage">
+           </ion-progress-bar>
+           </div>
         </ion-item>
+
         <ion-item lines="none"></ion-item>
           <ion-button lines="none"  [disabled]="!form.valid"
               (click)="onCreatePublicacion()">
@@ -54,4 +65,5 @@
     </ion-col>
     </ion-row>
   </ion-grid>
+
 

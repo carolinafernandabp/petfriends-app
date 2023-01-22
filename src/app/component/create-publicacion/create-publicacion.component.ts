@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { catchError, concatMap, last, tap, throwError } from 'rxjs';
+import { catchError, concatMap, last, Observable, tap, throwError } from 'rxjs';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from 'src/app/services/publicacion.service';
 
@@ -15,14 +15,18 @@ import { PublicacionService } from 'src/app/services/publicacion.service';
 })
 export class CreatePublicacionComponent implements OnInit {
 
-  publicacionId: any;
-  iconUrl: any;
+  publicacionId!: string;
+
+  percentageChanges$!: Observable<number> | any ;
+
+  iconUrl!: string;
 
     form = this.fb.group({
         titulo:['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
         description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
         category: ['', Validators.required],
-        image: ['', Validators.required]
+        url: [''],
+        create:[Date]
     });
 
 
@@ -45,6 +49,8 @@ export class CreatePublicacionComponent implements OnInit {
                     cacheControl: "max-age=2592000,public"
                 });
 
+                this.percentageChanges$ = task.percentageChanges();
+
 
                 task.snapshotChanges()
                     .pipe(
@@ -53,7 +59,6 @@ export class CreatePublicacionComponent implements OnInit {
                         tap(url => this.iconUrl = url),
                         catchError(err => {
                             console.log(err);
-                            alert("Could not create thumbnail url.");
                             return throwError(err);
                         })
 
@@ -73,10 +78,11 @@ export class CreatePublicacionComponent implements OnInit {
 
     const newPublicacion: Partial<Publicacion> = {
 
-      titulo: val.titulo as string,
-      description: val.description as string,
-      category: [val.category as string],
-      image: val.image as string
+      titulo: val.titulo as string  | any,
+      description: val.description as string | any,
+      category: [val.category as string] ,
+      url: val.url as any
+
   };
 
     this.publicacionService.createPublicacion(newPublicacion, this.publicacionId)
@@ -88,8 +94,10 @@ export class CreatePublicacionComponent implements OnInit {
                     duration: 1500,
 
               });
-              this.router.navigateByUrl("/publicaciones");
+
               await toast.present();
+              this.router.navigate(['/']);
+
 
 
             }),
@@ -102,7 +110,7 @@ export class CreatePublicacionComponent implements OnInit {
               });
 
               await toast.present();
-              this.router.navigateByUrl("/home");
+              this.router.navigate(['/']);
 
             })
         )

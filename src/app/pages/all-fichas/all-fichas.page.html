@@ -1,0 +1,48 @@
+<app-header title="Fichas"></app-header>
+<ion-content>
+<div class="hero"></div>
+
+<ion-grid [fixed]="true" >
+  <ion-row>
+    <ion-col>
+      <ion-toolbar>
+        <ion-segment scrollable="true" [value]="optionSelected"
+        (ionChange)="segmentChanged($event)" value="PERRO">
+          <ion-segment-button value="PERRO">
+            <ion-label>Perro</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="GATO">
+            <ion-label>Gato</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="OTRO">
+            <ion-label>Otro</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
+
+      <div *ngIf="optionSelected == 'PERRO'">
+        <app-list-ficha-mascota [fichas]="perroFicha$ | async"
+                (fichaDeleted)="reloadFichas()" ></app-list-ficha-mascota>
+      </div>
+      <div *ngIf="optionSelected == 'GATO'">
+        <app-list-ficha-mascota [fichas]="gatoFicha$ | async"
+                (fichaDeleted)="reloadFichas()" ></app-list-ficha-mascota>
+      </div>
+
+      <div *ngIf="optionSelected == 'OTRO'">
+        <app-list-ficha-mascota [fichas]="otroFicha$ | async"
+                (fichaDeleted)="reloadFichas()" ></app-list-ficha-mascota>
+      </div>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

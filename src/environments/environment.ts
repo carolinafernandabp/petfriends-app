@@ -15,7 +15,7 @@ export const environment = {
     measurementId: "G-TE8JYWD5PT"
   },
   api: {
-    createUser: "http://localhost:8100/petfriends-app-94df7/us-central5/createUser"
+    createUser: "http://localhost:8100/petfriends-app-94df7/createUser"
 }
 };
 

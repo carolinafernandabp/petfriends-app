@@ -20,19 +20,67 @@
   </ion-row>
 </ion-grid>
 
-<ion-grid [fixed]="true" >
-  <ion-row>
-          <div *ngIf="optionSelected == 'MASCOTA'">
-            <app-list-publicacion [publicaciones]="mascotaPublicacion$ | async"
+<div *ngIf="optionSelected == 'MASCOTA'">
+  <app-list-publicacion [publicaciones]="mascotaPublicacion$ | async"
+          (publicacionDeleted)="reloadPublicaciones()"
+          (publicacionEdited)="reloadPublicaciones()" ></app-list-publicacion>
+</div>
+<div *ngIf="optionSelected == 'NOTICIA'">
+  <app-list-publicacion [publicaciones]="noticiaPublicacion$ | async"
+          (publicacionDeleted)="reloadPublicaciones()"
+          (publicacionEdited)="reloadPublicaciones()" ></app-list-publicacion>
+</div>
 
-            (publicacionDeleted)="reloadPublicaciones()"></app-list-publicacion>
-          </div>
-          <div *ngIf="optionSelected == 'NOTICIA'">
-            <app-list-publicacion [publicaciones]="noticiaPublicacion$ | async"
-            (publicacionDeleted)="reloadPublicaciones()"></app-list-publicacion>
-          </div>
-  </ion-row>
-</ion-grid>
+<!----------------Org Amiga-->
+<ng-container *ngIf="(user.roles$ | async) as roles" >
+  <ng-container *ngIf="roles.admin">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button >
+        <ion-icon name="chevron-up-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top" >
+        <ion-fab-button routerLink="/publicacion">
+          <ion-icon name="document"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="paw" routerLink="/ficha"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="document" routerLink="/list-solicitud"></ion-icon> <!---ver solicitudes-->
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="heart" routerLink="/donar"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
+</ng-container>
+
+<ng-container  *ngIf="user.isLoggedIn$ | async">
+  <ng-container *ngIf="(user.roles$ | async) as roles" >
+    <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+      <ion-fab-button >
+        <ion-icon name="chevron-up-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top" >
+        <ion-fab-button routerLink="/publicacion">
+          <ion-icon name="document"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="paw" routerLink="/ficha"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="document" routerLink="/list-solicitud"></ion-icon> <!---ver solicitudes-->
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="heart" routerLink="/donar"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
+</ng-container>
+
+
 
 
 

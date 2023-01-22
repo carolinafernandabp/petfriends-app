@@ -1,18 +1,41 @@
 <ion-app>
 
-
-  <ion-split-pane contentId="main">
-
-    <!--  the side menu  --->
+  <ion-menu contentId="main" side="start" menuId="menuPrincipal">
 
 
-    <!-- the main content -->
+    <ion-content class="ion-padding">
 
-    <ion-router-outlet id="main" >
+      <ng-container *ngIf="user.isLoggedOut$ | async" >
+            <ion-list >
+              <ion-item  routerLink="/">Home</ion-item>
+              <ion-item  routerLink="/all-organizacion">Organizaciones</ion-item>
+            </ion-list>
+      </ng-container>
 
-    </ion-router-outlet>
+      <ng-container  *ngIf="user.isLoggedIn$ | async" >
+        <ng-container *ngIf="(user.roles$ | async) as roles"  >
+          <ion-list>
+            <ion-item  routerLink="/">Home</ion-item>
+            <ion-item  routerLink="/all-organizacion">Organizaciones</ion-item>
+            <ion-item  routerLink="/">Ver postulaciones</ion-item>
+          </ion-list>
+        </ng-container>
+      </ng-container>
 
+      <ng-container *ngIf="(user.roles$ | async) as roles" >
+        <ng-container *ngIf="roles.admin" >
+          <ion-list>
+            <ion-item  routerLink="/">Home</ion-item>
+            <ion-item  routerLink="/"> ver Solicitud</ion-item>
+            <ion-item  routerLink="/all-fichas"> Ver Fichas</ion-item>
+            <ion-item routerLink="/all-donar"> Ver Datos</ion-item>
+          </ion-list>
+        </ng-container>
+      </ng-container>
 
-  </ion-split-pane>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main" ></ion-router-outlet>
 
 </ion-app>

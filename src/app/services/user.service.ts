@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/compat/firestore";
-import {  UserInterface } from "../models/user-roles";
+import { Router } from "@angular/router";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { first, map } from "rxjs/operators"
+import { map, Observable } from "rxjs";
+import { UserInterface } from "../models/user-roles";
 
 @Injectable({
     providedIn: "root"
@@ -12,53 +13,38 @@ import { first, map } from "rxjs/operators"
 export class UserService {
 
 
-    constructor( public afsAuth : AngularFireAuth,
-                  public afs : AngularFirestore) {}
+  isLoggedIn$ : Observable<boolean>;
 
-    registerUser(email: string, pass: string) {
-      return new Promise((resolve, reject) => {
-        this.afsAuth.createUserWithEmailAndPassword(email, pass)
-          .then((userData: any) => {
-            resolve(userData),
-              this.updateUserData(userData.user)
-          }).catch((err: any) => console.log(reject(err)))
-      });
-    }
+  isLoggedOut$: Observable<boolean>;
 
-    loginEmailUser(email: string, pass: string) {
-      return new Promise((resolve, reject) => {
-        this.afsAuth.signInWithEmailAndPassword(email, pass)
-          .then((userData: unknown) => resolve(userData),
-            (          err: any) => reject(err));
-      });
-    }
+  pictureUrl$: Observable<string> | any;
+
+  roles$ : Observable<UserInterface>;
 
 
-    logoutUser() {
-      return this.afsAuth.signOut();
-    }
+    constructor( public afAuth : AngularFireAuth,
+                 public router: Router) {
 
-    isAuth() {
-      return this.afsAuth.authState.pipe(map((auth: any) => auth));
-    }
+              this.isLoggedIn$ = afAuth.authState.pipe(map(user => !!user));
 
-    private updateUserData(user: { uid: any; email: any; }) {
-      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users-organizacion/${user.uid}`);
-      const data: UserInterface = {
-        id: user.uid,
-        email: user.email,
-        roles: {
-          organizacion: true
-        }
-      }
-      return userRef.set(data, { merge: true })
-    }
+              this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
+
+              this.pictureUrl$ = afAuth.authState.pipe(map(user => user? user.photoURL : null));
+
+              this.roles$ = this.afAuth.idTokenResult
+                  .pipe(
+                      map(token => <any>token?.claims ?? {admin:false})
+                  )
+                  }
+
+
+    logout() {
+      this.afAuth.signOut();
+      this.router.navigateByUrl('/login');
+  }
 
 
 
-    isUserAdmin(userUid: any) {
-      return this.afs.doc<UserInterface>(`users-organizacion/${userUid}`).valueChanges();
-    }
 
 
 }

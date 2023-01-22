@@ -12,10 +12,6 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePage implements OnInit {
 
-  public  organizacion: boolean = true;
-  public  petlover: boolean = true;
-
-
   mascotaPublicacion$ : Observable<Publicacion[]> | any;
 
   noticiaPublicacion$ : Observable<Publicacion[]> | any;
@@ -29,6 +25,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
 
     this.reloadPublicaciones();
+
   }
 
   reloadPublicaciones() {
@@ -43,4 +40,4 @@ export class HomePage implements OnInit {
           console.log(event.detail.value);
     }
 
-}
+  }

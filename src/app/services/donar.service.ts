@@ -71,10 +71,10 @@ export class DonarService {
             )
     }
 
-    loadDonacionnByCategory(category:string): Observable<Donacion[]> {
+    loadDonacionnByBanco(banco:string): Observable<Donacion[]> {
          return this.db.collection(
             "donaciones",
-            ref => ref.where("categories", "array-contains", category)
+            ref => ref.where("banco", "array-contains", banco)
                 .orderBy("seqNo")
             )
             .get()

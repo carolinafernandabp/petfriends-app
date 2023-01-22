@@ -1,17 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
-    </ion-buttons>
-    <ion-title>Welcome</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()">Confirm</ion-button>
+      <ion-button color="medium" (click)="dismissModal()">Cancel</ion-button>
     </ion-buttons>
+    <ion-title>Editar</ion-title>
+
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="stacked">Your name</ion-label>
-    <ion-input  placeholder="Your name"></ion-input>
-  </ion-item>
+<ion-content class="ion-padding"  >
+  <form >
+    <ion-item>
+      <ion-label position="stacked">Titulo</ion-label>
+      <ion-input [formControl]="nuevoInput"   type="text" placeholder="Titulo" ></ion-input>
+    </ion-item>
+
+      <ion-button [disabled]="nuevoInput.invalid" (click)="save()" expand="block">Guardar</ion-button>
+
+  </form>
+
 </ion-content>

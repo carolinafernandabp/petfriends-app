@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
     "@angular/fire": "^7.4.1",
@@ -31,6 +32,7 @@
     "cordova-plugin-dialogs": "^2.0.2",
     "firebase": "^9.15.0",
     "firebaseui": "^6.0.2",
+    "g": "^2.0.1",
     "gcip-iap": "^1.0.0",
     "ionic-shrinkage": "^0.0.1",
     "ionicons": "^6.0.3",
@@ -47,7 +49,7 @@
     "@angular-eslint/eslint-plugin": "^14.0.0",
     "@angular-eslint/eslint-plugin-template": "^14.0.0",
     "@angular-eslint/template-parser": "^14.0.0",
-    "@angular/cli": "^14.0.0",
+    "@angular/cli": "^15.1.2",
     "@angular/compiler": "^14.0.0",
     "@angular/compiler-cli": "^14.0.0",
     "@angular/language-service": "^14.0.0",

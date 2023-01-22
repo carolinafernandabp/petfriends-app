@@ -24,33 +24,6 @@ export class FichaMascotaService {
     }
 
 
-    deleteFichayandPetlover(fichaId:string) {
-    return this.db.collection(`fichas/${fichaId}/Petlover`)
-    .get()
-    .pipe(
-        concatMap(results => {
-
-            const petlovers = convertSnaps<Petlover>(results);
-
-            const batch = this.db.firestore.batch();
-
-            const fichaRef = this.db.doc(`fichas/${fichaId}`).ref;
-
-            batch.delete(fichaRef);
-
-            for (let petlover of petlovers) {
-                const petloverRef =
-                    this.db.doc(`fichas/${fichaId}/lessons/${petlover.id}`).ref;
-
-                batch.delete(petloverRef);
-            }
-
-            return from(batch.commit());
-
-        })
-    );
-    }
-
 
 
     async deleteFicha(fichaId:string) {
@@ -102,10 +75,10 @@ export class FichaMascotaService {
             )
     }
 
-    loadFichaByCategory(category:string): Observable<Ficha[]> {
+    loadFichaByEspecie(especie:string): Observable<Ficha[]> {
          return this.db.collection(
             "fichas",
-            ref => ref.where("categories", "array-contains", category)
+            ref => ref.where("especie", "array-contains", especie)
                 .orderBy("seqNo")
             )
             .get()

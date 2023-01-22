@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { AlertController } from "@ionic/angular";
 import firebase from "firebase/compat";
 import {from, Observable, of} from "rxjs";
 import {concatMap, map, tap} from "rxjs/operators";
@@ -16,8 +15,7 @@ import OrderByDirection = firebase.firestore.OrderByDirection;
 })
 export class PublicacionService {
 
-    constructor(private db: AngularFirestore,
-                  private alertController: AlertController) {
+    constructor(private db: AngularFirestore) {
 
     }
 
@@ -29,6 +27,7 @@ export class PublicacionService {
 
     updatePublicacion(publicacionId:string, changes: Partial<Publicacion>):Observable<any> {
         return from(this.db.doc(`publicaciones/${publicacionId}`).update(changes));
+
     }
 
     createPublicacion(newPublicacion: Partial<Publicacion>, publicacionId?:string) {
@@ -74,7 +73,7 @@ export class PublicacionService {
     loadPublicacionByCategory(category:string): Observable<Publicacion[]> {
          return this.db.collection(
             "publicaciones",
-            ref => ref.where("categories", "array-contains", category)
+            ref => ref.where("category", "array-contains", category)
                 .orderBy("seqNo")
             )
             .get()

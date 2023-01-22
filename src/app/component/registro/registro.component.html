@@ -1,0 +1,25 @@
+<div class="create-user">
+
+  <ion-title>Registro Usuario</ion-title>
+
+<form [formGroup]="form">
+    <ion-item >
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked" >Es administrator?</ion-label>
+      <ion-toggle slot="end" color="primary" formControlName="admin" ></ion-toggle>
+    </ion-item>
+
+    <ion-button (click)="onCreateUser()"
+    [disabled]="form.invalid" expand='block'>Signup</ion-button>
+
+  </form>
+</div>

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from 'src/app/services/publicacion.service';
@@ -10,55 +10,39 @@ import { PublicacionService } from 'src/app/services/publicacion.service';
   styleUrls: ['./edit-publicacion.component.scss'],
 })
 export class EditPublicacionComponent implements OnInit {
-  name!: string;
 
-  //form : FormGroup;
 
-  //publicacion!: Publicacion;
+  nuevoInput = new FormControl('', Validators.required);
 
+
+  @Input()
+  titulo!: string | any ;
 
   constructor(private modalCtrl: ModalController,
               private fb : FormBuilder,
-              private publicacionService : PublicacionService,) {
+              private publicacionService : PublicacionService,
+              ) {}
 
-                /*
-                this.publicacion = this.publicacion;
+  ngOnInit() {
 
-                this.form = this.fb.group({
-                titulo:[this.publicacion.titulo, Validators.required],
-                descripction:[this.publicacion.description, Validators.required]
+   }
 
-                })
-*/
-              }
 
-  ngOnInit() {}
-  /*
-
-  close(){
-    this.modalCtrl.dismiss();
+  dismissModal(){
+    this.modalCtrl.dismiss(null, 'Cancel');
   }
 
   save(){
 
-    const changes = this.form.value;
-    this.publicacionService.updatePublicacion(this.publicacion.id ,changes)
-    .subscribe(() =>{
+    const newtitulo = this.titulo + this.nuevoInput.value;
 
-      this.modalCtrl.dismiss(changes);
-    })
 
-  }
+    this.modalCtrl.dismiss(newtitulo, 'cambio');
 
-  */
-  cancel() {
-    return this.modalCtrl.dismiss(null, 'cancel');
-  }
 
-  confirm() {
-    return this.modalCtrl.dismiss(this.name, 'confirm');
+
   }
 
 
 
-}
+  }

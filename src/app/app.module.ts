@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { AllcomponentsModule } from './component/allcomponents.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -41,7 +42,11 @@ import { AllcomponentsModule } from './component/allcomponents.module';
     AngularFireDatabaseModule,
     FormsModule,
     CommonModule,
-    AllcomponentsModule
+    AllcomponentsModule,
+
+
+
+
     ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},

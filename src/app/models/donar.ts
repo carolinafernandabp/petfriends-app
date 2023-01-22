@@ -1,9 +1,10 @@
 export interface Donacion {
+  id: string;
   nombre: string,
   rut: string,
-  banco: string,
+  banco: string[],
   tipo:string,
-  cuenta:string,
+  cuenta:number,
   correo: string,
   seqNo: number;
 
