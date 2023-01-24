@@ -46,7 +46,7 @@
           <ion-icon name="paw" routerLink="/ficha"></ion-icon>
         </ion-fab-button>
         <ion-fab-button>
-          <ion-icon name="document" routerLink="/list-solicitud"></ion-icon> <!---ver solicitudes-->
+          <ion-icon name="document" routerLink="/"></ion-icon> <!---ver solicitudes-->
         </ion-fab-button>
         <ion-fab-button>
           <ion-icon name="heart" routerLink="/donar"></ion-icon>
@@ -55,32 +55,6 @@
     </ion-fab>
   </ng-container>
 </ng-container>
-
-<ng-container  *ngIf="user.isLoggedIn$ | async">
-  <ng-container *ngIf="(user.roles$ | async) as roles" >
-    <ion-fab slot="fixed" vertical="bottom" horizontal="start">
-      <ion-fab-button >
-        <ion-icon name="chevron-up-circle"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="top" >
-        <ion-fab-button routerLink="/publicacion">
-          <ion-icon name="document"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="paw" routerLink="/ficha"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="document" routerLink="/list-solicitud"></ion-icon> <!---ver solicitudes-->
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="heart" routerLink="/donar"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
-  </ng-container>
-</ng-container>
-
-
 
 
 

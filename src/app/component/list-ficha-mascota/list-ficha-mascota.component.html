@@ -10,10 +10,11 @@
 
   <ng-container>
     <ng-container>
-      <ion-button fill="clear">Ver más</ion-button>
-      <ion-button fill="clear">Editar</ion-button>
+      <ion-button fill="clear" (click)="verFicha(ficha)">Ver más</ion-button>
+      <ion-button fill="clear" (click)="openModal(ficha)">Editar</ion-button>
       <ion-button fill="clear" (click)="onDeleteFicha(ficha)">Delete</ion-button>
     </ng-container>
   </ng-container>
 
 </ion-card>
+

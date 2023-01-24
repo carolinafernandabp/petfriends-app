@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { catchError, tap, throwError } from 'rxjs';
 import { Donacion } from 'src/app/models/donar';
 import { DonarService } from 'src/app/services/donar.service';
+import { UserService } from 'src/app/services/user.service';
+
 @Component({
   selector: 'app-list-donar',
   templateUrl: './list-donar.component.html',
@@ -10,37 +12,38 @@ import { DonarService } from 'src/app/services/donar.service';
 })
 export class ListDonarComponent implements OnInit {
 
-  @Input() donaciones: Donacion[] | any = [];
+  @Input() donaciones!: Donacion[]| any ;
 
-  @Output() donacionEdited = new EventEmitter();
+  @Output() donacionEdited = new EventEmitter<void>();
 
   @Output() donacionDeleted = new EventEmitter<Donacion>();
 
 
-
-  constructor(private router :Router,
-              private donarService : DonarService
-              ) { }
+  constructor(private donarService : DonarService,
+              private modalCtrl : ModalController,
+                  public user : UserService) { }
 
   ngOnInit() {}
 
-  async onDeletedonar(donacion : Donacion){
+  async onDeletePublicacion(donacion : Donacion) {
 
     (await this.donarService.deleteDonar(donacion.id))
-    .pipe(
-      tap(() => {
-        console.log("Delete", donacion);
-        this.donacionDeleted.emit(donacion);
-      }),
-      catchError(err => {
-        console.log(err);
-        return throwError(err);
-      })
-    )
-    .subscribe();
-  }
+        .pipe(
+            tap(async () => {
 
+                console.log("Deleted course", donacion);
+                this.donacionDeleted.emit(donacion);
+                location.reload();
 
+            }),
+            catchError(err => {
+                console.log(err);
+                alert("Could not delete course.");
+                return throwError(err);
+            })
+        )
+        .subscribe();
 
+}
 
 }

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -15,19 +16,26 @@ export class HeaderComponent implements OnInit {
   @Input()title!: string;
 
   constructor( private router: Router,
-                public user : UserService) { }
+                public user : UserService,
+                private toastController : ToastController) { }
 
   async ngOnInit() {
 
   }
 
-  logout(){
+  async logout(){
 
     this.user.logout()
-    this.router.navigate(['/']);
-    console.log('sesión cerrada');
-  }
+    this.router.navigate(['']);
+    const toast = await this.toastController.create({
+      message: 'Sesión Cerrada ',
+      duration: 1500,
+      cssClass: 'toast-danger',
+      icon: 'exit-outline'
+    });
 
+    await toast.present();
+  }
 
 
 }

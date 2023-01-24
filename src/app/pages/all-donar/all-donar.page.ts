@@ -14,7 +14,7 @@ export class AllDonarPage implements OnInit {
 
   optionSelected:string = "DATOS";
 
-  constructor(private donarService : DonarService) { }
+  constructor(public donarService : DonarService) { }
 
   ngOnInit() {
 

@@ -18,9 +18,9 @@ export class RegistroComponent implements OnInit {
   form = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.required, Validators.minLength(5)]],
-     name: ['', [Validators.required, Validators.minLength(5)]],
-    admin: [false]
+     admin: [false]
 });
+
 
 
   constructor(
@@ -35,7 +35,7 @@ export class RegistroComponent implements OnInit {
 
     console.log(user);
 
-    this.http.post(environment.api.createUser, {
+    this.http.post(environment.api.createUser  , {
         email: user.email,
         password: user.password,
         admin: user.admin

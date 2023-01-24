@@ -8,6 +8,7 @@ import 'firebase/compat/firestore';
 import EmailAuthProvider = firebase.auth.EmailAuthProvider;
 
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ui!: firebaseui.auth.AuthUI;
 
   constructor( public router:Router,
-                private afAuth: AngularFireAuth) {
+                private afAuth: AngularFireAuth,
+                private toastController : ToastController) {
                 }
 
   ngOnInit() {
@@ -50,16 +52,25 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.ui.delete();
 }
 
-onLoginSuccessful(result: any) {
+  async onLoginSuccessful(result: any) {
 
   console.log('Firebase UI result:', result);
 
   this.router.navigateByUrl("/");
 
+  const toast = await this.toastController.create({
+    message: 'Sesión iniciada exitosamente ',
+    duration: 1500,
+    cssClass: 'toast-success',
+    icon: 'enter-outline'
+  });
 
-
+  await toast.present();
 }
 
+signup(){
+  this.router.navigateByUrl('registro-usuario');
+}
 
 
 }

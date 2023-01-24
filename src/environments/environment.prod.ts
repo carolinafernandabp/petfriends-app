@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  useEmulator:false,
+  useEmulator:true,
   firebase : {
     apiKey: "AIzaSyAuD-PD1XTgUvkil5kp3HXi9RCPoIm0mMs",
     authDomain: "petfriends-app-94df7.firebaseapp.com",
@@ -11,6 +11,6 @@ export const environment = {
     measurementId: "G-TE8JYWD5PT"
   },
   api: {
-    createUser: "http://localhost:8100/petfriends-app-94df7/createUser"
+    createUser: "http://127.0.0.1:5000/petfriends-app-94df7/us-central1/createUser"
 }
 };

@@ -15,7 +15,7 @@ export const environment = {
     measurementId: "G-TE8JYWD5PT"
   },
   api: {
-    createUser: "http://localhost:8100/petfriends-app-94df7/createUser"
+    createUser: "http://127.0.0.1:5000/petfriends-app-94df7/us-central1/createUser"
 }
 };
 
@@ -26,4 +26,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+ import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

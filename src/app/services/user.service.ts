@@ -6,6 +6,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { map, Observable } from "rxjs";
 import { UserInterface } from "../models/user-roles";
+import { FirestoreService } from "./solicitudes.service";
 
 @Injectable({
     providedIn: "root"
@@ -23,7 +24,8 @@ export class UserService {
 
 
     constructor( public afAuth : AngularFireAuth,
-                 public router: Router) {
+                 public router: Router,
+                 public firestore: AngularFirestore) {
 
               this.isLoggedIn$ = afAuth.authState.pipe(map(user => !!user));
 
@@ -37,12 +39,15 @@ export class UserService {
                   )
                   }
 
+                  stateAuth() {
+                    return this.afAuth.authState;
+                 }
+
 
     logout() {
       this.afAuth.signOut();
       this.router.navigateByUrl('/login');
   }
-
 
 
 

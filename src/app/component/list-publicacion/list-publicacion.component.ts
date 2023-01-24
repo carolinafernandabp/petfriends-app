@@ -21,14 +21,14 @@ export class ListPublicacionComponent implements OnInit {
 
   @Output() publicacionDeleted = new EventEmitter<Publicacion>();
 
-  newtitulo!: string;
+  dialog:any
 
-  constructor( private router : Router,
-                private publicacionService : PublicacionService,
+  constructor(  private publicacionService : PublicacionService,
                   private modalCtrl : ModalController,
-                    private alertCtrl : AlertController,
                       public user : UserService
-                      ) { }
+                      ) {
+
+                      }
 
   ngOnInit() {}
 
@@ -38,21 +38,16 @@ export class ListPublicacionComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: EditPublicacionComponent,
       componentProps:{
-        titulo :  this.publicaciones.titulo,
-        description : this.publicaciones.description
+
+        titulo: publicaciones.titulo,
+        description:publicaciones.description
+
       },
     });
-    await modal.present();
 
+     await modal.present();
 
-    const {data: newtitulo , role} = await modal.onWillDismiss();
-    if(role === 'cambio'){
-      const index = this.publicaciones.findIndex( (post: { titulo: string; }) => post.titulo ===  publicaciones.titulo)
-      this.publicaciones[index].titulo = newtitulo;
-
-      const alert = await this.alertCtrl.create({header: 'Editar', message :'Editado exitosamente', buttons: ['Cerrar']})
-      await alert.present();
-    }
+      this.publicacionEdited.emit();
 
   }
 
@@ -78,17 +73,20 @@ export class ListPublicacionComponent implements OnInit {
 
 }
 
-async verMas() {
+async verMas(publicaciones  : Publicacion) {
+
   const modal = await this.modalCtrl.create({
     component: VerPublicacionComponent,
     componentProps: {
 
-      titulo : this.publicaciones.titulo,
-      description : this.publicaciones.description
+      titulo: publicaciones.titulo,
+      description:publicaciones.description,
 
        }
+
+
   });
-  await modal.present();
+ return  await modal.present();
 }
 
 

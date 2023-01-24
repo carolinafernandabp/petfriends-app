@@ -4,12 +4,18 @@
       Información
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">Cerrar</ion-button>
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <ion-label>Titulo:</ion-label>
+<ion-content>
+  <img alt="image " src="https://ionicframework.com/docs/img/demos/card-media.png">
+  <ion-item lines="none" >
+    <ion-title> {{titulo}}</ion-title>
+  </ion-item>
+  <ion-item lines="none">
+   <ion-title >{{description}}</ion-title>
+  </ion-item>
 
 </ion-content>

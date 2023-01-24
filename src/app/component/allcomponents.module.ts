@@ -15,10 +15,14 @@ import { RegistroComponent } from './registro/registro.component';
 import { ListPublicacionComponent } from './list-publicacion/list-publicacion.component';
 import { ListOrganizacionComponent } from './list-organizacion/list-organizacion.component';
 import { ListFichaMascotaComponent } from './list-ficha-mascota/list-ficha-mascota.component';
-import { ListDonarComponent } from './list-donar/list-donar.component';
 import { VerPublicacionComponent } from './ver-publicacion/ver-publicacion.component';
+import { EditFichaComponent } from './edit-ficha/edit-ficha.component';
+import { VerFichaComponent } from './ver-ficha/ver-ficha.component';
+import { ListDonarComponent } from './list-donar/list-donar.component';
 
 @NgModule({
+
+
   declarations: [
     HeaderComponent,
     CreatePublicacionComponent,
@@ -32,8 +36,10 @@ import { VerPublicacionComponent } from './ver-publicacion/ver-publicacion.compo
     ListPublicacionComponent,
     ListOrganizacionComponent,
     ListFichaMascotaComponent,
-    ListDonarComponent,
-    VerPublicacionComponent
+    VerPublicacionComponent,
+    EditFichaComponent,
+    VerFichaComponent,
+    ListDonarComponent
 ],
 
   imports: [
@@ -56,8 +62,10 @@ import { VerPublicacionComponent } from './ver-publicacion/ver-publicacion.compo
     ListPublicacionComponent,
     ListOrganizacionComponent,
     ListFichaMascotaComponent,
-    ListDonarComponent,
-    VerPublicacionComponent
+    VerPublicacionComponent,
+    EditFichaComponent,
+    VerFichaComponent,
+    ListDonarComponent
 
 
 ]

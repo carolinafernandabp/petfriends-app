@@ -1,6 +1,6 @@
 
-import { Component, Input, OnInit } from '@angular/core';
-import { UserInterface } from 'src/app/models/user-roles';
+import { Component,  OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-list-organizacion',
@@ -8,8 +8,6 @@ import { UserInterface } from 'src/app/models/user-roles';
   styleUrls: ['./list-organizacion.component.scss'],
 })
 export class ListOrganizacionComponent implements OnInit {
-
-
 
 
   constructor() { }

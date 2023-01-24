@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from 'src/app/services/publicacion.service';
 
@@ -11,34 +11,53 @@ import { PublicacionService } from 'src/app/services/publicacion.service';
 })
 export class EditPublicacionComponent implements OnInit {
 
-
-  nuevoInput = new FormControl('', Validators.required);
-
-
   @Input()
-  titulo!: string | any ;
+  titulo!: string;
+  @Input()
+  description!: string;
+
+  form!: FormGroup;
+
+  publicaciones!: Publicacion;
+
+
 
   constructor(private modalCtrl: ModalController,
               private fb : FormBuilder,
-              private publicacionService : PublicacionService,
-              ) {}
+              public  publicacionService : PublicacionService,
+              @Inject(NavParams) publicacion: Publicacion
+              ) {
 
-  ngOnInit() {
+                this.publicaciones = this.publicaciones
 
-   }
+                this.publicaciones = publicacion;
+                this.form = this.fb.group({
+                  titulo:['', this.publicaciones.titulo],
+                  description:['',this.publicaciones.description]
+
+                })
+              }
+
+
+  ngOnInit() {}
 
 
   dismissModal(){
-    this.modalCtrl.dismiss(null, 'Cancel');
+    this.modalCtrl.dismiss();
   }
 
   save(){
 
-    const newtitulo = this.titulo + this.nuevoInput.value;
+    const changes = this.form.value;
+
+    this.publicacionService.updatePublicacion(this.publicaciones.id, changes)
+
+        .subscribe(() => {
+
+            this.modalCtrl.dismiss(changes);
 
 
-    this.modalCtrl.dismiss(newtitulo, 'cambio');
-
+        });
 
 
   }
@@ -46,3 +65,4 @@ export class EditPublicacionComponent implements OnInit {
 
 
   }
+

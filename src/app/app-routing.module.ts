@@ -14,13 +14,13 @@ const routes: Routes = [
 {
   path: 'publicacion',
   loadChildren: () => import('./pages/publicacion/publicacion.module').then( m => m.PublicacionPageModule),
-  canActivate: [AuthGuard]
+
 
 },
 {
   path: 'ficha',
   loadChildren: () => import('./pages/ficha/ficha.module').then( m => m.FichaPageModule),
-  canActivate: [AuthGuard]
+
 },
 
 {
@@ -30,7 +30,7 @@ const routes: Routes = [
 {
   path: 'donar',
   loadChildren: () => import('./pages/donar/donar.module').then( m => m.DonarPageModule),
-  canActivate: [AuthGuard]
+
 
 },
 

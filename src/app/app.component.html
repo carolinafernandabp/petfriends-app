@@ -9,26 +9,27 @@
             <ion-list >
               <ion-item  routerLink="/">Home</ion-item>
               <ion-item  routerLink="/all-organizacion">Organizaciones</ion-item>
+              <ion-item  routerLink="/registro-usuario">Registro</ion-item>
             </ion-list>
       </ng-container>
 
       <ng-container  *ngIf="user.isLoggedIn$ | async" >
-        <ng-container *ngIf="(user.roles$ | async) as roles"  >
+        <ng-container  >
           <ion-list>
             <ion-item  routerLink="/">Home</ion-item>
             <ion-item  routerLink="/all-organizacion">Organizaciones</ion-item>
-            <ion-item  routerLink="/">Ver postulaciones</ion-item>
+            <ion-item  routerLink="/">Mis postulaciones</ion-item>
           </ion-list>
         </ng-container>
       </ng-container>
 
       <ng-container *ngIf="(user.roles$ | async) as roles" >
-        <ng-container *ngIf="roles.admin" >
+        <ng-container  *ngIf="roles.admin">
           <ion-list>
             <ion-item  routerLink="/">Home</ion-item>
-            <ion-item  routerLink="/"> ver Solicitud</ion-item>
-            <ion-item  routerLink="/all-fichas"> Ver Fichas</ion-item>
-            <ion-item routerLink="/all-donar"> Ver Datos</ion-item>
+            <ion-item  routerLink="/"> solicitudes</ion-item>
+            <ion-item  routerLink="/all-fichas"> Fichas</ion-item>
+            <ion-item routerLink="/all-donar"> Datos</ion-item>
           </ion-list>
         </ng-container>
       </ng-container>

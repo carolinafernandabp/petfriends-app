@@ -7,12 +7,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
-import { AngularFireAuthModule} from '@angular/fire/compat/auth';
+import { AngularFireAuthModule, USE_EMULATOR} from '@angular/fire/compat/auth';
 import { AngularFireFunctionsModule} from '@angular/fire/compat/functions';
 import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule} from '@angular/fire/compat/storage';
@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
 import { AllcomponentsModule } from './component/allcomponents.module';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 
@@ -51,10 +52,10 @@ import { AllcomponentsModule } from './component/allcomponents.module';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
 
-    /*
-    { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 9099] : undefined },
-    { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 8080] : undefined },
-    { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 5001] : undefined },
+
+    { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 9098] : undefined },
+    { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 8081] : undefined },
+    { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 5000] : undefined },
 
 
     {
@@ -62,7 +63,7 @@ import { AllcomponentsModule } from './component/allcomponents.module';
         useClass: AuthInterceptor,
         multi: true
     }
- */
+
 
   ],
   bootstrap: [AppComponent],

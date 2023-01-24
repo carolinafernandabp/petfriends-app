@@ -27,11 +27,11 @@ export class CreateDonarComponent implements OnInit {
         correo: ['', Validators.required]
     });
 
-  constructor(private fb: FormBuilder,
-              private donarService : DonarService,
-              private afs: AngularFirestore,
+  constructor(public fb: FormBuilder,
+              public donarService : DonarService,
+              public afs: AngularFirestore,
               private router: Router,
-              private storage: AngularFireStorage,
+              public storage: AngularFireStorage,
               private toastController: ToastController) { }
 
                uploadThumbnail(event:any) {

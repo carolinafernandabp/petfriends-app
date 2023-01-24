@@ -11,6 +11,7 @@
           <ion-segment-button value="DATOS">
             <ion-label>Transferencia</ion-label>
           </ion-segment-button>
+
         </ion-segment>
       </ion-toolbar>
     </ion-col>
@@ -32,6 +33,6 @@
 </ion-grid>
 
 
-
+<app-list-donar [donaciones]="datosDonar$ | async" ></app-list-donar>
 
 </ion-content>

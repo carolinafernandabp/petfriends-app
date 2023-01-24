@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { PublicacionService } from 'src/app/services/publicacion.service';
-import { ListPublicacionComponent } from '../list-publicacion/list-publicacion.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-ver-publicacion',
@@ -10,13 +9,17 @@ import { ListPublicacionComponent } from '../list-publicacion/list-publicacion.c
 })
 export class VerPublicacionComponent implements OnInit {
 
+  @Input()
+  titulo!: string;
+  @Input()
+  description!: string;
 
-  constructor(private modalCtrl: ModalController,
-                private publicacionService : PublicacionService) { }
+
+  constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {}
 
-  closeModal() {
+  dismissModal() {
     this.modalCtrl.dismiss();
   }
 
