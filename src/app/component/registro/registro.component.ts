@@ -25,7 +25,8 @@ export class RegistroComponent implements OnInit {
 
   constructor(
                 private fb: FormBuilder,
-                private http: HttpClient) { }
+                private http: HttpClient,
+                public router : Router) { }
 
   ngOnInit() {}
 
@@ -49,11 +50,13 @@ export class RegistroComponent implements OnInit {
         )
         .subscribe(() => {
             alert("User created successfully!");
-            this.form.reset();
+            this.router.navigate(['login-user']);
         });
+}
 
+singup(){
 
-
+  this.router.navigate(['login-user']);
 }
 
 }

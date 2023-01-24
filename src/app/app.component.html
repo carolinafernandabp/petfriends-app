@@ -2,37 +2,72 @@
 
   <ion-menu contentId="main" side="start" menuId="menuPrincipal">
 
-
     <ion-content class="ion-padding">
-
       <ng-container *ngIf="user.isLoggedOut$ | async" >
             <ion-list >
-              <ion-item  routerLink="/">Home</ion-item>
-              <ion-item  routerLink="/all-organizacion">Organizaciones</ion-item>
-              <ion-item  routerLink="/registro-usuario">Registro</ion-item>
+              <ion-item lines="none" routerLink="/">Home
+                <ion-icon name="home" slot="start"></ion-icon>
+              </ion-item>
+              <ion-item lines="none"  routerLink="/all-organizacion">Organizaciones
+                <ion-icon name="happy" slot="start"></ion-icon>
+              </ion-item>
             </ion-list>
       </ng-container>
 
       <ng-container  *ngIf="user.isLoggedIn$ | async" >
-        <ng-container  >
-          <ion-list>
-            <ion-item  routerLink="/">Home</ion-item>
-            <ion-item  routerLink="/all-organizacion">Organizaciones</ion-item>
-            <ion-item  routerLink="/">Mis postulaciones</ion-item>
-          </ion-list>
+        <ng-container *ngIf="(user.roles$ | async) as roles" >
+          <ng-container *ngIf="roles.admin == false">
+            <ion-list>
+              <ion-item lines="none"   routerLink="/">Home
+                <ion-icon name="home" slot="start"></ion-icon>
+              </ion-item>
+              <ion-item  lines="none"  routerLink="/all-organizacion">Organizaciones
+                <ion-icon name="happy" slot="start"></ion-icon>
+              </ion-item>
+              <ion-item lines="none"  routerLink="/">Mis postulaciones
+                <ion-icon  slot="start" name="document"></ion-icon>
+              </ion-item>
+            </ion-list>
+          </ng-container>
         </ng-container>
       </ng-container>
 
       <ng-container *ngIf="(user.roles$ | async) as roles" >
         <ng-container  *ngIf="roles.admin">
           <ion-list>
-            <ion-item  routerLink="/">Home</ion-item>
-            <ion-item  routerLink="/"> solicitudes</ion-item>
-            <ion-item  routerLink="/all-fichas"> Fichas</ion-item>
-            <ion-item routerLink="/all-donar"> Datos</ion-item>
+            <ion-item lines="none"  routerLink="/">Home
+              <ion-icon name="home" slot="start"></ion-icon>
+            </ion-item>
+            <ion-item   lines="none" routerLink="/"> solicitudes
+              <ion-icon slot="start" name="folder"></ion-icon>
+            </ion-item>
+            <ion-item lines="none"  routerLink="/all-fichas"> Fichas
+              <ion-icon  slot="start" name="paw"></ion-icon>
+            </ion-item>
+            <ion-item lines="none"  routerLink="/all-donar"> Datos
+              <ion-icon slot="start" name="card"></ion-icon>
+            </ion-item>
           </ion-list>
         </ng-container>
       </ng-container>
+
+
+        <ng-container *ngIf="user.isLoggedOut$ | async">
+          <ion-item lines="none" routerLink="/registro-usuario">Iniciar sesión
+              <ion-icon slot="start" name="person" > </ion-icon>
+          </ion-item>
+        </ng-container>
+
+        <ng-container *ngIf="user.isLoggedIn$ | async">
+          <ion-item lines="none">Cerrar Sesión
+            <ion-buttons slot="start" (click)="logout()" >
+              <ion-icon  name="exit"> </ion-icon>
+            </ion-buttons>
+          </ion-item>
+
+        </ng-container>
+
+
 
     </ion-content>
   </ion-menu>

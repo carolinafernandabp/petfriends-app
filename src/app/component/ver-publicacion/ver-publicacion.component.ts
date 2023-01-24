@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { Component,  Input, OnInit,  } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -13,6 +13,8 @@ export class VerPublicacionComponent implements OnInit {
   titulo!: string;
   @Input()
   description!: string;
+  @Input()
+  category!: string;
 
 
   constructor(private modalCtrl: ModalController) {}

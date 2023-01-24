@@ -26,7 +26,6 @@ export class CreatePublicacionComponent implements OnInit {
         description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
         category: ['', Validators.required],
         url: [''],
-        create:[Date]
     });
 
 
@@ -81,7 +80,7 @@ export class CreatePublicacionComponent implements OnInit {
       titulo: val.titulo as string  | any,
       description: val.description as string | any,
       category: [val.category as string] ,
-      url: val.url as any
+      url: val.url as any,
 
   };
 
@@ -95,12 +94,13 @@ export class CreatePublicacionComponent implements OnInit {
 
               });
 
-              await toast.present();
               this.router.navigate(['/']);
-
+              await toast.present();
+              location.reload();
 
 
             }),
+
             catchError(async err => {
               const toast = await  this.toastController.create({
                 cssClass: 'toast-danger',
@@ -112,9 +112,11 @@ export class CreatePublicacionComponent implements OnInit {
               await toast.present();
               this.router.navigate(['/']);
 
+
             })
         )
         .subscribe();
+
 
   }
 

@@ -1,46 +1,17 @@
-@media(min-width: 768px ) {
+.hero{
+  background-image: url('../../../assets/icon/perro2.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 30vh;
+  width: 100%;
+}
 
-  .mobile-header {
-    display: none;
-  }
+ion-menu-button{
 
-  .header {
-    display: flex;
-    background: #fff;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
 
+    color: white;
 
 
 }
 
-@media(max-width: 768px) {
-  .mobile-header {
-    display: block;
-  }
-
-  .header {
-    display: none;
-  }
-
-
-}
-
-.active-item {
-  border-bottom: 2px solid var(--ion-color-primary);
-
-}
-
-.dropdown {
-    width: 136px;
-    height: 150px;
-    background: rgb(255, 255, 255);
-    position: absolute;
-    top: 40px;
-    left: 87px;
-    z-index: 1;
-    ion-item:hover {
-        --ion-item-color: var(--ion-color-primary);
-    }
-}

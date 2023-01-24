@@ -1,25 +1,15 @@
-<ion-header class="mobile-header">
-  <ion-toolbar >
-    <ion-buttons slot="start">
-      <ion-menu-button menu="menuPrincipal"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{ title }}</ion-title>
-    <ion-buttons slot="end">
 
-      <ng-container *ngIf="user.isLoggedOut$ | async">
-        <ion-button routerLink="/login-user">
-          <ion-icon slot="icon-only" name="person" ></ion-icon>
-        </ion-button>
-      </ng-container>
+  <ion-header  class="ion-no-border">
+    <ion-toolbar >
+      <div class="hero">
+      <ion-buttons >
+        <ion-menu-button menu="menuPrincipal" slot="start">
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>{{ title }}</ion-title>
 
-      <ng-container *ngIf="user.isLoggedIn$ | async">
-        <ion-button  (click)="logout()" >
-          <ion-icon slot="icon-only" name="exit"></ion-icon>
-        </ion-button>
-      </ng-container>
 
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
+    </div>
+    </ion-toolbar>
+  </ion-header>
 

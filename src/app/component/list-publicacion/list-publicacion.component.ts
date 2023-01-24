@@ -81,6 +81,7 @@ async verMas(publicaciones  : Publicacion) {
 
       titulo: publicaciones.titulo,
       description:publicaciones.description,
+      category:publicaciones.category
 
        }
 
