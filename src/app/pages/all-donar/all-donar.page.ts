@@ -12,7 +12,7 @@ export class AllDonarPage implements OnInit {
 
   datosDonar$ : Observable<Donacion[]> | any;
 
-  optionSelected:string = "DATOS";
+  optionSelected:string = "1";
 
   constructor(public donarService : DonarService) { }
 
@@ -23,7 +23,7 @@ export class AllDonarPage implements OnInit {
 
   reloadDatos(){
 
-    this.datosDonar$ = this.donarService.loadDonacionnByBanco("DATOS");
+    this.datosDonar$ = this.donarService.loadDonacionnByBanco("1");
   }
 
   segmentChanged(event: any){

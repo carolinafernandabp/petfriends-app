@@ -3,7 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { catchError, tap, throwError } from 'rxjs';
 import { Donacion } from 'src/app/models/donar';
 import { DonarService } from 'src/app/services/donar.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-list-donar',
@@ -20,8 +19,7 @@ export class ListDonarComponent implements OnInit {
 
 
   constructor(private donarService : DonarService,
-              private modalCtrl : ModalController,
-                  public user : UserService) { }
+              private modalCtrl : ModalController) { }
 
   ngOnInit() {}
 

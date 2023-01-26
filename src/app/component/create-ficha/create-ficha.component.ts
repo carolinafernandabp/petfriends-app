@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { catchError, concatMap, last, tap, throwError } from 'rxjs';
@@ -16,21 +16,26 @@ import { PublicacionService } from 'src/app/services/publicacion.service';
 })
 export class CreateFichaComponent implements OnInit {
 
+
   fichaId: any;
   iconUrl: any;
 
+
+
     form = this.fb.group({
-        nombre:['', [Validators.required]],
-        nacimiento: ['', [Validators.required]],
-        raza: ['', Validators.required],
-        color: ['', Validators.required],
-        tamanio: ['', Validators.required],
-        description: ['', Validators.required],
+        nombre:['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        nacimiento: ['', [Validators.required, this.validateDate]],
+        raza: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        color: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        tamanio: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+        description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(150)]],
         image: ['', Validators.required],
         especie: ['', Validators.required],
         estado: ['', Validators.required],
-        microChip: ['', Validators.required]
+        microChip: ['', [ Validators.minLength(15), Validators.maxLength(20)]]
     });
+
+ fechaMinima!: Date;
 
 
   constructor(private fb: FormBuilder,
@@ -38,7 +43,22 @@ export class CreateFichaComponent implements OnInit {
               private afs: AngularFirestore,
               private router: Router,
               private storage: AngularFireStorage,
-              private toastController: ToastController) { }
+              private toastController: ToastController) {
+
+                this.fechaMinima = new Date(2013,0,1);
+
+
+              }
+
+              validateDate(control: FormGroup, fechaMinima:Date) {
+                const selectedDate = new Date(control.value);
+                const minDate = new Date(fechaMinima);
+                const currentDate = new Date();
+                if (selectedDate < minDate || selectedDate > currentDate) {
+                  return { outOfRange: true };
+                }
+                return null;
+              }
 
 
     uploadThumbnail(event:any) {
@@ -101,8 +121,9 @@ export class CreateFichaComponent implements OnInit {
                     duration: 1500,
 
               });
-              this.router.navigateByUrl("/fichas");
+              this.router.navigateByUrl("/all-fichas");
               await toast.present();
+              location.reload();
 
 
             }),
@@ -115,11 +136,13 @@ export class CreateFichaComponent implements OnInit {
               });
 
               await toast.present();
-              this.router.navigateByUrl("/fichas");
+              this.router.navigateByUrl("/all-fichas");
 
             })
         )
         .subscribe();
 
   }
+
+
 }

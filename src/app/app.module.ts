@@ -48,15 +48,16 @@ import { AuthInterceptor } from './services/auth.interceptor';
 
 
 
+
     ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
 
-
+/*
     { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 9098] : undefined },
     { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 8081] : undefined },
     { provide: USE_EMULATOR, useValue: environment.useEmulator ? ['http://localhost', 5000] : undefined },
-
+*/
 
     {
         provide: HTTP_INTERCEPTORS,

@@ -28,7 +28,7 @@ export class EditPublicacionComponent implements OnInit {
               @Inject(NavParams) publicacion: Publicacion
               ) {
 
-                this.publicaciones = this.publicaciones
+                this.publicaciones = publicacion;
 
                 this.publicaciones = publicacion;
                 this.form = this.fb.group({
@@ -55,7 +55,7 @@ export class EditPublicacionComponent implements OnInit {
         .subscribe(() => {
 
             this.modalCtrl.dismiss(changes);
-
+            location.reload();
 
         });
 

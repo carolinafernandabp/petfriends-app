@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ficha } from 'src/app/models/ficha-mascota';
-import { Publicacion } from 'src/app/models/publicacion';
 import { FichaMascotaService } from 'src/app/services/ficha.service';
 
 @Component({

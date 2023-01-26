@@ -7,7 +7,6 @@ import { HeaderComponent } from './header/header.component';
 import { CreatePublicacionComponent } from './create-publicacion/create-publicacion.component';
 import { EditPublicacionComponent } from './edit-publicacion/edit-publicacion.component';
 import { CreateFichaComponent } from './create-ficha/create-ficha.component';
-import { CreateSolicitudComponent } from './create-solicitud/create-solicitud.component';
 import { EditSolicitudComponent } from './edit-solicitud/edit-solicitud.component';
 import { CreateDonarComponent } from './create-donar/create-donar.component';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +18,8 @@ import { VerPublicacionComponent } from './ver-publicacion/ver-publicacion.compo
 import { EditFichaComponent } from './edit-ficha/edit-ficha.component';
 import { VerFichaComponent } from './ver-ficha/ver-ficha.component';
 import { ListDonarComponent } from './list-donar/list-donar.component';
+import { RecibirSolicitudComponent } from './recibir-solicitud/recibir-solicitud.component';
+import { EnviarsolicitudComponent } from './enviarsolicitud/enviarsolicitud.component';
 
 @NgModule({
 
@@ -28,7 +29,6 @@ import { ListDonarComponent } from './list-donar/list-donar.component';
     CreatePublicacionComponent,
     EditPublicacionComponent,
     CreateFichaComponent,
-    CreateSolicitudComponent,
     EditSolicitudComponent,
     CreateDonarComponent,
     LoginComponent,
@@ -39,7 +39,9 @@ import { ListDonarComponent } from './list-donar/list-donar.component';
     VerPublicacionComponent,
     EditFichaComponent,
     VerFichaComponent,
-    ListDonarComponent
+    ListDonarComponent,
+    RecibirSolicitudComponent,
+    EnviarsolicitudComponent
 ],
 
   imports: [
@@ -54,7 +56,6 @@ import { ListDonarComponent } from './list-donar/list-donar.component';
     CreatePublicacionComponent,
     EditPublicacionComponent,
     CreateFichaComponent,
-    CreateSolicitudComponent,
     EditPublicacionComponent,
     CreateDonarComponent,
     LoginComponent,
@@ -65,7 +66,9 @@ import { ListDonarComponent } from './list-donar/list-donar.component';
     VerPublicacionComponent,
     EditFichaComponent,
     VerFichaComponent,
-    ListDonarComponent
+    ListDonarComponent,
+    RecibirSolicitudComponent,
+    EnviarsolicitudComponent
 
 
 ]

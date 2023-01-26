@@ -12,6 +12,20 @@ export class VerFichaComponent implements OnInit {
   nombre!: string;
   @Input()
   raza!: string;
+  @Input()
+  nacimiento!: string;
+  @Input()
+  color!: string;
+  @Input()
+  tamanio!: string;
+  @Input()
+  description!: string;
+  @Input()
+  especie!: string;
+  @Input()
+  estado!: string;
+  @Input()
+  microChip!: string;
 
 
   constructor(private modalCtrl: ModalController) { }

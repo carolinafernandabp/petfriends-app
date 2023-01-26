@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   useEmulator:false,
   firebase : {
     apiKey: "AIzaSyAuD-PD1XTgUvkil5kp3HXi9RCPoIm0mMs",
@@ -15,7 +15,7 @@ export const environment = {
     measurementId: "G-TE8JYWD5PT"
   },
   api: {
-    createUser: "http://127.0.0.1:5000/petfriends-app-94df7/us-central1/createUser"
+    createUser: "https://us-central1-petfriends-app-94df7.cloudfunctions.net/createUser"
 }
 };
 

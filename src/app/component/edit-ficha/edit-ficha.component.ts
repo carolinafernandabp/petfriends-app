@@ -52,7 +52,7 @@ export class EditFichaComponent implements OnInit {
         .subscribe(() => {
 
             this.modalCtrl.dismiss(changes);
-
+            location.reload();
 
         });
 

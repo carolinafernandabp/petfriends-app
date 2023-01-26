@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import {  ModalController } from '@ionic/angular';
 import { catchError, tap, throwError } from 'rxjs';
 import { Ficha } from 'src/app/models/ficha-mascota';
 import { FichaMascotaService } from 'src/app/services/ficha.service';
@@ -71,7 +70,16 @@ async verFicha(fichas : Ficha) {
     componentProps: {
 
       nombre : fichas.nombre,
-      raza : fichas.raza
+      nacimiento: fichas.nacimiento,
+      raza : fichas.raza,
+      color: fichas.color,
+      tamanio: fichas.tamanio,
+      description: fichas.description,
+      especie: fichas.especie,
+      estado: fichas.estado,
+      microChip: fichas.microChip
+
+
 
        }
 

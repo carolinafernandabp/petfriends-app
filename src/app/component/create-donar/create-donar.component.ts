@@ -20,11 +20,11 @@ export class CreateDonarComponent implements OnInit {
 
     form = this.fb.group({
         nombre:['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-        rut: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+        rut: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
         banco: ['', Validators.required],
         tipo: ['', Validators.required],
-        cuenta: ['', Validators.required],
-        correo: ['', Validators.required]
+        cuenta: ['',  [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+        correo: ['', Validators.email]
     });
 
   constructor(public fb: FormBuilder,
@@ -34,34 +34,7 @@ export class CreateDonarComponent implements OnInit {
               public storage: AngularFireStorage,
               private toastController: ToastController) { }
 
-               uploadThumbnail(event:any) {
 
-      const file: File = event.target.files[0];
-
-      console.log(file.name);
-
-      const filePath = `fichas/${this.donarId}/${file.name}`;
-
-      const task = this.storage.upload(filePath, file, {
-          cacheControl: "max-age=2592000,public"
-      });
-
-
-      task.snapshotChanges()
-          .pipe(
-              last(),
-              concatMap(() => this.storage.ref(filePath).getDownloadURL()),
-              tap(url => this.iconUrl = url),
-              catchError(err => {
-                  console.log(err);
-                  alert("Could not create thumbnail url.");
-                  return throwError(err);
-              })
-
-          )
-          .subscribe();
-
-      }
   ngOnInit() {
 
     this.donarId = this.afs.createId();
@@ -78,7 +51,7 @@ export class CreateDonarComponent implements OnInit {
       banco: [val.banco as string],
       tipo: val.tipo as string,
       cuenta: val.cuenta as any,
-      correo: val.correo as string
+      correo: val.correo as any
   };
 
     this.donarService.createDonacion(newDonacion, this.donarId)
@@ -90,8 +63,10 @@ export class CreateDonarComponent implements OnInit {
                     duration: 1500,
 
               });
-              this.router.navigateByUrl("/publicaciones");
+              this.router.navigateByUrl("/all-donar");
               await toast.present();
+              location.reload();
+
 
 
             }),
@@ -104,7 +79,7 @@ export class CreateDonarComponent implements OnInit {
               });
 
               await toast.present();
-              this.router.navigateByUrl("/home");
+              this.router.navigateByUrl("/");
 
             })
         )

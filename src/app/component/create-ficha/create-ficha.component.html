@@ -86,10 +86,16 @@
           </ion-item>
 
           <ion-item lines="none">
-            <ion-label position="stacked" >Cargar imagen</ion-label>
-            <ion-input type="file" formControlName="image"></ion-input>
+            <ion-label >Subir imagen</ion-label>
+            <ion-buttons slot="end">
+              <ion-button>
+                <label for="file-upload">
+                  <ion-icon slot="icon-only" name="images"></ion-icon>
+                </label>
+                <input  (change)="uploadThumbnail($event)" id="file-upload" style="display: none;" type="file" accept="image/*">
+              </ion-button>
+            </ion-buttons>
           </ion-item>
-
 
         <ion-item lines="none"></ion-item>
 

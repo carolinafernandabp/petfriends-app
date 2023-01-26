@@ -6,7 +6,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { map, Observable } from "rxjs";
 import { UserInterface } from "../models/user-roles";
-import { FirestoreService } from "./solicitudes.service";
+
 
 @Injectable({
     providedIn: "root"

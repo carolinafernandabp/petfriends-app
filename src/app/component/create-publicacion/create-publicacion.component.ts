@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { catchError, concatMap, last, Observable, tap, throwError } from 'rxjs';
+import { catchError,  concatMap,  finalize,  last,  Observable, tap, throwError,  } from 'rxjs';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from 'src/app/services/publicacion.service';
 
@@ -21,9 +21,10 @@ export class CreatePublicacionComponent implements OnInit {
 
   iconUrl!: string;
 
+
     form = this.fb.group({
         titulo:['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-        description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+        description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
         category: ['', Validators.required],
         url: [''],
     });
@@ -36,40 +37,44 @@ export class CreatePublicacionComponent implements OnInit {
               private storage: AngularFireStorage,
               private toastController: ToastController) { }
 
-              uploadThumbnail(event:any) {
-
-                const file: File = event.target.files[0];
-
-                console.log(file.name);
-
-                const filePath = `publicaciones/${this.publicacionId}/${file.name}`;
-
-                const task = this.storage.upload(filePath, file, {
-                    cacheControl: "max-age=2592000,public"
-                });
-
-                this.percentageChanges$ = task.percentageChanges();
-
-
-                task.snapshotChanges()
-                    .pipe(
-                        last(),
-                        concatMap(() => this.storage.ref(filePath).getDownloadURL()),
-                        tap(url => this.iconUrl = url),
-                        catchError(err => {
-                            console.log(err);
-                            return throwError(err);
-                        })
-
-                    )
-                    .subscribe();
-
-            }
 
   ngOnInit() {
 
   this.publicacionId = this.afs.createId();
   }
+
+  uploadThumbnail(event: any) {
+
+    const file: File = event.target.files[0];
+
+    console.log(file.name);
+
+    const filePath = `publicaciones/${this.publicacionId}/${file.name}`;
+
+    const task = this.storage.upload(filePath, file, {
+        cacheControl: "max-age=2592000,public"
+    });
+
+    this.percentageChanges$ = task.percentageChanges();
+
+    task.snapshotChanges()
+        .pipe(
+            last(),
+            concatMap(() => this.storage.ref(filePath).getDownloadURL()),
+            tap(url => this.iconUrl = url),
+            catchError(err => {
+                console.log(err);
+                alert("Could not create thumbnail url.");
+                return throwError(err);
+            })
+
+        )
+        .subscribe();
+
+
+}
+
+
 
   async onCreatePublicacion() {
 
@@ -80,13 +85,15 @@ export class CreatePublicacionComponent implements OnInit {
       titulo: val.titulo as string  | any,
       description: val.description as string | any,
       category: [val.category as string] ,
-      url: val.url as any,
-
+      url: val.url as any
   };
 
+
     this.publicacionService.createPublicacion(newPublicacion, this.publicacionId)
+
         .pipe(
             tap(async publicacion => {
+
               const toast = await  this.toastController.create({
                 cssClass: 'toast-success',
                 message: 'Publicación creada exitosamente',

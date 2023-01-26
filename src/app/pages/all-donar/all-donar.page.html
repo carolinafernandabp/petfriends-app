@@ -1,4 +1,4 @@
-<app-header title="Información Bancaria"></app-header>
+<app-header title=""></app-header>
 <ion-content>
 
 <ion-grid [fixed]="true" >
@@ -6,8 +6,8 @@
     <ion-col>
       <ion-toolbar>
         <ion-segment scrollable="true" [value]="optionSelected"
-        (ionChange)="segmentChanged($event)" value="DATOS">
-          <ion-segment-button value="DATOS">
+        (ionChange)="segmentChanged($event)" value="1">
+          <ion-segment-button value="1">
             <ion-label>Transferencia</ion-label>
           </ion-segment-button>
 
@@ -21,7 +21,7 @@
   <ion-row class="ion-justify-content-center">
     <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
 
-      <div *ngIf="optionSelected == 'DATOS'">
+      <div *ngIf="optionSelected == '1'">
         <app-list-donar [donaciones]="datosDonar$ | async"
                 (donacionDeleted)="reloadDatos()" ></app-list-donar>
       </div>
@@ -31,7 +31,5 @@
   </ion-row>
 </ion-grid>
 
-
-<app-list-donar [donaciones]="datosDonar$ | async" ></app-list-donar>
 
 </ion-content>
