@@ -11,12 +11,7 @@ const routes: Routes = [
   loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
 
 },
-{
-  path: 'publicacion',
-  loadChildren: () => import('./pages/publicacion/publicacion.module').then( m => m.PublicacionPageModule),
 
-
-},
 {
   path: 'ficha',
   loadChildren: () => import('./pages/ficha/ficha.module').then( m => m.FichaPageModule),
@@ -55,6 +50,14 @@ const routes: Routes = [
   {
     path: 'all-donar',
     loadChildren: () => import('./pages/all-donar/all-donar.module').then( m => m.AllDonarPageModule)
+  },
+  {
+    path: 'crear-publicacion',
+    loadChildren: () => import('./pages/crear-publicacion/crear-publicacion.module').then( m => m.CrearPublicacionPageModule)
+  },
+  {
+    path: 'all-publicaciones',
+    loadChildren: () => import('./pages/all-publicaciones/all-publicaciones.module').then( m => m.AllPublicacionesPageModule)
   },
 
 

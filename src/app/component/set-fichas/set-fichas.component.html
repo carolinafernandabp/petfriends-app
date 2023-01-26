@@ -1,0 +1,92 @@
+
+
+  <ion-grid [fixed]="true">
+
+    <ion-grid [fixed]="true">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-title>Crear Ficha Mascota</ion-title>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+      <ion-row>
+        <ion-col>
+        <ion-col >
+            <ion-item fill="outline">
+              <ion-label position="stacked">Nombre</ion-label>
+                <ion-input placeholder="Nombre"  [(ngModel)]="newFicha.nombre" type="text"></ion-input>
+            </ion-item>
+            <ion-item fill="outline">
+              <ion-label position="stacked">Fecha de nacimiento</ion-label>
+                <ion-input placeholder="Fecha de nacimiento"  [(ngModel)]="newFicha.nacimiento" type="date"></ion-input>
+            </ion-item>
+            <ion-item fill="outline">
+              <ion-label position="stacked">Raza</ion-label>
+                <ion-input placeholder="Raza"  [(ngModel)]="newFicha.raza"type="text"></ion-input>
+            </ion-item>
+            <ion-item fill="outline">
+              <ion-label position="stacked">Color</ion-label>
+                <ion-input placeholder="Color"  [(ngModel)]="newFicha.color" type="text"></ion-input>
+            </ion-item>
+            <ion-item fill="outline">
+              <ion-label position="stacked">Tamaño</ion-label>
+                <ion-input placeholder="Tamaño"  [(ngModel)]="newFicha.tamanio" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item fill="outline">
+              <ion-label position="stacked">Carácter</ion-label>
+                <ion-input placeholder="Carácter"  [(ngModel)]="newFicha.description" type="text"></ion-input>
+            </ion-item>
+
+            <ion-list>
+              <ion-item fill="outline">
+                <ion-label position="stacked">Especie</ion-label>
+                <ion-select placeholder="Especie"  interface="popover"  [(ngModel)]="newFicha.especie">
+                  <ion-select-option value="PERRO">Perro</ion-select-option>
+                  <ion-select-option value="GATO">Gato</ion-select-option>
+                  <ion-select-option value="OTRO">Otro</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+
+            <ion-list>
+              <ion-item fill="outline">
+                <ion-label position="stacked">Estado</ion-label>
+                <ion-select placeholder="Estado"  interface="popover" [(ngModel)]="newFicha.estado">
+                  <ion-select-option value="ADOPTADO">Adoptado</ion-select-option>
+                  <ion-select-option value="NOADOPTADO">No adoptado</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+
+            <ion-item fill="outline">
+              <ion-label position="stacked"> Número Micro Chip</ion-label>
+                <ion-input placeholder="Número"  [(ngModel)]="newFicha.microChip" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label >Subir imagen</ion-label>
+              <ion-buttons slot="end">
+                <ion-button>
+                  <label for="file-upload">
+                    <ion-icon slot="icon-only" name="images"></ion-icon>
+                  </label>
+                  <input  (change)="newImageUpload($event)" id="file-upload" style="display: none;" type="file" accept="image/*">
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+
+          <ion-item lines="none"></ion-item>
+
+            <ion-button lines="none" (click)="guardarFicha()">
+              Crear Ficha
+            </ion-button>
+
+            <ion-item lines="none"></ion-item>
+        </ion-col>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+

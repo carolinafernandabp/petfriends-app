@@ -1,0 +1,58 @@
+
+  <ion-grid [fixed]="true">
+    <ion-grid [fixed]="true">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-title>Crear Publicación</ion-title>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+
+      <ion-row>
+        <ion-col>
+        <ion-col >
+
+            <ion-list>
+              <ion-item fill="outline">
+                <ion-label position="stacked"> Categoría </ion-label>
+                <ion-select placeholder="Categoría"  interface="popover"  [(ngModel)]="newPublicacion.category">
+                  <ion-select-option value="MASCOTA">Mascota</ion-select-option>
+                  <ion-select-option value="NOTICIA">Noticia</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+
+            <ion-item fill="outline">
+            <ion-label position="stacked"> Título </ion-label>
+              <ion-input placeholder="Título"  [(ngModel)]="newPublicacion.titulo" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item fill="outline" >
+            <ion-label position="stacked" >Descripción</ion-label>
+              <ion-input placeholder="Descripción"  [(ngModel)]="newPublicacion.description" type="text" ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label >Subir imagen</ion-label>
+            <ion-buttons slot="end">
+              <ion-button>
+                <label for="file-upload">
+                  <ion-icon slot="icon-only" name="images"></ion-icon>
+                </label>
+                <input  (change)="newImageUpload($event)" id="file-upload" style="display: none;" type="file" accept="image/*">
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+            <ion-button lines="none" (click)="guardarPublicacion()">
+              Crear Publicación
+            </ion-button>
+
+        </ion-col>
+      </ion-col>
+      </ion-row>
+
+
+  </ion-grid>

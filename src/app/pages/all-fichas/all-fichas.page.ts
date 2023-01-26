@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ficha } from 'src/app/models/ficha-mascota';
-import { FichaMascotaService } from 'src/app/services/ficha.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-all-fichas',
@@ -10,35 +11,23 @@ import { FichaMascotaService } from 'src/app/services/ficha.service';
 })
 export class AllFichasPage implements OnInit {
 
-  perroFicha$ : Observable<Ficha[]> | any;
-
-  gatoFicha$ : Observable<Ficha[]> | any;
-
-  otroFicha$ : Observable<Ficha[]> | any;
 
   optionSelected:string = "PERRO";
 
-  constructor( private fichaService : FichaMascotaService) { }
+  constructor( public firestore : FirestoreService,
+              public user: UserService) { }
 
   ngOnInit() {
 
-    this.reloadFichas();
+
   }
 
-  reloadFichas() {
+  segmentChanged(event: any){
+    this.optionSelected = event.detail.value;
+        console.log(event.detail.value);
+  }
 
-    this.perroFicha$ = this.fichaService.loadFichaByEspecie("PERRO");
 
-    this.gatoFicha$ = this.fichaService.loadFichaByEspecie("GATO");
-
-    this.otroFicha$ = this.fichaService.loadFichaByEspecie("OTRO");
-
-}
-
-segmentChanged(event: any){
-  this.optionSelected = event.detail.value;
-      console.log(event.detail.value);
-}
 
 
 

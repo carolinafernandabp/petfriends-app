@@ -1,0 +1,30 @@
+
+  <ion-card *ngFor="let publicacion of publicaciones">
+    <img  alt="image" src="{{publicacion.foto}}">
+    <ion-card-header>
+      <ion-card-title >{{publicacion.titulo}}</ion-card-title>
+      <ion-card-subtitle >{{publicacion.category}}</ion-card-subtitle>
+    </ion-card-header>
+    <ng-container *ngIf="user.isLoggedOut$ | async">
+      <ion-button fill="clear" (click)="verMas(publicacion)" >Ver más</ion-button>
+
+    </ng-container>
+
+    <ng-container *ngIf="user.isLoggedIn$ | async">
+      <ng-container *ngIf="(user.roles$ | async) as roles" >
+        <ng-container *ngIf="roles.admin == false">
+          <ion-button fill="clear" (click)="verMas(publicacion)" >Ver más</ion-button>
+          <ion-button fill="clear" >Adoptar</ion-button>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="(user.roles$ | async) as roles" >
+      <ng-container *ngIf="roles.admin">
+        <ion-button fill="clear" (click)="verMas(publicacion)">Ver más</ion-button>
+        <ion-button fill="clear" (click)="openModal(publicacion)">Editar</ion-button>
+        <ion-button fill="clear" (click)="deletePublicacion(publicacion)" >Delete</ion-button>
+      </ng-container>
+    </ng-container>
+
+  </ion-card>

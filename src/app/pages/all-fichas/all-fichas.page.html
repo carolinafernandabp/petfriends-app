@@ -1,48 +1,59 @@
-<app-header title=""></app-header>
+
 <ion-content>
+  <app-header title=""></app-header>
 
-
-<ion-grid [fixed]="true" >
-  <ion-row>
-    <ion-col>
-      <ion-toolbar>
-        <ion-segment scrollable="true" [value]="optionSelected"
-        (ionChange)="segmentChanged($event)" value="PERRO">
-          <ion-segment-button value="PERRO">
-            <ion-label>Perro</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="GATO">
-            <ion-label>Gato</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="OTRO">
-            <ion-label>Otro</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-toolbar>
-    </ion-col>
-  </ion-row>
-</ion-grid>
 
 <ion-grid>
   <ion-row class="ion-justify-content-center">
     <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
 
-      <div *ngIf="optionSelected == 'PERRO'">
-        <app-list-ficha-mascota [fichas]="perroFicha$ | async"
-                (fichaDeleted)="reloadFichas()" ></app-list-ficha-mascota>
-      </div>
-      <div *ngIf="optionSelected == 'GATO'">
-        <app-list-ficha-mascota [fichas]="gatoFicha$ | async"
-                (fichaDeleted)="reloadFichas()" ></app-list-ficha-mascota>
-      </div>
+      <ion-grid [fixed]="true" >
+        <ion-row>
+          <ion-col>
+            <ion-toolbar>
+              <ion-segment scrollable="true" [value]="optionSelected"
+              (ionChange)="segmentChanged($event)" value="PERRO">
+                <ion-segment-button value="PERRO">
+                  <ion-label>Perro</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="GATO">
+                  <ion-label>Gato</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="OTRO">
+                  <ion-label>Otro</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-      <div *ngIf="optionSelected == 'OTRO'">
-        <app-list-ficha-mascota [fichas]="otroFicha$ | async"
-                (fichaDeleted)="reloadFichas()" ></app-list-ficha-mascota>
-      </div>
 
+      <app-list-fichas></app-list-fichas>
     </ion-col>
   </ion-row>
 </ion-grid>
+
+
+<ng-container *ngIf="(user.roles$ | async) as roles" >
+  <ng-container *ngIf="roles.admin">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button >
+        <ion-icon name="chevron-up-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top" >
+        <ion-fab-button routerLink="/crear-publicacion">
+          <ion-icon name="document"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="paw" routerLink="/ficha"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="heart" routerLink="/donar"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
+</ng-container>
 
 </ion-content>

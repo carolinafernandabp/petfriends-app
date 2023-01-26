@@ -4,44 +4,42 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
-import { CreatePublicacionComponent } from './create-publicacion/create-publicacion.component';
-import { EditPublicacionComponent } from './edit-publicacion/edit-publicacion.component';
-import { CreateFichaComponent } from './create-ficha/create-ficha.component';
-import { EditSolicitudComponent } from './edit-solicitud/edit-solicitud.component';
-import { CreateDonarComponent } from './create-donar/create-donar.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
-import { ListPublicacionComponent } from './list-publicacion/list-publicacion.component';
-import { ListOrganizacionComponent } from './list-organizacion/list-organizacion.component';
-import { ListFichaMascotaComponent } from './list-ficha-mascota/list-ficha-mascota.component';
-import { VerPublicacionComponent } from './ver-publicacion/ver-publicacion.component';
-import { EditFichaComponent } from './edit-ficha/edit-ficha.component';
-import { VerFichaComponent } from './ver-ficha/ver-ficha.component';
-import { ListDonarComponent } from './list-donar/list-donar.component';
-import { RecibirSolicitudComponent } from './recibir-solicitud/recibir-solicitud.component';
-import { EnviarsolicitudComponent } from './enviarsolicitud/enviarsolicitud.component';
+import { SetPublicacionesComponent } from './set-publicaciones/set-publicaciones.component';
+import { ListPublicacionesComponent } from './list-publicaciones/list-publicaciones.component';
+import { VerPublicacionesComponent } from './ver-publicaciones/ver-publicaciones.component';
+import { EditPublicacionesComponent } from './edit-publicaciones/edit-publicaciones.component';
+import { SetFichasComponent } from './set-fichas/set-fichas.component';
+import { VerFichasComponent } from './ver-fichas/ver-fichas.component';
+import { EditFichasComponent } from './edit-fichas/edit-fichas.component';
+import { SetDatosComponent } from './set-datos/set-datos.component';
+import { ListDatosComponent } from './list-datos/list-datos.component';
+import { VerDatosComponent } from './ver-datos/ver-datos.component';
+import { EditDatosComponent } from './edit-datos/edit-datos.component';
+import { ListFichasComponent } from './list-fichas/list-fichas.component';
 
 @NgModule({
 
 
   declarations: [
     HeaderComponent,
-    CreatePublicacionComponent,
-    EditPublicacionComponent,
-    CreateFichaComponent,
-    EditSolicitudComponent,
-    CreateDonarComponent,
     LoginComponent,
     RegistroComponent,
-    ListPublicacionComponent,
-    ListOrganizacionComponent,
-    ListFichaMascotaComponent,
-    VerPublicacionComponent,
-    EditFichaComponent,
-    VerFichaComponent,
-    ListDonarComponent,
-    RecibirSolicitudComponent,
-    EnviarsolicitudComponent
+    SetPublicacionesComponent,
+    ListPublicacionesComponent,
+    VerPublicacionesComponent,
+    EditPublicacionesComponent,
+    SetFichasComponent,
+    EditFichasComponent,
+    VerFichasComponent,
+    SetDatosComponent,
+    ListDatosComponent,
+    VerDatosComponent,
+    EditDatosComponent,
+    ListFichasComponent
+
+
 ],
 
   imports: [
@@ -53,22 +51,21 @@ import { EnviarsolicitudComponent } from './enviarsolicitud/enviarsolicitud.comp
   ],
   exports:[
     HeaderComponent,
-    CreatePublicacionComponent,
-    EditPublicacionComponent,
-    CreateFichaComponent,
-    EditPublicacionComponent,
-    CreateDonarComponent,
     LoginComponent,
     RegistroComponent,
-    ListPublicacionComponent,
-    ListOrganizacionComponent,
-    ListFichaMascotaComponent,
-    VerPublicacionComponent,
-    EditFichaComponent,
-    VerFichaComponent,
-    ListDonarComponent,
-    RecibirSolicitudComponent,
-    EnviarsolicitudComponent
+    SetPublicacionesComponent,
+    ListPublicacionesComponent,
+    VerPublicacionesComponent,
+    EditPublicacionesComponent,
+    SetFichasComponent,
+    VerFichasComponent,
+    EditFichasComponent,
+    SetDatosComponent,
+    ListDatosComponent,
+    VerDatosComponent,
+    EditDatosComponent,
+    ListFichasComponent
+
 
 
 ]

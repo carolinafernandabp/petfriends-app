@@ -55,7 +55,6 @@ export class RegistroComponent implements OnInit {
 }
 
 singup(){
-
   this.router.navigate(['login-user']);
 }
 

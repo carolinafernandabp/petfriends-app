@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Donacion } from 'src/app/models/donar';
-import { DonarService } from 'src/app/services/donar.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-all-donar',
@@ -10,25 +10,17 @@ import { DonarService } from 'src/app/services/donar.service';
 })
 export class AllDonarPage implements OnInit {
 
-  datosDonar$ : Observable<Donacion[]> | any;
 
-  optionSelected:string = "1";
 
-  constructor(public donarService : DonarService) { }
+  constructor(public firestore : FirestoreService,
+    public user: UserService) { }
 
   ngOnInit() {
 
-    this.reloadDatos;
+
   }
 
-  reloadDatos(){
 
-    this.datosDonar$ = this.donarService.loadDonacionnByBanco("1");
-  }
 
-  segmentChanged(event: any){
-    this.optionSelected = event.detail.value;
-        console.log(event.detail.value);
-  }
 
 }

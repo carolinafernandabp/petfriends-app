@@ -1,6 +1,6 @@
-<app-header></app-header>
-<ion-content>
 
+<ion-content>
+  <app-header></app-header>
 <ion-grid [fixed]="true" >
   <ion-row>
     <ion-col>
@@ -20,16 +20,11 @@
 </ion-grid>
 
 <div *ngIf="optionSelected == 'MASCOTA'">
-  <app-list-publicacion [publicaciones]="mascotaPublicacion$ | async"
-          (publicacionDeleted)="reloadPublicaciones()"
-          (publicacionEdited)="reloadPublicaciones()" ></app-list-publicacion>
+  <app-list-publicaciones [publicaciones]="mascotaPublicacion$ | async"></app-list-publicaciones>
 </div>
 <div *ngIf="optionSelected == 'NOTICIA'">
-  <app-list-publicacion [publicaciones]="noticiaPublicacion$ | async"
-          (publicacionDeleted)="reloadPublicaciones()"
-          (publicacionEdited)="reloadPublicaciones()" ></app-list-publicacion>
+  <app-list-publicaciones [publicaciones]="noticiaPublicacion$ | async"></app-list-publicaciones>
 </div>
-
 <!----------------Org Amiga-->
 <ng-container *ngIf="(user.roles$ | async) as roles" >
   <ng-container *ngIf="roles.admin">
@@ -38,14 +33,11 @@
         <ion-icon name="chevron-up-circle"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="top" >
-        <ion-fab-button routerLink="/publicacion">
+        <ion-fab-button routerLink="/crear-publicacion">
           <ion-icon name="document"></ion-icon>
         </ion-fab-button>
         <ion-fab-button>
           <ion-icon name="paw" routerLink="/ficha"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="document" routerLink="/"></ion-icon> <!---ver solicitudes-->
         </ion-fab-button>
         <ion-fab-button>
           <ion-icon name="heart" routerLink="/donar"></ion-icon>

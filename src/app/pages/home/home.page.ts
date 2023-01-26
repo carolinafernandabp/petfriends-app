@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Publicacion } from 'src/app/models/publicacion';
-import { PublicacionService } from 'src/app/services/publicacion.service';
+import { Publicacion } from 'src/app/models/models';
+import { FirestoreService } from 'src/app/services/firestore.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -18,8 +17,8 @@ export class HomePage implements OnInit {
 
   optionSelected:string = "MASCOTA";
 
-  constructor(private router: Router,
-              private publicacionService: PublicacionService,
+  constructor(
+              public firestore : FirestoreService,
               public user: UserService) { }
 
   ngOnInit() {
@@ -30,10 +29,11 @@ export class HomePage implements OnInit {
 
   reloadPublicaciones() {
 
-    this.mascotaPublicacion$ = this.publicacionService.loadPublicacionByCategory("MASCOTA");
+    this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA');
 
-    this.noticiaPublicacion$ = this.publicacionService.loadPublicacionByCategory("NOTICIA");
+    this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
 }
+
 
     segmentChanged(event: any){
       this.optionSelected = event.detail.value;
