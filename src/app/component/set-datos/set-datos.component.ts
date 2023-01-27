@@ -46,6 +46,10 @@ export class SetDatosComponent implements OnInit {
     this.getDonaciones();
   }
 
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
+
   async guardarDonacion() {
     this.presentLoading();
     const path = 'Donaciones';

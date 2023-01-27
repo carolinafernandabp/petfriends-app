@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:863513492581:android:6347424c46556456899a8c",
+        "mobilesdk_app_id": "1:863513492581:android:e0e303b851b005e0899a8c",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.aplication.petfriends"
         }
       },
       "oauth_client": [

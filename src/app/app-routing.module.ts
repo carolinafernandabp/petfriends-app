@@ -105,7 +105,5 @@ const routes: Routes = [
   providers: []
 })
 export class AppRoutingModule { }
-function hasCustomClaim(arg0: string) {
-  throw new Error('Function not implemented.');
-}
+
 

@@ -38,6 +38,9 @@ export class AdoptarComponent implements OnInit {
 
   ngOnInit() {}
 
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
 
 
   async guardarAdoptar() {

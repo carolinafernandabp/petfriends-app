@@ -48,6 +48,7 @@ export class EditAdoptarComponent implements OnInit {
     this.firestoreService.updateDoc(updateData, this.path, adopcion.id)
     .then(() => {
     this.presentToast('Estado actualizado exitosamente');
+
     })
     .catch(() => {
     this.presentToast('Error al actualizar el estado');

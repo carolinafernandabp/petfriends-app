@@ -21,7 +21,7 @@ export class ListPublicacionesComponent implements OnInit {
   @Output() publicacionDeleted = new EventEmitter<Publicacion>();
 
 
-  private path = 'Publicaciones/';
+  private path = 'Publicaciones';
 
   loading: any;
 
@@ -49,9 +49,12 @@ export class ListPublicacionesComponent implements OnInit {
       component: EditPublicacionesComponent,
       componentProps:{
 
-
+        id: publicaciones.id,
         titulo: publicaciones.titulo,
         description:publicaciones.description,
+        foto : publicaciones.foto,
+        category: publicaciones.category
+
 
       },
 
@@ -120,10 +123,11 @@ async presentToast(msg: string) {
       component: VerPublicacionesComponent,
       componentProps: {
 
-        foto: publicaciones.foto,
+        id: publicaciones.id,
         titulo: publicaciones.titulo,
         description:publicaciones.description,
-        category:publicaciones.category
+        foto : publicaciones.foto,
+        category: publicaciones.category
 
          }
 

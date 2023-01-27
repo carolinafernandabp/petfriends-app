@@ -53,6 +53,10 @@ export class SetFichasComponent implements OnInit {
     this.getFichas();
   }
 
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
+
 
   async guardarFicha() {
     this.presentLoading();

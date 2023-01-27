@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 import { AuthTokenService } from './services/auth-token.service';
+import { NotificationsService } from './services/notifications.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class AppComponent {
                 private token: AuthTokenService,
                   public router : Router,
                   private toastController : ToastController,
-                  private menu: MenuController ) {}
+                  private menu: MenuController,
+                  private notificationsService : NotificationsService ) {}
 
 
     async logout() {

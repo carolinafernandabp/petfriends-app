@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 import { Publicacion } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UserService } from 'src/app/services/user.service';
@@ -13,15 +14,20 @@ import { UserService } from 'src/app/services/user.service';
 export class EditPublicacionesComponent implements OnInit {
 
 
-  @Input() publicaciones: Publicacion[]| any ;
+  @Input()
+  titulo!: string;
+  @Input()
+  id!: string;
+  @Input()
+  description!: string;
 
-  publicacion:Publicacion;
+  publicaciones!: Publicacion;
 
   form!: FormGroup;
 
   loading: any;
 
-  private path = 'Publicaciones/';
+  private path = 'Publicaciones';
 
   constructor(
               public user : UserService,
@@ -33,27 +39,45 @@ export class EditPublicacionesComponent implements OnInit {
               public alertController: AlertController ,
               public loadingController: LoadingController) {
 
-                this.publicacion = publicacion;
+                this.publicaciones = publicacion;
 
                 this.form = this.fb.group({
-                  titulo:[this.publicacion.titulo],
-                  description:[this.publicacion.description]
+                  titulo:[this.titulo],
+                  description:[this.description]
 
                 })
                }
 
-  ngOnInit() {}
+  ngOnInit() {
 
-  dismissModal(){
-    this.modalCtrl.dismiss();
-  }
-
-  getPublicaciones() {
-    this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
-           this.publicaciones = res;
+    this.firestoreService.getDoc<Publicacion>('Publicaciones', this.publicaciones.id)
+    .pipe(map(document => this.publicaciones.id))
+    .subscribe(id => {
+      console.log(id);
     });
   }
 
+  dismissModal(){
+    this.modalCtrl.dismiss();
+
+  }
+
+
+  save() {
+
+    const changes = this.form.value;
+
+    this.firestoreService.updateDoc(changes,this.path,this.publicaciones.id).then( () => {
+
+      this.alertController.dismiss(changes);
+      this.modalCtrl.dismiss();
+
+    });
+
+
+}
+
+/*
   async editPublicacion() {
 
     const alert = await this.alertController.create({
@@ -74,8 +98,8 @@ export class EditPublicacionesComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             const changes = this.form.value;
-            console.log(this.publicacion.id);
-            this.firestoreService.updateDoc(changes,'Publicaciones/',this.publicacion.id).then( res => {
+            console.log(this.publicaciones.id);
+            this.firestoreService.updateDoc(changes,this.path,this.publicaciones.id).then( res => {
               this.presentToast('Editado con éxito');
               this.alertController.dismiss(changes);
               this.modalCtrl.dismiss();
@@ -89,7 +113,7 @@ export class EditPublicacionesComponent implements OnInit {
     });
     await alert.present();
 }
-
+*/
 async presentLoading() {
   this.loading = await this.loadingController.create({
     cssClass: 'normal',

@@ -47,6 +47,10 @@ export class SetPublicacionesComponent implements OnInit {
     this.getPublicaciones();
   }
 
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} caracteres`;
+  }
+
   async guardarPublicacion() {
     this.presentLoading();
     const path = 'Publicaciones';

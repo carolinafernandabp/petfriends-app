@@ -14,14 +14,14 @@
       <ion-col>
       <ion-col >
 
-          <ion-item fill="outline">
+          <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
           <ion-label position="stacked">Nombre</ion-label>
-            <ion-input placeholder="nombre"  [(ngModel)]="newDonacion.nombre" type="text"></ion-input>
+            <ion-input placeholder="nombre" maxlength="20"  [(ngModel)]="newDonacion.nombre" type="text"></ion-input>
         </ion-item>
 
-        <ion-item fill="outline">
+        <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
           <ion-label position="stacked" >Rut</ion-label>
-            <ion-input placeholder="rut"  [(ngModel)]="newDonacion.rut" type="text" ></ion-input>
+            <ion-input placeholder="rut"  [(ngModel)]="newDonacion.rut" type="text" maxlength="9"></ion-input>
         </ion-item>
 
         <ion-list>
@@ -46,7 +46,7 @@
         </ion-list>
 
         <ion-list>
-          <ion-item fill="outline">
+          <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
             <ion-label position="stacked">Tipo</ion-label>
             <ion-select placeholder="Tipo de cuenta"  interface="popover"  [(ngModel)]="newDonacion.tipo">
               <ion-select-option value="CORRIENTE">Cuenta Corriente /Cuenta Vista</ion-select-option>
@@ -55,12 +55,12 @@
           </ion-item>
         </ion-list>
 
-        <ion-item fill="outline">
+        <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
           <ion-label position="stacked" >Número de cuenta</ion-label>
-            <ion-input placeholder="número de cuenta"  [(ngModel)]="newDonacion.cuenta"type="text" ></ion-input>
+            <ion-input placeholder="número de cuenta"  [(ngModel)]="newDonacion.cuenta"type="text" maxlength="20"></ion-input>
         </ion-item>
 
-        <ion-item fill="outline">
+        <ion-item fill="outline" >
           <ion-label position="stacked" >Correo</ion-label>
             <ion-input placeholder="correo"  [(ngModel)]="newDonacion.correo" type="text" ></ion-input>
         </ion-item>

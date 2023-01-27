@@ -1,18 +1,15 @@
-<ion-header>
-  <ion-toolbar>
+
     <ion-title>
-      Solicitudes
+      Solicitudes adopción
     </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 
   <ion-list *ngFor="let adopcion of adopciones">
 
     <ion-item>
       <ion-label>
-        <h2>{{ adopcion.fecha }}</h2>
-        <p>{{ adopcion.description }}</p>
+        <h2>{{ adopcion.description }}</h2>
+        <p>{{ adopcion.fecha.seconds*1000 | date:'dd-MM-YYYY  hh:mm'  }}</p>
         <p *ngIf="adopcion.estado == 'enviada'">Estado: Enviada</p>
         <p *ngIf="adopcion.estado == 'aceptada'">Estado: Aceptada</p>
         <p *ngIf="adopcion.estado == 'rechazada'">Estado: Rechazada</p>

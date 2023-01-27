@@ -29,7 +29,10 @@
         <ion-col >
 
               <div class="col-75">
-                <textarea  [(ngModel)]="newAdoptar.description"  placeholder="Cuentanos sobre ti...."  style="height:150px; width: 100%;"></textarea>
+                <ion-item lines="none" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
+                  <textarea  [(ngModel)]="newAdoptar.description"  placeholder="Cuentanos sobre ti...."  style="height:150px; width: 100%;" maxlength="300"></textarea>
+                </ion-item>
+
               </div>
 
               <ion-item lines="none">

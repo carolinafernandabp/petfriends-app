@@ -9,8 +9,8 @@
 
     <ion-item>
       <ion-label>
-        <h2>{{ voluntario.fecha }}</h2>
-        <p>{{ voluntario.description }}</p>
+        <h2>{{ voluntario.description }}</h2>
+        <p>{{ voluntario.fecha.seconds*1000 | date:'dd-MM-YYYY  hh:mm'  }}</p>
         <p *ngIf="voluntario.estado == 'enviada'">Estado: Enviada</p>
         <p *ngIf="voluntario.estado == 'aceptada'">Estado: Aceptada</p>
         <p *ngIf="voluntario.estado == 'rechazada'">Estado: Rechazada</p>
