@@ -1,20 +1,19 @@
 <ion-title>
-  Solcitudes de voluntario
+  Solicitudes de voluntario
 </ion-title>
 
 
 <ion-list *ngFor="let voluntario of voluntarios">
 
-<ion-item>
-  <ion-thumbnail slot="start">
-    <img alt="Silhouette of mountains" src="../../../assets/icon/logo-oficial.png" />
-  </ion-thumbnail>
-  <ion-label>
-    <h2>Estado: <a>{{ voluntario.estado }}</a></h2>
-    <p>{{ voluntario.description }}</p>
-    <p>{{ voluntario.fecha }}</p>
-  </ion-label>
-</ion-item>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Estado: <a>{{ voluntario.estado }}</a></ion-card-title>
+    <ion-card-subtitle>{{ voluntario.fecha.seconds*1000 | date:'dd-MM-YYYY  hh:mm'  }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    {{ voluntario.description }}
+  </ion-card-content>
+</ion-card>
 
 </ion-list>
 

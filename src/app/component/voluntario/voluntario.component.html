@@ -29,7 +29,7 @@
         <ion-col >
 
               <div class="col-75">
-                <textarea  [(ngModel)]="newVoluntario.description"  placeholder="Cuentanos sobre ti...."  style="height:150px; width: 100%;"></textarea>
+                <textarea  [(ngModel)]="newVoluntario.description"  placeholder="Cuentanos sobre ti...."  style="height:150px; width: 100%;"minlength="5" maxlength="500" required></textarea>
               </div>
 
             <ion-button lines="none" (click)="guardarVoluntario()">

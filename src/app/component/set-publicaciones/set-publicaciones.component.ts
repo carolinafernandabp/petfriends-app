@@ -40,15 +40,18 @@ export class SetPublicacionesComponent implements OnInit {
               public toastController: ToastController,
               public alertController: AlertController,
               public firestorageService: FirestorageService,
-              private router: Router) { }
+              private router: Router) {
+
+
+               }
 
   ngOnInit() {
 
     this.getPublicaciones();
   }
 
-  customCounterFormatter(inputLength: number, maxLength: number) {
-    return `${maxLength - inputLength} caracteres`;
+  customCounterFormatter(inputLength: number, maxLength: number, minLenght:number) {
+    return `${ maxLength - inputLength} caracteres`;
   }
 
   async guardarPublicacion() {

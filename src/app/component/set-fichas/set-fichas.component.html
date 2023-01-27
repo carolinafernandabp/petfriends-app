@@ -16,34 +16,34 @@
         <ion-col >
             <ion-item fill="outline"  id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
               <ion-label position="stacked">Nombre</ion-label>
-                <ion-input placeholder="Nombre"  [(ngModel)]="newFicha.nombre" type="text" maxlength="20"></ion-input>
+                <ion-input placeholder="Nombre"  [(ngModel)]="newFicha.nombre" type="text" maxlength="20" required></ion-input>
             </ion-item>
             <ion-item fill="outline">
               <ion-label position="stacked">Fecha de nacimiento</ion-label>
-                <ion-input placeholder="Fecha de nacimiento"  [(ngModel)]="newFicha.nacimiento" type="date"></ion-input>
+                <ion-input placeholder="Fecha de nacimiento"  [(ngModel)]="newFicha.nacimiento" type="date" required></ion-input>
             </ion-item>
             <ion-item fill="outline"  id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
               <ion-label position="stacked">Raza</ion-label>
-                <ion-input placeholder="Raza"  [(ngModel)]="newFicha.raza"type="text" maxlength="20"></ion-input>
+                <ion-input placeholder="Raza"  [(ngModel)]="newFicha.raza"type="text" maxlength="20" required></ion-input>
             </ion-item>
             <ion-item fill="outline"  id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
               <ion-label position="stacked">Color</ion-label>
-                <ion-input placeholder="Color"  [(ngModel)]="newFicha.color" type="text" maxlength="20" ></ion-input>
+                <ion-input placeholder="Color"  [(ngModel)]="newFicha.color" type="text" maxlength="20" required ></ion-input>
             </ion-item>
             <ion-item fill="outline"  id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
               <ion-label position="stacked">Tamaño</ion-label>
-                <ion-input placeholder="Tamaño"  [(ngModel)]="newFicha.tamanio" type="text" maxlength="20"></ion-input>
+                <ion-input placeholder="Tamaño"  [(ngModel)]="newFicha.tamanio" type="text" maxlength="20" required></ion-input>
             </ion-item>
 
             <ion-item fill="outline"  id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
               <ion-label position="stacked">Carácter</ion-label>
-                <ion-input placeholder="Carácter"  [(ngModel)]="newFicha.description" type="text" maxlength="100"></ion-input>
+                <ion-input placeholder="Carácter"  [(ngModel)]="newFicha.description" type="text" maxlength="100" required></ion-input>
             </ion-item>
 
             <ion-list>
               <ion-item fill="outline">
                 <ion-label position="stacked">Especie</ion-label>
-                <ion-select placeholder="Especie"  interface="popover"  [(ngModel)]="newFicha.especie">
+                <ion-select placeholder="Especie"  interface="popover"  [(ngModel)]="newFicha.especie" required>
                   <ion-select-option value="PERRO">Perro</ion-select-option>
                   <ion-select-option value="GATO">Gato</ion-select-option>
                   <ion-select-option value="OTRO">Otro</ion-select-option>
@@ -54,7 +54,7 @@
             <ion-list>
               <ion-item fill="outline">
                 <ion-label position="stacked">Estado</ion-label>
-                <ion-select placeholder="Estado"  interface="popover" [(ngModel)]="newFicha.estado">
+                <ion-select placeholder="Estado"  interface="popover" [(ngModel)]="newFicha.estado" required>
                   <ion-select-option value="ADOPTADO">Adoptado</ion-select-option>
                   <ion-select-option value="NOADOPTADO">No adoptado</ion-select-option>
                 </ion-select>
