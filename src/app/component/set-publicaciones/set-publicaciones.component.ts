@@ -59,6 +59,7 @@ export class SetPublicacionesComponent implements OnInit {
          this.loading.dismiss();
          this.router.navigate(['/']);
          this.presentToast('guardo con exito');
+
     }).catch( error => {
        this.presentToast('no se pude guardar');
     });
@@ -67,6 +68,7 @@ export class SetPublicacionesComponent implements OnInit {
   getPublicaciones() {
     this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
            this.publicaciones = res;
+
     });
   }
 

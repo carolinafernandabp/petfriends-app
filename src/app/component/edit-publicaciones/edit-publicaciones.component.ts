@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { Publicacion } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-publicaciones',
@@ -12,13 +13,19 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class EditPublicacionesComponent implements OnInit {
 
 
+  @Input() publicaciones: Publicacion[]| any ;
+
   publicacion:Publicacion;
 
   form!: FormGroup;
 
   loading: any;
 
-  constructor(private modalCtrl: ModalController,
+  private path = 'Publicaciones/';
+
+  constructor(
+              public user : UserService,
+              private modalCtrl: ModalController,
               private fb : FormBuilder,
               public  firestoreService : FirestoreService,
               @Inject(NavParams) publicacion: Publicacion,
@@ -39,6 +46,12 @@ export class EditPublicacionesComponent implements OnInit {
 
   dismissModal(){
     this.modalCtrl.dismiss();
+  }
+
+  getPublicaciones() {
+    this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
+           this.publicaciones = res;
+    });
   }
 
   async editPublicacion() {

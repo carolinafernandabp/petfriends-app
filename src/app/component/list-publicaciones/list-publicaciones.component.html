@@ -14,7 +14,7 @@
       <ng-container *ngIf="(user.roles$ | async) as roles" >
         <ng-container *ngIf="roles.admin == false">
           <ion-button fill="clear" (click)="verMas(publicacion)" >Ver más</ion-button>
-          <ion-button fill="clear" >Adoptar</ion-button>
+          <ion-button fill="clear" (click)="singup()">Adoptar</ion-button>
         </ng-container>
       </ng-container>
     </ng-container>

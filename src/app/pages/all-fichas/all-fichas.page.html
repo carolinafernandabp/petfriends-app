@@ -29,11 +29,12 @@
       </ion-grid>
 
 
-      <app-list-fichas></app-list-fichas>
+
     </ion-col>
   </ion-row>
 </ion-grid>
 
+<app-list-fichas></app-list-fichas>
 
 <ng-container *ngIf="(user.roles$ | async) as roles" >
   <ng-container *ngIf="roles.admin">

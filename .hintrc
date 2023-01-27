@@ -17,7 +17,8 @@
       {
         "ignore": [
           "dialog",
-          "meta[name=color-scheme]"
+          "meta[name=color-scheme]",
+          "ion-input[inputmode]"
         ]
       }
     ],
@@ -40,6 +41,12 @@
       "default",
       {
         "button-name": "off"
+      }
+    ],
+    "axe/language": [
+      "default",
+      {
+        "html-has-lang": "off"
       }
     ]
   }

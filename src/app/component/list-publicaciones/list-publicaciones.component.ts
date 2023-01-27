@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { EditPublicacionesComponent } from 'src/app/component/edit-publicaciones/edit-publicaciones.component';
 import { Publicacion } from 'src/app/models/models';
@@ -29,7 +30,8 @@ export class ListPublicacionesComponent implements OnInit {
                 private modalCtrl : ModalController,
                 public toastController: ToastController,
                 public alertController: AlertController ,
-                public loadingController: LoadingController) { }
+                public loadingController: LoadingController,
+                private router : Router) { }
 
   ngOnInit() {
 
@@ -55,7 +57,7 @@ export class ListPublicacionesComponent implements OnInit {
 
 
     });
-    console.log(this.publicaciones.id);
+
      await modal.present();
 
 
@@ -125,8 +127,17 @@ async presentToast(msg: string) {
 
          }
 
+
+
     });
+
+
    return  await modal.present();
+  }
+
+
+  singup(){
+    this.router.navigate(['form-adoptar']);
   }
 
 

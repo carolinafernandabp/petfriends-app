@@ -1,0 +1,44 @@
+
+  <ion-grid [fixed]="true">
+    <ion-grid [fixed]="true">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-title>Adoptar </ion-title>
+
+
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="col">
+            <ion-text>
+              ¡Hola Petlover! en Petfriends necesitamos de mucha ayuda, para apoyar a nuestras organizaciones amigas a
+              seguir con el arduo trabajo de rescatar a nuestros amigos de cuatro patas,
+              Ya que nunca es suficiente cuando se trata de ellos, esta sección es para que nos demuestres que tan Petlover eres.
+              Cuentanos un poco sobre ti... Demuestra todo tu entusiasmo por esta bella experiencia. </ion-text>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+      <ion-row>
+        <ion-col>
+        <ion-col >
+
+              <div class="col-75">
+                <textarea  [(ngModel)]="newVoluntario.description"  placeholder="Cuentanos sobre ti...."  style="height:150px; width: 100%;"></textarea>
+              </div>
+
+            <ion-button lines="none" (click)="guardarVoluntario()">
+               Enviar
+            </ion-button>
+
+        </ion-col>
+      </ion-col>
+      </ion-row>
+
+
+  </ion-grid>

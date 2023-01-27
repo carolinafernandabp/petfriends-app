@@ -1,0 +1,22 @@
+
+
+    <ion-title>
+      Solcilitudes de adopción
+    </ion-title>
+
+
+  <ion-list *ngFor="let adopcion of adopciones">
+
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <img alt="Silhouette of mountains" src="../../../assets/icon/logo-oficial.png" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>Estado: <a>{{ adopcion.estado }}</a></h2>
+        <p>{{ adopcion.description }}</p>
+        <p>{{ adopcion.fecha }}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+

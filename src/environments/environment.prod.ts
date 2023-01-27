@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  useEmulator:false,
   firebase : {
     apiKey: "AIzaSyAuD-PD1XTgUvkil5kp3HXi9RCPoIm0mMs",
     authDomain: "petfriends-app-94df7.firebaseapp.com",

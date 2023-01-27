@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-import { UserService } from 'src/app/services/user.service';
+import { Usuario } from 'src/app/models/models';
+import { UserInterface } from 'src/app/models/user-roles';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,11 +16,11 @@ export class RegistroComponent implements OnInit {
 
 
   form = this.fb.group({
+
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.required, Validators.minLength(5)]],
      admin: [false]
 });
-
 
 
   constructor(
@@ -29,6 +29,8 @@ export class RegistroComponent implements OnInit {
                 public router : Router) { }
 
   ngOnInit() {}
+
+
 
   onCreateUser() {
 
@@ -39,6 +41,7 @@ export class RegistroComponent implements OnInit {
     this.http.post(environment.api.createUser  , {
         email: user.email,
         password: user.password,
+
         admin: user.admin
     })
         .pipe(

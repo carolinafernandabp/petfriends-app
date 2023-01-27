@@ -1,0 +1,21 @@
+<ion-title>
+  Solcitudes de voluntario
+</ion-title>
+
+
+<ion-list *ngFor="let voluntario of voluntarios">
+
+<ion-item>
+  <ion-thumbnail slot="start">
+    <img alt="Silhouette of mountains" src="../../../assets/icon/logo-oficial.png" />
+  </ion-thumbnail>
+  <ion-label>
+    <h2>Estado: <a>{{ voluntario.estado }}</a></h2>
+    <p>{{ voluntario.description }}</p>
+    <p>{{ voluntario.fecha }}</p>
+  </ion-label>
+</ion-item>
+
+</ion-list>
+
+

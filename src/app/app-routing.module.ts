@@ -59,6 +59,35 @@ const routes: Routes = [
     path: 'all-publicaciones',
     loadChildren: () => import('./pages/all-publicaciones/all-publicaciones.module').then( m => m.AllPublicacionesPageModule)
   },
+  {
+    path: 'list-adoptar',
+    loadChildren: () => import('./pages/list-adoptar/list-adoptar.module').then( m => m.ListAdoptarPageModule)
+  },
+  {
+    path: 'list-voluntario',
+    loadChildren: () => import('./pages/list-voluntario/list-voluntario.module').then( m => m.ListVoluntarioPageModule)
+  },
+  {
+    path: 'form-adoptar',
+    loadChildren: () => import('./pages/form-adoptar/form-adoptar.module').then( m => m.FormAdoptarPageModule)
+  },
+  {
+    path: 'all-adoptar',
+    loadChildren: () => import('./pages/all-adoptar/all-adoptar.module').then( m => m.AllAdoptarPageModule)
+  },
+  {
+    path: 'estado-adopcion',
+    loadChildren: () => import('./pages/estado-adopcion/estado-adopcion.module').then( m => m.EstadoAdopcionPageModule)
+  },
+
+  {
+    path: 'all-voluntario',
+    loadChildren: () => import('./pages/all-voluntario/all-voluntario.module').then( m => m.AllVoluntarioPageModule)
+  },
+  {
+    path: 'estado-voluntario',
+    loadChildren: () => import('./pages/estado-voluntario/estado-voluntario.module').then( m => m.EstadoVoluntarioPageModule)
+  },
 
 
 

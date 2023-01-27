@@ -1,3 +1,4 @@
+import { UserInterface } from "./user-roles";
 
 
 export interface Publicacion {
@@ -37,27 +38,31 @@ export interface Donacion {
 }
 
 export interface Usuario {
-  uid: string;
-  email: string;
-  nombre: string;
-  celular: string;
-  foto: string;
-  ubicacion: string;
+
+  userinterface : UserInterface
 }
 
 
 export interface Adoptar {
   id: string;
-  usuario : Usuario;
-  adoptado : MascotaAdoptada[];
+  description: string;
   estado: EstadoPedido;
-  fecha: any;
-  valoracion: number;
+  fecha: Date;
 }
 
-export interface MascotaAdoptada{
-
-  publicacion: Publicacion;
+export interface Voluntario {
+  id: string;
+  description: string;
+  estado: EstadoPedido;
+  fecha: Date;
 }
 
-export type  EstadoPedido = 'enviado' | 'procesando' | 'aprobado' | 'rechazado';
+
+export interface Adopcion{
+
+  adoptar : Adoptar;
+}
+
+
+
+export type  EstadoPedido = 'enviada' | 'aceptada' | 'rechazada';

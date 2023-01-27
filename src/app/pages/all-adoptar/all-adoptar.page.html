@@ -1,0 +1,40 @@
+
+<ion-content>
+  <app-header title=""></app-header>
+
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
+
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<app-list-adoptar></app-list-adoptar>
+
+<ng-container *ngIf="(user.roles$ | async) as roles" >
+  <ng-container *ngIf="roles.admin">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button >
+        <ion-icon name="chevron-up-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top" >
+        <ion-fab-button routerLink="/crear-publicacion">
+          <ion-icon name="document"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="paw" routerLink="/ficha"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="heart" routerLink="/donar"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
+</ng-container>
+
+
+
+
+</ion-content>

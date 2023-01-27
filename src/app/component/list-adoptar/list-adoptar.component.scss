@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+}
+thead th {
+  background-color: #F25657;
+  color: white;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+td, th {
+  border: 1px solid #ddd;
+  padding: 2px;
+  text-align: center;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: 1em;
+}
+
+
+
+
+ion-title{
+
+  text-align: center;
+}

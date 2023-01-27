@@ -23,19 +23,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  async logout(){
-
-    this.user.logout()
-    this.router.navigate(['']);
-    const toast = await this.toastController.create({
-      message: 'Sesión Cerrada ',
-      duration: 1500,
-      cssClass: 'toast-danger',
-      icon: 'exit-outline'
-    });
-
-    await toast.present();
-  }
 
 
 }

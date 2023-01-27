@@ -18,6 +18,13 @@ import { ListDatosComponent } from './list-datos/list-datos.component';
 import { VerDatosComponent } from './ver-datos/ver-datos.component';
 import { EditDatosComponent } from './edit-datos/edit-datos.component';
 import { ListFichasComponent } from './list-fichas/list-fichas.component';
+import { AdoptarComponent } from './adoptar/adoptar.component';
+import { VoluntarioComponent } from './voluntario/voluntario.component';
+import { ListAdoptarComponent } from './list-adoptar/list-adoptar.component';
+import { EditAdoptarComponent } from './edit-adoptar/edit-adoptar.component';
+import { ListVoluntarioComponent } from './list-voluntario/list-voluntario.component';
+import { EditVoluntarioComponent } from './edit-voluntario/edit-voluntario.component';
+
 
 @NgModule({
 
@@ -37,7 +44,13 @@ import { ListFichasComponent } from './list-fichas/list-fichas.component';
     ListDatosComponent,
     VerDatosComponent,
     EditDatosComponent,
-    ListFichasComponent
+    ListFichasComponent,
+    AdoptarComponent,
+    VoluntarioComponent,
+    ListAdoptarComponent,
+    EditAdoptarComponent,
+    ListVoluntarioComponent,
+    EditVoluntarioComponent
 
 
 ],
@@ -58,13 +71,20 @@ import { ListFichasComponent } from './list-fichas/list-fichas.component';
     VerPublicacionesComponent,
     EditPublicacionesComponent,
     SetFichasComponent,
-    VerFichasComponent,
     EditFichasComponent,
+    VerFichasComponent,
     SetDatosComponent,
     ListDatosComponent,
     VerDatosComponent,
     EditDatosComponent,
-    ListFichasComponent
+    ListFichasComponent,
+    AdoptarComponent,
+    VoluntarioComponent,
+    ListAdoptarComponent,
+    EditAdoptarComponent,
+    ListVoluntarioComponent,
+    EditVoluntarioComponent
+
 
 
 
