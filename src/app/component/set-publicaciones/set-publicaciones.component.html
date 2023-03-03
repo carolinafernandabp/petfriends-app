@@ -27,7 +27,6 @@
             <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
             <ion-label position="stacked"> Título </ion-label>
               <ion-input placeholder="Título"  [(ngModel)]="newPublicacion.titulo"  type="text"ngModel text  minlenght="3" maxlength="20" required></ion-input>
-              <ion-note slot="helper">Campo Requerido</ion-note>
           </ion-item>
 
 
@@ -55,6 +54,8 @@
         </ion-col>
       </ion-col>
       </ion-row>
+
+
 
 
   </ion-grid>

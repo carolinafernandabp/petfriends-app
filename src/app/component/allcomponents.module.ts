@@ -24,7 +24,7 @@ import { ListAdoptarComponent } from './list-adoptar/list-adoptar.component';
 import { EditAdoptarComponent } from './edit-adoptar/edit-adoptar.component';
 import { ListVoluntarioComponent } from './list-voluntario/list-voluntario.component';
 import { EditVoluntarioComponent } from './edit-voluntario/edit-voluntario.component';
-
+import { AllPipesModule } from '../pipes/all-pipes.module';
 
 @NgModule({
 
@@ -50,8 +50,7 @@ import { EditVoluntarioComponent } from './edit-voluntario/edit-voluntario.compo
     ListAdoptarComponent,
     EditAdoptarComponent,
     ListVoluntarioComponent,
-    EditVoluntarioComponent
-
+    EditVoluntarioComponent,
 
 ],
 
@@ -60,7 +59,9 @@ import { EditVoluntarioComponent } from './edit-voluntario/edit-voluntario.compo
     IonicModule,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AllPipesModule
+
   ],
   exports:[
     HeaderComponent,

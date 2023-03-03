@@ -19,7 +19,7 @@ export class ListDatosComponent implements OnInit {
 
   @Output() donacionDeleted = new EventEmitter<Donacion>();
 
-  private path = 'Donaciones/';
+  private path = 'Donaciones';
 
   loading: any;
 
@@ -31,36 +31,49 @@ export class ListDatosComponent implements OnInit {
               public alertController: AlertController ,
               public loadingController: LoadingController) { }
 
+              filterPost = '';
+              uid = '';
+
   ngOnInit() {
 
-    this.getDonacion();
+    this.uid = this.user.getUserId();
+    this.getDonaciones();
   }
 
-  getDonacion() {
+  getDonaciones() {
+    this.firestoreService.getCollection<Donacion>(this.path).subscribe(res => {
+      console.log(res); // Verificar que res contiene los datos que esperas
+      this.donaciones = res.filter(d => d.userId === this.uid);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getDonaciones1() {
     this.firestoreService.getCollection<Donacion>(this.path).subscribe(  res => {
            this.donaciones = res;
     });
   }
 
-  async openModal(donacion : Donacion) {
-    const modal = await this.modalCtrl.create({
-      component: EditDatosComponent,
-      componentProps:{
+  async openModal(donaciones: Donacion) {
+    if (donaciones && donaciones.id) {
+      const modal = await this.modalCtrl.create({
+        component: EditDatosComponent,
+        componentProps:{
 
-        nombre: donacion.nombre,
-        rut: donacion.rut,
-        banco: donacion.banco,
-        tipo: donacion.tipo,
-        cuenta:donacion.cuenta,
-        correo: donacion.correo,
-
-      },
-    });
-
-     await modal.present();
-
-
+          id: donaciones.id,
+          nombre: donaciones.nombre,
+          rut: donaciones.rut,
+          banco: donaciones.banco,
+          tipo: donaciones.tipo,
+          cuenta:donaciones.cuenta,
+          correo: donaciones.correo
+        },
+      });
+      await modal.present();
+    }
   }
+
 
 
   async deleteDonacion(donacion : Donacion) {

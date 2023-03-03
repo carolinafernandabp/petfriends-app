@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { map, Observable, of } from 'rxjs';
 import { Donacion, Ficha, Publicacion } from '../models/models';
 import { convertSnaps } from './db-util';
+import { where } from 'firebase/firestore';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
+  path!: string;
 
   constructor(public database : AngularFirestore) { }
 
@@ -35,6 +37,7 @@ export class FirestoreService {
   getId() {
     return this.database.createId();
   }
+
 
   getCollection<tipo>(path: string) {
     const collection = this.database.collection<tipo>(path);
@@ -72,12 +75,21 @@ export class FirestoreService {
     return collection.valueChanges();
   }
 
+  getPublicacionesPorUsuario(userId: string): Observable<Publicacion[]> {
+    if (!userId) {
+      return of([]);
+    }
+    const collection = this.database.collection<Publicacion>('Publicaciones', ref => ref.where("userId", "==", userId));
+    return collection.valueChanges();
+  }
+
+/*
 
   loadPublicacionByCategory(category:string): Observable<Publicacion[]> {
     return this.database.collection(
        "Publicaciones",
        ref => ref.where("category", "array-contains", category)
-           .orderBy("create")
+           .orderBy("id")
        )
        .get()
         .pipe(
@@ -85,6 +97,25 @@ export class FirestoreService {
         );
 
 }
+
+*/
+
+loadPublicacionByCategory(category: string): Observable<Publicacion[]> {
+  return this.database.collection<Publicacion>('Publicaciones', ref => ref.where('category', '==', category))
+    .snapshotChanges()
+    .pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Publicacion;
+        const id = a.payload.doc.id;
+        return {...data };
+      }))
+    );
+}
+
+
+
+
+
 
 loadFichaByEspecie(especie:string): Observable<Ficha[]> {
   return this.database.collection(
@@ -99,18 +130,6 @@ loadFichaByEspecie(especie:string): Observable<Ficha[]> {
 
 }
 
-loadDonacionnByBanco(banco:string): Observable<Donacion[]> {
-  return this.database.collection(
-     "Donaciones",
-     ref => ref.where("banco", "array-contains", banco)
-         .orderBy("cuenta")
-     )
-     .get()
-      .pipe(
-          map(result => convertSnaps<Donacion>(result))
-      );
-
-}
 
 }
 

@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { Ficha } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -12,31 +12,47 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class EditFichasComponent implements OnInit {
 
 
-
-  ficha!: Ficha;
+  @Input()
+  id!: string;
+  @Input()
+  nombre!: string;
+  @Input()
+  nacimiento!: string;
+  @Input()
+  raza!: string;
+  @Input()
+  color!: string;
+  @Input()
+  tamanio!: string;
+  @Input()
+  description!: string;
+  @Input()
+  especie!: string;
+  @Input()
+  estado!: string;
+  @Input()
+  microChip!: string;
 
   form!: FormGroup;
 
   loading: any;
 
+  private path = 'Fichas';
+
   constructor(private modalCtrl: ModalController,
                 private fb : FormBuilder,
                 public  firestoreService : FirestoreService,
-                @Inject(NavParams) ficha : Ficha,
                 public toastController: ToastController,
                 public alertController: AlertController ,
-                public loadingController: LoadingController) {
+                public loadingController: LoadingController) { }
 
-                  this.ficha = ficha;
+  ngOnInit() {
 
-                  this.form = this.fb.group({
-                    nombre:[this.ficha.nombre],
-                    description:[this.ficha.description]
-
-                  })
-                 }
-
-  ngOnInit() {}
+    this.form = this.fb.group({
+      nombre: ['', Validators.required],
+      description: ['', Validators.required],
+    });
+  }
 
   dismissModal(){
     this.modalCtrl.dismiss();
@@ -44,6 +60,11 @@ export class EditFichasComponent implements OnInit {
 
 
   async editFicha() {
+
+    if (!this.form) {
+      console.error('Formulario no definido');
+      return;
+    }
 
     const alert = await this.alertController.create({
       cssClass: 'normal',
@@ -62,8 +83,20 @@ export class EditFichasComponent implements OnInit {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
-            const changes = this.form.value;
-            this.firestoreService.updateDoc(changes,'Fichas/',this.ficha.id).then( res => {
+
+             // verificar si form.value está definido
+             if (!this.form.value) {
+              console.error('Formulario sin valor');
+              return;
+            }
+            const changes = {
+              nombre: this.form.value.nombre || this.nombre,
+              description: this.form.value.description|| this.description,
+              // Añade el resto de los campos que quieres editar
+            };
+
+            console.log(this.id);
+            this.firestoreService.updateDoc(changes,this.path,this.id).then( res => {
               this.presentToast('Editado con éxito');
               this.alertController.dismiss();
               this.modalCtrl.dismiss();

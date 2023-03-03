@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListPublicacionesComponent } from 'src/app/component/list-publicaciones/list-publicaciones.component';
 import { Publicacion } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-all-publicaciones',
@@ -11,31 +11,25 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class AllPublicacionesPage implements OnInit {
 
-  mascotaPublicacion$ : Observable<Publicacion[]> | any;
+  mascotaPublicacion$: Observable<Publicacion[]> | undefined;
+  noticiaPublicacion$: Observable<Publicacion[]> | undefined;
+  publicaciones: Publicacion[] = [];
+  user: any;
 
-  noticiaPublicacion$ : Observable<Publicacion[]> | any;
-
-  optionSelected:string = "MASCOTA";
-
-  constructor( public list : FirestoreService) { }
+  constructor(
+    private firestoreService: FirestoreService,
+    public userService: UserService
+  ) {}
 
   ngOnInit() {
-
-    this.reloadPublicaciones();
-
+    this.user = this.userService.getUserId();
+    this.getPublicaciones();
   }
 
-  reloadPublicaciones() {
-
-    this.mascotaPublicacion$ = this.list.loadPublicacionByCategory('MASCOTA');
-
-    this.noticiaPublicacion$ = this.list.loadPublicacionByCategory('NOTICIA');
-}
-
-
-
-  segmentChanged(event: any){
-    this.optionSelected = event.detail.value;
-        console.log(event.detail.value);
+  getPublicaciones() {
+    this.firestoreService.getCollection<Publicacion>('Publicaciones').subscribe(res => {
+      this.publicaciones = res;
+    });
   }
 }
+

@@ -4,6 +4,7 @@ import { MenuController, ToastController } from '@ionic/angular';
 import { AuthTokenService } from './services/auth-token.service';
 import { NotificationsService } from './services/notifications.service';
 import { UserService } from './services/user.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,14 @@ export class AppComponent {
                   public router : Router,
                   private toastController : ToastController,
                   private menu: MenuController,
-                  private notificationsService : NotificationsService ) {}
+                  private notificationsService : NotificationsService,
+                  private platform: Platform ) { }
+
+
+    ngOnInit(){
+
+
+    }
 
 
     async logout() {

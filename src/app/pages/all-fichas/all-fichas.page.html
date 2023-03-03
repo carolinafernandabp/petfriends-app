@@ -7,6 +7,7 @@
   <ion-row class="ion-justify-content-center">
     <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
 
+
       <ion-grid [fixed]="true" >
         <ion-row>
           <ion-col>
@@ -28,13 +29,13 @@
         </ion-row>
       </ion-grid>
 
-
+      <app-list-fichas></app-list-fichas>
 
     </ion-col>
   </ion-row>
 </ion-grid>
 
-<app-list-fichas></app-list-fichas>
+
 
 <ng-container *ngIf="(user.roles$ | async) as roles" >
   <ng-container *ngIf="roles.admin">

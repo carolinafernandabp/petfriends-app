@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { Publicacion } from 'src/app/models/models';
@@ -14,14 +14,18 @@ import { UserService } from 'src/app/services/user.service';
 export class EditPublicacionesComponent implements OnInit {
 
 
-  @Input()
-  titulo!: string;
+  //@Input() publicaciones!: Publicacion;
+
   @Input()
   id!: string;
   @Input()
+  foto!: string;
+  @Input()
+  titulo!: string;
+  @Input()
   description!: string;
-
-  publicaciones!: Publicacion;
+  @Input()
+  category!: string;
 
   form!: FormGroup;
 
@@ -34,51 +38,34 @@ export class EditPublicacionesComponent implements OnInit {
               private modalCtrl: ModalController,
               private fb : FormBuilder,
               public  firestoreService : FirestoreService,
-              @Inject(NavParams) publicacion: Publicacion,
               public toastController: ToastController,
               public alertController: AlertController ,
               public loadingController: LoadingController) {
 
-                this.publicaciones = publicacion;
 
-                this.form = this.fb.group({
-                  titulo:[this.titulo],
-                  description:[this.description]
-
-                })
                }
 
   ngOnInit() {
 
-    this.firestoreService.getDoc<Publicacion>('Publicaciones', this.publicaciones.id)
-    .pipe(map(document => this.publicaciones.id))
-    .subscribe(id => {
-      console.log(id);
+    this.form = this.fb.group({
+      titulo: ['', Validators.required],
+      description: ['', Validators.required],
     });
+
   }
+
 
   dismissModal(){
     this.modalCtrl.dismiss();
 
   }
 
-
-  save() {
-
-    const changes = this.form.value;
-
-    this.firestoreService.updateDoc(changes,this.path,this.publicaciones.id).then( () => {
-
-      this.alertController.dismiss(changes);
-      this.modalCtrl.dismiss();
-
-    });
-
-
-}
-
-/*
   async editPublicacion() {
+    // verificar si form está definido
+    if (!this.form) {
+      console.error('Formulario no definido');
+      return;
+    }
 
     const alert = await this.alertController.create({
       cssClass: 'normal',
@@ -97,9 +84,20 @@ export class EditPublicacionesComponent implements OnInit {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
-            const changes = this.form.value;
-            console.log(this.publicaciones.id);
-            this.firestoreService.updateDoc(changes,this.path,this.publicaciones.id).then( res => {
+            // verificar si form.value está definido
+            if (!this.form.value) {
+              console.error('Formulario sin valor');
+              return;
+            }
+
+            const changes = {
+              titulo: this.form.value.titulo || this.titulo,
+              description: this.form.value.description || this.description,
+              // Añade el resto de los campos que quieres editar
+            };
+
+            console.log(this.id);
+            this.firestoreService.updateDoc(changes, this.path, this.id).then( res => {
               this.presentToast('Editado con éxito');
               this.alertController.dismiss(changes);
               this.modalCtrl.dismiss();
@@ -112,8 +110,10 @@ export class EditPublicacionesComponent implements OnInit {
       ]
     });
     await alert.present();
-}
-*/
+  }
+
+
+
 async presentLoading() {
   this.loading = await this.loadingController.create({
     cssClass: 'normal',

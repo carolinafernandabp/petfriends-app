@@ -3,33 +3,15 @@
   <app-header></app-header>
 <ion-grid>
 
-  <ion-grid [fixed]="true" >
-    <ion-row>
-      <ion-col>
-        <ion-toolbar>
-          <ion-segment scrollable="true" [value]="optionSelected"
-          (ionChange)="segmentChanged($event)" value="MASCOTA">
-            <ion-segment-button value="MASCOTA">
-              <ion-label>Mascotas</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="NOTICIA">
-              <ion-label>Noticias</ion-label>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-toolbar>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
 
   <ion-row class="ion-justify-content-center">
     <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
 
-      <div *ngIf="optionSelected == 'MASCOTA'">
-        <app-list-publicaciones [publicaciones]="mascotaPublicacion$ | async"></app-list-publicaciones>
-      </div>
-      <div *ngIf="optionSelected == 'NOTICIA'">
-        <app-list-publicaciones [publicaciones]="noticiaPublicacion$ | async"></app-list-publicaciones>
-      </div>
+
+      <app-list-publicaciones ></app-list-publicaciones>
+
+
     </ion-col>
   </ion-row>
 </ion-grid>

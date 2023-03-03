@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { Publicacion } from 'src/app/models/models';
@@ -14,6 +14,8 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class SetPublicacionesComponent implements OnInit {
 
+  usuarioActual: string = ''; // asignar valor
+
   publicaciones: Publicacion[] = [];
 
   newPublicacion: Publicacion ={
@@ -22,12 +24,13 @@ export class SetPublicacionesComponent implements OnInit {
     foto: '',
     category: [],
     id: this.firestoreService.getId(),
-    create: new Date
+    create: new Date,
+    userId: this.usuarioActual,
   }
 
   enableNewPublicacion = false;
 
-  private path = 'Publicaciones/';
+  private path = 'Publicaciones';
 
   newImage = '';
   newFile: any;
@@ -40,10 +43,8 @@ export class SetPublicacionesComponent implements OnInit {
               public toastController: ToastController,
               public alertController: AlertController,
               public firestorageService: FirestorageService,
-              private router: Router) {
-
-
-               }
+              private router: Router,
+              public  afAuth: AngularFireAuth) { }
 
   ngOnInit() {
 
@@ -55,22 +56,23 @@ export class SetPublicacionesComponent implements OnInit {
   }
 
   async guardarPublicacion() {
+    const userId = (await this.afAuth.currentUser)?.uid; // asignar valor id
     this.presentLoading();
-    const path = 'Publicaciones';
+    const path = 'Publicaciones/';
     const name = this.newPublicacion.titulo;
     if (this.newFile !== undefined) {
       const res = await this.firestorageService.uploadImage(this.newFile, path, name);
       this.newPublicacion.foto = res;
     }
+    this.newPublicacion.userId = userId; // asignar el valor de userId a newPublicacion
     this.firestoreService.createDoc(this.newPublicacion, this.path, this.newPublicacion.id).then( res => {
-         this.loading.dismiss();
-         this.router.navigate(['/']);
-         this.presentToast('guardo con exito');
-
+      this.loading.dismiss();
+      this.router.navigate(['/']);
+      this.presentToast('guardo con exito');
     }).catch( error => {
-       this.presentToast('no se pude guardar');
+      this.presentToast('no se pude guardar');
     });
-}
+  }
 
   getPublicaciones() {
     this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
@@ -98,6 +100,7 @@ export class SetPublicacionesComponent implements OnInit {
     toast.present();
   }
 
+  /*
   async newImageUpload(event: any) {
     if (event.target.files && event.target.files[0]) {
         this.newFile = event.target.files[0];
@@ -108,5 +111,46 @@ export class SetPublicacionesComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       }
 }
+
+*/
+
+async newImageUpload(event: any) {
+  if (event.target.files && event.target.files[0]) {
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      const image = new Image();
+      image.src = event.target?.result as string;
+      image.onload = async () => {
+        const canvas = document.createElement('canvas');
+        const maxWidth = 800;
+        const maxHeight = maxWidth / 2; // relación de aspecto de 2:1
+        let width = image.width;
+        let height = image.height;
+        let x = 0;
+        let y = 0;
+        if (width / height > 2) {
+          // la imagen es más ancha de lo deseado, así que recortamos los lados izquierdo y derecho
+          width = height * 2;
+          x = (image.width - width) / 2;
+        } else {
+          // la imagen es más alta de lo deseado, así que recortamos la parte superior e inferior
+          height = width / 2;
+          y = (image.height - height) / 2;
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx!.drawImage(image, x, y, width, height, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        const blob = await fetch(dataUrl).then((res) => res.blob());
+        this.newPublicacion.foto = dataUrl;
+        // aquí subirías el blob al servidor
+      };
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+}
+
+
 
 }

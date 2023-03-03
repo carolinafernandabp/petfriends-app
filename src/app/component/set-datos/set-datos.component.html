@@ -16,31 +16,31 @@
 
           <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
           <ion-label position="stacked">Nombre</ion-label>
-            <ion-input placeholder="nombre" maxlength="20"  [(ngModel)]="newDonacion.nombre" type="text" required></ion-input>
+            <ion-input placeholder="Nombre" maxlength="20"  [(ngModel)]="newDonacion.nombre" type="text" required></ion-input>
         </ion-item>
 
         <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
           <ion-label position="stacked" >Rut</ion-label>
-            <ion-input placeholder="rut"  [(ngModel)]="newDonacion.rut" type="text" maxlength="9" required></ion-input>
+            <ion-input placeholder="Rut"  [(ngModel)]="newDonacion.rut" type="text" maxlength="9" required></ion-input>
         </ion-item>
 
         <ion-list>
           <ion-item fill="outline">
             <ion-label position="stacked">Banco</ion-label>
             <ion-select placeholder="Banco"  interface="popover"  [(ngModel)]="newDonacion.banco" required>
-              <ion-select-option value="1">Banco Estado</ion-select-option>
-              <ion-select-option value="2">Banco Santander Chile</ion-select-option>
-              <ion-select-option value="3">Bancho de Chile</ion-select-option>
-              <ion-select-option value="4">Bancho Internacional</ion-select-option>
-              <ion-select-option value="5">Scotiobank Chile</ion-select-option>
-              <ion-select-option value="6">Bancho de crédito e inversiones</ion-select-option>
-              <ion-select-option value="7">Bancho Bice</ion-select-option>
-              <ion-select-option value="8">HSBC BANK</ion-select-option>
-              <ion-select-option value="9">Itaú Corpbanca</ion-select-option>
-              <ion-select-option value="10">Bancho Security</ion-select-option>
-              <ion-select-option value="11">Bancho Falabella</ion-select-option>
-              <ion-select-option value="12">Bancho Ripley</ion-select-option>
-              <ion-select-option value="13">Bancho Consorcio</ion-select-option>
+              <ion-select-option value="Banco Estado">Banco Estado</ion-select-option>
+              <ion-select-option value="Banco Santander Chile">Banco Santander Chile</ion-select-option>
+              <ion-select-option value="Banco de Chile">Banco de Chile</ion-select-option>
+              <ion-select-option value="Banco Internacional">Banco Internacional</ion-select-option>
+              <ion-select-option value="Scotiobank Chile">Scotiobank Chile</ion-select-option>
+              <ion-select-option value="Banco de crédito e inversiones">Banco de crédito e inversiones</ion-select-option>
+              <ion-select-option value="Banco Bice">Banco Bice</ion-select-option>
+              <ion-select-option value="HSBC BANK">HSBC BANK</ion-select-option>
+              <ion-select-option value="Itaú Corpbanca">Itaú Corpbanca</ion-select-option>
+              <ion-select-option value="Banco Security">Banco Security</ion-select-option>
+              <ion-select-option value="Banco Falabella">Banco Falabella</ion-select-option>
+              <ion-select-option value="Banco Ripley">Banco Ripley</ion-select-option>
+              <ion-select-option value="Banco Consorcio">Banco Consorcio</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
@@ -57,12 +57,12 @@
 
         <ion-item fill="outline" id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
           <ion-label position="stacked" >Número de cuenta</ion-label>
-            <ion-input placeholder="número de cuenta"  [(ngModel)]="newDonacion.cuenta"type="text" maxlength="20" required></ion-input>
+            <ion-input placeholder="Número de cuenta"  [(ngModel)]="newDonacion.cuenta"type="text" maxlength="20" required></ion-input>
         </ion-item>
 
         <ion-item fill="outline" >
           <ion-label position="stacked" >Correo</ion-label>
-            <ion-input placeholder="correo"  [(ngModel)]="newDonacion.correo" type="text" required></ion-input>
+            <ion-input placeholder="Correo"  [(ngModel)]="newDonacion.correo" type="text" required></ion-input>
         </ion-item>
 
 

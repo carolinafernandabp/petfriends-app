@@ -20,9 +20,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   ui!: firebaseui.auth.AuthUI;
+  usuarioActual: string | any;
 
   constructor( public router:Router,
-                private afAuth: AngularFireAuth,
+                public afAuth: AngularFireAuth,
                 private toastController : ToastController) {
                 }
 
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   async onLoginSuccessful(result: any) {
 
   console.log('Firebase UI result:', result);
+  this.usuarioActual = (await this.afAuth.currentUser)?.uid;
 
   this.router.navigateByUrl("/");
 

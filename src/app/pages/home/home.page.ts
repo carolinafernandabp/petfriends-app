@@ -11,11 +11,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePage implements OnInit {
 
-  mascotaPublicacion$ : Observable<Publicacion[]> | any;
+  mascotaPublicacion$ !: Observable<Publicacion[]> ;
 
-  noticiaPublicacion$ : Observable<Publicacion[]> | any;
+  noticiaPublicacion$ !: Observable<Publicacion[]> ;
 
-  optionSelected:string = "MASCOTA";
+  publicaciones: Publicacion[] = [];
+  users: any;
+
+
+  optionSelected = 'MASCOTA';
 
   constructor(
               public firestore : FirestoreService,
@@ -23,17 +27,27 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
-    this.reloadPublicaciones();
+    this.users = this.user.getUserId();
+    this.getPublicaciones();
+
+    //this.reloadPublicaciones();
 
   }
+
+  getPublicaciones() {
+    this.firestore.getCollection<Publicacion>('Publicaciones/').subscribe(res => {
+      this.publicaciones = res;
+    });
+  }
+
 
   reloadPublicaciones() {
 
     this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA');
-
     this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
-}
 
+
+  }
 
     segmentChanged(event: any){
       this.optionSelected = event.detail.value;

@@ -20,7 +20,7 @@ export class ListFichasComponent implements OnInit {
 
   @Output() fichanDeleted = new EventEmitter<Ficha>();
 
-  private path = 'Fichas/';
+  private path = 'Fichas';
 
   loading: any;
 
@@ -31,41 +31,54 @@ export class ListFichasComponent implements OnInit {
               public alertController: AlertController ,
               public loadingController: LoadingController) { }
 
+              filterPost = '';
+              uid = '';
+
   ngOnInit() {
 
+    this.uid = this.user.getUserId();
     this.getFichas();
   }
 
   getFichas() {
+    this.firestoreService.getCollection<Ficha>(this.path).subscribe(res => {
+      console.log(res); // Verificar que res contiene los datos que esperas
+      this.fichas= res.filter(f => f.userId === this.uid);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getFichas1() {
     this.firestoreService.getCollection<Ficha>(this.path).subscribe(  res => {
            this.fichas = res;
     });
   }
 
-  async openModal(ficha : Ficha) {
-    const modal = await this.modalCtrl.create({
-      component: EditFichasComponent,
-      componentProps:{
+  async openModal(fichas : Ficha) {
+    if (fichas && fichas.id) {
+      const modal = await this.modalCtrl.create({
+        component: EditFichasComponent,
+        componentProps:{
 
-        nombre: ficha.nombre,
-        nacimiento: ficha.nacimiento,
-        raza: ficha.raza,
-        color: ficha.color,
-        tamanio: ficha.tamanio,
-        description: ficha.description,
-        foto: ficha.foto,
-        especie: ficha.especie,
-        estado: ficha.estado,
-        microChip: ficha.microChip,
+          id: fichas.id,
+          nombre: fichas.nombre,
+          nacimiento: fichas.nacimiento,
+          raza: fichas.raza,
+          color: fichas.color,
+          tamanio: fichas.tamanio,
+          description: fichas.description,
+          foto: fichas.foto,
+          especie: fichas.especie,
+          estado: fichas.estado,
+          microChip: fichas.microChip,
 
-
-      },
-    });
-
-     await modal.present();
-
-
+        },
+      });
+      await modal.present();
+    }
   }
+
 
   async deleteFicha(ficha : Ficha) {
 

@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { Donacion } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -11,37 +11,46 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class EditDatosComponent implements OnInit {
 
-  @Input() donaciones: Donacion[]| any ;
+  @Input()
+  id!: string;
+  @Input()
+  nombre!: string;
+  @Input()
+  rut!: string;
+  @Input()
+  banco!: string;
+  @Input()
+  tipo!: string;
+  @Input()
+  foto!: string;
+  @Input()
+  cuenta!: string;
+  @Input()
+  correo!: string;
 
-
-  donacion!: Donacion;
 
   form!: FormGroup;
 
   loading: any;
 
+  private path = 'Donaciones';
+
   constructor(private modalCtrl: ModalController,
               private fb : FormBuilder,
               public  firestoreService : FirestoreService,
-              @Inject(NavParams) donacion : Donacion,
               public toastController: ToastController,
               public alertController: AlertController ,
               public loadingController: LoadingController) {
 
-                this.donacion = donacion;
-
-                this.form = this.fb.group({
-                  nombre:[this.donacion.nombre],
-                  rut:[this.donacion.rut],
-                  banco:[this.donacion.banco],
-                  tipo:[this.donacion.tipo],
-                  cuenta: [this.donacion.cuenta],
-                  correo:[this.donacion.correo]
-
-                })
                }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+      this.form = this.fb.group({
+      nombre: ['', Validators.required],
+      rut: ['', Validators.required],
+    });
+  }
 
   dismissModal(){
     this.modalCtrl.dismiss();
@@ -49,6 +58,11 @@ export class EditDatosComponent implements OnInit {
 
 
   async editDonacion() {
+
+     if (!this.form) {
+      console.error('Formulario no definido');
+      return;
+    }
 
     const alert = await this.alertController.create({
       cssClass: 'normal',
@@ -67,8 +81,20 @@ export class EditDatosComponent implements OnInit {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
-            const changes = this.form.value;
-            this.firestoreService.updateDoc(changes,'Donaciones/',this.donacion.id).then( res => {
+
+            console.log('Confirm Okay');
+            // verificar si form.value está definido
+            if (!this.form.value) {
+              console.error('Formulario sin valor');
+              return;
+            }
+            const changes = {
+              nombre: this.form.value.nombre || this.nombre,
+              rut: this.form.value.rut|| this.rut,
+              // Añade el resto de los campos que quieres editar
+            };
+            console.log(this.id);
+            this.firestoreService.updateDoc(changes,this.path,this.id).then( res => {
               this.presentToast('Editado con éxito');
               this.alertController.dismiss();
               this.modalCtrl.dismiss();

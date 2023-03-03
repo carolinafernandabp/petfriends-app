@@ -31,39 +31,51 @@ export class ListPublicacionesComponent implements OnInit {
                 public toastController: ToastController,
                 public alertController: AlertController ,
                 public loadingController: LoadingController,
-                private router : Router) { }
+                private router : Router,
+                ) { }
+
+                filterPost = '';
+                uid = '';
 
   ngOnInit() {
 
+    this.uid = this.user.getUserId();
     this.getPublicaciones();
   }
 
-  getPublicaciones() {
-    this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
-           this.publicaciones = res;
+
+  getPublicaciones1() {
+    this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
+      console.log(res); // Verificar que res contiene los datos que esperas
+      this.publicaciones= res.filter(p => p.userId === this.uid);
+    }, error => {
+      console.log(error);
     });
   }
 
-  async openModal(publicaciones  : Publicacion) {
-    const modal = await this.modalCtrl.create({
-      component: EditPublicacionesComponent,
-      componentProps:{
+//Lista todas las publicaciones
+  getPublicaciones() {
+    this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
 
-        id: publicaciones.id,
-        titulo: publicaciones.titulo,
-        description:publicaciones.description,
-        foto : publicaciones.foto,
-        category: publicaciones.category
-
-
-      },
-
-
+      this.publicaciones= res.filter(p => p.userId === this.uid);
+      console.log(res);
     });
+  }
 
-     await modal.present();
-
-
+  async openModal(publicaciones: Publicacion) {
+    if (publicaciones && publicaciones.id) {
+      const modal = await this.modalCtrl.create({
+        component: EditPublicacionesComponent,
+        componentProps: {
+          id: publicaciones.id,
+          titulo: publicaciones.titulo,
+          description: publicaciones.description,
+          foto: publicaciones.foto,
+          category: publicaciones.category
+        },
+      });
+      await modal.present();
+    }
   }
 
   async deletePublicacion(publicacion : Publicacion) {
@@ -142,6 +154,12 @@ async presentToast(msg: string) {
 
   singup(){
     this.router.navigate(['form-adoptar']);
+  }
+
+
+  postular(){
+
+    this.router.navigate(['solicitud']);
   }
 
 

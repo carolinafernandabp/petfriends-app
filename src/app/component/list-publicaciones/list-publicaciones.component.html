@@ -1,5 +1,5 @@
 
-  <ion-card *ngFor="let publicacion of publicaciones">
+  <ion-card *ngFor="let publicacion of publicaciones" >
     <img  alt="image" src="{{publicacion.foto}}">
     <ion-card-header>
       <ion-card-title >{{publicacion.titulo}}</ion-card-title>
@@ -15,6 +15,7 @@
         <ng-container *ngIf="roles.admin == false">
           <ion-button fill="clear" (click)="verMas(publicacion)" >Ver más</ion-button>
           <ion-button fill="clear" (click)="singup()">Adoptar</ion-button>
+          <ion-button fill="clear" (click)="postular">Postular</ion-button>
         </ng-container>
       </ng-container>
     </ng-container>
@@ -23,7 +24,7 @@
       <ng-container *ngIf="roles.admin">
         <ion-button fill="clear" (click)="verMas(publicacion)">Ver más</ion-button>
         <ion-button fill="clear" (click)="openModal(publicacion)">Editar</ion-button>
-        <ion-button fill="clear" (click)="deletePublicacion(publicacion)" >Delete</ion-button>
+        <ion-button fill="clear" (click)="deletePublicacion(publicacion)" >Eliminar</ion-button>
       </ng-container>
     </ng-container>
 

@@ -6,18 +6,18 @@
     </ion-buttons>
     <ion-title>Welcome</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="save()" [strong]="true">Confirm</ion-button>
+      <ion-button (click)="editPublicacion()" [strong]="true">Confirm</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content  class="ion-padding" [formGroup]="form">
   <ion-item>
     <ion-label position="stacked">titulo</ion-label>
-    <ion-input type="text" placeholder="Titulo"  formControlName="titulo"></ion-input>
+    <ion-input type="text"  placeholder="{{titulo}}" formControlName="titulo"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Descripción</ion-label>
-    <ion-input type="text" placeholder="Descripción"formControlName="description" ></ion-input>
+    <ion-input type="text" placeholder="{{description}}" formControlName="description" ></ion-input>
   </ion-item>
 </ion-content>
 

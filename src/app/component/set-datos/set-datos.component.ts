@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { Donacion } from 'src/app/models/models';
@@ -12,18 +13,19 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class SetDatosComponent implements OnInit {
 
+  usuarioActual: string = ''; // asignar valor
+
   donaciones: Donacion[] = [];
 
   newDonacion: Donacion ={
-
     nombre: '',
     rut: '',
     banco: [],
-    tipo:'',
-    cuenta:'',
+    tipo: '',
+    cuenta: '',
     correo: '',
     id: this.firestoreService.getId(),
-
+    userId: this.usuarioActual,
   }
 
   enableNewDonacion = false;
@@ -39,7 +41,8 @@ export class SetDatosComponent implements OnInit {
               public toastController: ToastController,
               public alertController: AlertController,
               public firestorageService: FirestorageService,
-              private router : Router) { }
+              private router : Router,
+              public  afAuth: AngularFireAuth) { }
 
   ngOnInit() {
 
@@ -51,10 +54,12 @@ export class SetDatosComponent implements OnInit {
   }
 
   async guardarDonacion() {
+    const userId = (await this.afAuth.currentUser)?.uid; // asignar valor id
     this.presentLoading();
     const path = 'Donaciones';
     const name = this.newDonacion.banco;
 
+    this.newDonacion.userId = userId; // asignar el valor de userId a donacion
     this.firestoreService.createDoc(this.newDonacion, this.path, this.newDonacion.id).then( res => {
          this.loading.dismiss();
          this.router.navigate(['/all-datos']);

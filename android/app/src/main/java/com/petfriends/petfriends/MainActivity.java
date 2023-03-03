@@ -1,4 +1,4 @@
-package com.aplication.petfriends;
+package com.petfriends.petfriends;
 
 import com.getcapacitor.BridgeActivity;
 

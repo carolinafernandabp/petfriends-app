@@ -8,6 +8,9 @@ export interface Publicacion {
   foto: string;
   category:string[];
   create: Date;
+  userId: string | any; // para coincidir Id
+
+
 
 }
 
@@ -24,6 +27,7 @@ export interface Ficha {
   especie: string[];
   estado:string[];
   microChip: string;
+  userId: string | any; // para coincidir Id
 }
 
 export interface Donacion {
@@ -34,6 +38,7 @@ export interface Donacion {
   tipo:string,
   cuenta:string,
   correo: string
+  userId: string | any; // para coincidir Id
 
 }
 
