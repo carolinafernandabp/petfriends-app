@@ -26,8 +26,6 @@ import { FilterByCategory } from './pipes/filtro-by-category/filter-by-category.
 
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent
@@ -48,9 +46,6 @@ import { FilterByCategory } from './pipes/filtro-by-category/filter-by-category.
     FormsModule,
     CommonModule,
     AllcomponentsModule,
-
-
-
 
 
     ],

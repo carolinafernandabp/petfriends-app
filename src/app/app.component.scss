@@ -1,10 +1,25 @@
 ion-icon{
-  color: #DB8875;
+  color: rgb(235, 68, 90);
+
 }
 
 ion-item{
 
-  color: #DB8875;
+  --color: rgb(235, 68, 90);
+ --background-color: white; /* Green */
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+
+  ion-item:hover{
+
+    --color: rgb(235, 68, 90);
+    --background-color: white; /* Green */
+
+  }
+
+
+
 }
 
 

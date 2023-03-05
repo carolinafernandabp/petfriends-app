@@ -43,25 +43,39 @@ export class ListPublicacionesComponent implements OnInit {
     this.getPublicaciones();
   }
 
+  getPublicaciones() {
+    if (this.user.isLoggedOut$) { // si el usuario no ha iniciado sesión
+      this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
+        this.publicaciones = res;
+        console.log(res);
+      });
+    } else { // si el usuario ha iniciado sesión
+      this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
+        this.publicaciones = res.filter(p => p.userId === this.uid);
+      });
+    }
+  }
+
+
+/*
 
   getPublicaciones1() {
     this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
-      console.log(res); // Verificar que res contiene los datos que esperas
-      this.publicaciones= res.filter(p => p.userId === this.uid);
-    }, error => {
-      console.log(error);
+        this.publicaciones(res);
     });
   }
 
-//Lista todas las publicaciones
-  getPublicaciones() {
+  */
+
+/*Lista todas las publicaciones
+  getPublicaciones2() {
     this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
 
       this.publicaciones= res.filter(p => p.userId === this.uid);
       console.log(res);
     });
   }
-
+*/
   async openModal(publicaciones: Publicacion) {
     if (publicaciones && publicaciones.id) {
       const modal = await this.modalCtrl.create({
@@ -71,7 +85,8 @@ export class ListPublicacionesComponent implements OnInit {
           titulo: publicaciones.titulo,
           description: publicaciones.description,
           foto: publicaciones.foto,
-          category: publicaciones.category
+          category: publicaciones.category,
+          create: publicaciones.create
         },
       });
       await modal.present();
@@ -139,7 +154,8 @@ async presentToast(msg: string) {
         titulo: publicaciones.titulo,
         description:publicaciones.description,
         foto : publicaciones.foto,
-        category: publicaciones.category
+        category: publicaciones.category,
+        create: publicaciones.create
 
          }
 

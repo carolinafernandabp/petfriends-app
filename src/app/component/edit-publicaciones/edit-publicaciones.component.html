@@ -2,22 +2,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="dismissModal()">Cancel</ion-button>
+      <ion-button (click)="dismissModal()">Cancelar</ion-button>
     </ion-buttons>
-    <ion-title>Welcome</ion-title>
+    <ion-title></ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="editPublicacion()" [strong]="true">Confirm</ion-button>
+      <ion-button (click)="editPublicacion()" [strong]="true">Confirmar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content  class="ion-padding" [formGroup]="form">
   <ion-item>
-    <ion-label position="stacked">titulo</ion-label>
+    <ion-label position="stacked">Título</ion-label>
     <ion-input type="text"  placeholder="{{titulo}}" formControlName="titulo"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Descripción</ion-label>
-    <ion-input type="text" placeholder="{{description}}" formControlName="description" ></ion-input>
+    <ion-input type="text" placeholder="{{description}}" formControlName="description" class="ion-text-wrap"></ion-input>
   </ion-item>
 </ion-content>
 

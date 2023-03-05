@@ -26,6 +26,7 @@ import { ListVoluntarioComponent } from './list-voluntario/list-voluntario.compo
 import { EditVoluntarioComponent } from './edit-voluntario/edit-voluntario.component';
 import { AllPipesModule } from '../pipes/all-pipes.module';
 
+
 @NgModule({
 
 
@@ -84,8 +85,7 @@ import { AllPipesModule } from '../pipes/all-pipes.module';
     ListAdoptarComponent,
     EditAdoptarComponent,
     ListVoluntarioComponent,
-    EditVoluntarioComponent
-
+    EditVoluntarioComponent,
 
 
 

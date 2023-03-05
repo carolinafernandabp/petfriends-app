@@ -23,11 +23,10 @@ export class AppComponent {
                   private platform: Platform ) { }
 
 
-    ngOnInit(){
-
-
-    }
-
+  closeMenu() {
+    this.menu.close(); // Cierra el menú lateral
+    document.getElementsByTagName('ion-app')[0].classList.remove('menu-content-open'); // Remueve la clase "menu-content-open" de <ion-app>
+  }
 
     async logout() {
       this.user.logout();
@@ -35,7 +34,7 @@ export class AppComponent {
       const toast = await this.toastController.create({
         message: 'Sesión Cerrada correctamente',
         duration: 1500,
-        cssClass: 'toast-danger',
+        cssClass: 'toast-success',
         icon: 'exit-outline'
       });
 

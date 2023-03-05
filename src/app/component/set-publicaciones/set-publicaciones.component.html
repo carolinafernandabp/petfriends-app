@@ -1,18 +1,18 @@
 
   <ion-grid [fixed]="true">
-    <ion-grid [fixed]="true">
-      <ion-row>
-        <ion-col></ion-col>
-        <ion-col>
-          <ion-title>Crear Publicación</ion-title>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-    </ion-grid>
 
       <ion-row>
         <ion-col>
         <ion-col >
+          <ion-grid [fixed]="true">
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col>
+                <ion-title>Crear Publicación</ion-title>
+              </ion-col>
+              <ion-col></ion-col>
+            </ion-row>
+          </ion-grid>
 
             <ion-list>
               <ion-item fill="outline"   >
@@ -36,15 +36,19 @@
           </ion-item>
 
           <ion-item lines="none">
-            <ion-label >Subir imagen</ion-label>
+            <ion-label>Subir imagen</ion-label>
             <ion-buttons slot="end">
               <ion-button>
                 <label for="file-upload">
                   <ion-icon slot="icon-only" name="images"></ion-icon>
                 </label>
-                <input  (change)="newImageUpload($event)" id="file-upload" style="display: none;" type="file" accept="image/*" required  >
+                <input (change)="newImageUpload($event)" id="file-upload" style="display: none;" type="file" accept="image/*" required>
               </ion-button>
             </ion-buttons>
+          </ion-item>
+
+          <ion-item lines="none">
+            <img alt="" class="image" [src]="newPublicacion.foto" style="border-color: white;">
           </ion-item>
 
             <ion-button lines="none" (click)="guardarPublicacion()">

@@ -17,7 +17,37 @@
   margin-bottom: 20px;
 }
 
-ion-text{
+.titulo-principal{
+margin: auto;
+ padding: 3vh;
+}
 
-  margin-left: 2vh;
+ion-button{
+
+  margin-top: 3vh;
+}
+
+.title{
+
+  margin-left: 4vh;
+  padding: 3vh;
+}
+
+ion-popover {
+  --background: rgba(172, 176, 176, 0.8);
+  --backdrop-opacity: 0.6;
+  --box-shadow: 0 5px 10px 0 rgb(235, 68, 90);
+  --color: white;
+  --width: 300px;
+}
+
+ion-popover ion-content {
+  --background: rgb(235, 68, 90);
+  --color:white;
+  text-align: center;
+
+}
+
+ion-popover::part(backdrop) {
+  background-color: rgba(172, 176, 176, 0.8);
 }

@@ -1,10 +1,9 @@
 <div class="create-user">
 
-  <ion-title>Registro Usuario</ion-title>
 
 <form [formGroup]="form">
 
-
+  <ion-title class="titulo-principal">Registro Usuario</ion-title>
 
     <ion-item >
       <ion-label position="stacked">Email</ion-label>
@@ -16,15 +15,30 @@
       <ion-input formControlName="password"></ion-input>
     </ion-item>
 
-    <ion-item lines="none">
-      <ion-label position="stacked" >Eres una organizacion amiga?</ion-label>
-      <ion-toggle slot="end" color="primary" formControlName="admin" ></ion-toggle>
+    <ion-item lines="none" style="display: flex; align-items: center;">
+        <ion-buttons id="hover-trigger">
+          <ion-icon slot="end" name="information-circle" size="small" style="color:rgb(235, 68, 90) "></ion-icon>
+        </ion-buttons>
+          <ion-popover trigger="hover-trigger" triggerAction="hover">
+            <ng-template>
+        <ion-content class="ion-padding" style="font-style: oblique;">Una organización amiga es la entidad encargada de la protección animal,
+       como por ejemplo Fundaciones, Veterinarias, Rescatistas, Servicios de Adopción, entre otros.</ion-content>
+        </ng-template>
+      </ion-popover>
+      <ion-label style="flex: 1; font-size: small; margin-right: 4vh;" >Eres una organizacion amiga?</ion-label>
+      <ion-toggle slot="end" color="primary" formControlName="admin"></ion-toggle>
     </ion-item>
 
-
     <ion-button (click)="onCreateUser()"
-     expand='block'>Signup</ion-button>
+     expand='block'>Crear Cuenta</ion-button>
+
   </form>
 
-  <ion-text (click)="singup()">Ya tengo una cuenta <a>Login</a></ion-text>
+  <div class="title">
+    <ion-text (click)="singup()">¿Ya tienes una cuenta? <a> Ingresa</a></ion-text>
+  </div>
+
+
+
+
 </div>

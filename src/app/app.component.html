@@ -2,10 +2,11 @@
 
   <ion-menu contentId="main" side="start" menuId="menuPrincipal">
 
+
     <ion-content class="ion-padding">
       <ng-container *ngIf="user.isLoggedOut$ | async" >
             <ion-list >
-              <ion-item lines="none" routerLink="/" >Home
+              <ion-item lines="none" routerLink="/" (click)="closeMenu()">Home
                 <ion-icon name="home" slot="start"></ion-icon>
               </ion-item>
             </ion-list>
@@ -15,13 +16,13 @@
         <ng-container *ngIf="(user.roles$ | async) as roles" >
           <ng-container *ngIf="roles.admin == false">
             <ion-list>
-              <ion-item lines="none"   routerLink="/">Home
+              <ion-item lines="none"   routerLink="/" (click)="closeMenu()">Home
                 <ion-icon name="home" slot="start"></ion-icon>
               </ion-item>
-              <ion-item lines="none"  routerLink="/all-adoptar">Mis Adopciones
+              <ion-item lines="none"  routerLink="/all-adoptar" (click)="closeMenu()">Mis Adopciones
                 <ion-icon  slot="start" name="document"></ion-icon>
               </ion-item>
-              <ion-item lines="none"  routerLink="/all-voluntario">Soy Voluntario
+              <ion-item lines="none"  routerLink="/all-voluntario" (click)="closeMenu()">Soy Voluntario
                 <ion-icon  slot="start" name="document"></ion-icon>
               </ion-item>
             </ion-list>
@@ -32,19 +33,19 @@
       <ng-container *ngIf="(user.roles$ | async) as roles" >
         <ng-container  *ngIf="roles.admin">
           <ion-list>
-            <ion-item lines="none"  routerLink="/" >Home
+            <ion-item lines="none"  routerLink="/" (click)="closeMenu()">Home
               <ion-icon name="home" slot="start"></ion-icon>
             </ion-item>
-            <ion-item   lines="none" routerLink="/estado-adopcion"> Solicitud Adopción
+            <ion-item   lines="none" routerLink="/estado-adopcion" (click)="closeMenu()"> Solicitud Adopción
               <ion-icon slot="start" name="folder"></ion-icon>
             </ion-item>
-            <ion-item   lines="none" routerLink="/estado-voluntario"> Solicitud Voluntario
+            <ion-item   lines="none" routerLink="/estado-voluntario" (click)="closeMenu()"> Solicitud Voluntario
               <ion-icon slot="start" name="folder"></ion-icon>
             </ion-item>
-            <ion-item lines="none"  routerLink="/all-fichas"> Fichas
+            <ion-item lines="none"  routerLink="/all-fichas" (click)="closeMenu()"> Fichas
               <ion-icon  slot="start" name="paw"></ion-icon>
             </ion-item>
-            <ion-item lines="none"  routerLink="/all-donar"> Datos
+            <ion-item lines="none"  routerLink="/all-donar" (click)="closeMenu()"> Datos
               <ion-icon slot="start" name="card"></ion-icon>
             </ion-item>
           </ion-list>
@@ -53,13 +54,13 @@
 
 
         <ng-container *ngIf="user.isLoggedOut$ | async">
-          <ion-item lines="none" routerLink="/registro-usuario">Iniciar sesión
+          <ion-item lines="none" routerLink="/registro-usuario" (click)="closeMenu()">Iniciar sesión
               <ion-icon slot="start" name="person" > </ion-icon>
           </ion-item>
         </ng-container>
 
         <ng-container *ngIf="user.isLoggedIn$ | async">
-          <ion-item lines="none" (click)="logout()" >Cerrar sesión
+          <ion-item lines="none" (click)="logout()" (click)="closeMenu()" >Cerrar sesión
               <ion-icon  slot="start" name="exit"> </ion-icon>
             </ion-item>
         </ng-container>

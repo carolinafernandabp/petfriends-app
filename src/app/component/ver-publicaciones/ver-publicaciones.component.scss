@@ -1,4 +1,43 @@
-ion-toolbar{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
-  color: #F25657;
+ion-toolbar{
+  color: rgb(235, 68, 90);
+  --background: rgb(252, 252, 252);
+}
+
+ion-content{
+  --background: rgb(252, 252, 252);
+  text-align: justify;
+}
+
+ion-card-title{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: center;
+}
+
+.category{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: rgb(235, 68, 90);
+  font-size: 15px;
+  text-align: center;
+}
+
+.create{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: rgb(235, 68, 90);
+  font-size: 10px;
+  text-align: justify;
+  margin-top: 2vh;
+}
+
+.modal-page {
+  max-width: 90%;
+  max-height: 80%;
 }

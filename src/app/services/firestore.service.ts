@@ -4,7 +4,8 @@ import { map, Observable, of } from 'rxjs';
 import { Donacion, Ficha, Publicacion } from '../models/models';
 import { convertSnaps } from './db-util';
 import { where } from 'firebase/firestore';
-
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -83,22 +84,7 @@ export class FirestoreService {
     return collection.valueChanges();
   }
 
-/*
 
-  loadPublicacionByCategory(category:string): Observable<Publicacion[]> {
-    return this.database.collection(
-       "Publicaciones",
-       ref => ref.where("category", "array-contains", category)
-           .orderBy("id")
-       )
-       .get()
-        .pipe(
-            map((result: any) => convertSnaps<Publicacion>(result))
-        );
-
-}
-
-*/
 
 loadPublicacionByCategory(category: string): Observable<Publicacion[]> {
   return this.database.collection<Publicacion>('Publicaciones', ref => ref.where('category', '==', category))
@@ -111,8 +97,6 @@ loadPublicacionByCategory(category: string): Observable<Publicacion[]> {
       }))
     );
 }
-
-
 
 
 

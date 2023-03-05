@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Publicacion } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -16,8 +16,8 @@ export class HomePage implements OnInit {
   noticiaPublicacion$ !: Observable<Publicacion[]> ;
 
   publicaciones: Publicacion[] = [];
-  users: any;
 
+  users: any;
 
   optionSelected = 'MASCOTA';
 
@@ -28,26 +28,39 @@ export class HomePage implements OnInit {
   ngOnInit() {
 
     this.users = this.user.getUserId();
-    this.getPublicaciones();
-
-    //this.reloadPublicaciones();
+    this.reloadPublicaciones();
 
   }
 
   getPublicaciones() {
-    this.firestore.getCollection<Publicacion>('Publicaciones/').subscribe(res => {
+    this.firestore.getCollection<Publicacion>('Publicaciones').subscribe(res => {
       this.publicaciones = res;
     });
   }
 
-
   reloadPublicaciones() {
 
-    this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA');
-    this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
+
+      this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA');
+      this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
+      this.publicacionesSeleccionadas();
+
 
 
   }
+
+  publicacionesSeleccionadas() {
+    if (this.optionSelected === 'MASCOTA') {
+      this.mascotaPublicacion$.subscribe(res => {
+        this.publicaciones = res;
+      });
+    } else if (this.optionSelected === 'NOTICIA') {
+      this.noticiaPublicacion$.subscribe(res => {
+        this.publicaciones = res;
+      });
+    }
+  }
+
 
     segmentChanged(event: any){
       this.optionSelected = event.detail.value;

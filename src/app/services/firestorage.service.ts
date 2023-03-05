@@ -6,6 +6,9 @@ import { finalize } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FirestorageService {
+  ref(path: string) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(public storage : AngularFireStorage) { }
 

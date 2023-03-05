@@ -22,7 +22,7 @@ export class AllPublicacionesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this.userService.getUserId();
+
     this.getPublicaciones();
   }
 

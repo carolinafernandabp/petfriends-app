@@ -16,8 +16,21 @@ export class VerPublicacionesComponent implements OnInit {
   description!: string;
   @Input()
   category!: string;
+  @Input()
+  create!: { seconds: number };
 
-  constructor(private modalCtrl: ModalController) { }
+  formattedDate!: string;
+
+  constructor(private modalCtrl: ModalController) {
+
+    this.create = { seconds: 1646456000 }; // ejemplo con una fecha fija
+    const date = new Date(this.create.seconds * 1000);
+    this.formattedDate = date.toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+   }
 
   ngOnInit() {}
 

@@ -9,6 +9,7 @@ import EmailAuthProvider = firebase.auth.EmailAuthProvider;
 
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import { ToastController } from '@ionic/angular';
+import { userInfo } from 'os';
 
 
 @Component({

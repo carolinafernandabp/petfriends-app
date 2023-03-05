@@ -1,7 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
-import { Ficha } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
@@ -50,7 +49,14 @@ export class EditFichasComponent implements OnInit {
 
     this.form = this.fb.group({
       nombre: ['', Validators.required],
+      nacimiento: ['', Validators.required],
+      raza: ['', Validators.required],
+      color: ['', Validators.required],
+      tamanio: ['', Validators.required],
       description: ['', Validators.required],
+      especie: ['', Validators.required],
+      estado: ['', Validators.required],
+      microChip: ['', Validators.required],
     });
   }
 
