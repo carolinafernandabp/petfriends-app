@@ -1,5 +1,9 @@
 import { UserInterface } from "./user-roles";
 
+export interface Usuario {
+
+  userinterface : UserInterface
+}
 
 export interface Publicacion {
   id: string;
@@ -9,8 +13,6 @@ export interface Publicacion {
   category:string[];
   create: Date;
   userId: string | any; // para coincidir Id
-
-
 
 }
 
@@ -31,6 +33,7 @@ export interface Ficha {
 }
 
 export interface Donacion {
+
   id: string;
   nombre: string,
   rut: string,
@@ -39,35 +42,25 @@ export interface Donacion {
   cuenta:string,
   correo: string
   userId: string | any; // para coincidir Id
-
 }
-
-export interface Usuario {
-
-  userinterface : UserInterface
-}
-
-
 export interface Adoptar {
+
   id: string;
   description: string;
   estado: EstadoPedido;
   fecha: Date;
+  userId: string | any; // Agregamops Id para coincidir Id de la sesión iniciada
+  publicacionId: string | any;
 }
 
 export interface Voluntario {
+
   id: string;
   description: string;
   estado: EstadoPedido;
   fecha: Date;
+  userId: string | any; // Agregamops Id para coincidir Id de la sesión iniciada
+  publicacionId: string | any;
 }
-
-
-export interface Adopcion{
-
-  adoptar : Adoptar;
-}
-
-
 
 export type  EstadoPedido = 'enviada' | 'aceptada' | 'rechazada';

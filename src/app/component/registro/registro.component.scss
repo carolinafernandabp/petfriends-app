@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 :host {
   display: flex;
   justify-content: center;
@@ -18,8 +21,11 @@
 }
 
 .titulo-principal{
-margin: auto;
- padding: 3vh;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  margin: auto;
+  padding: 3vh;
 }
 
 ion-button{
@@ -50,4 +56,16 @@ ion-popover ion-content {
 
 ion-popover::part(backdrop) {
   background-color: rgba(172, 176, 176, 0.8);
+}
+
+
+ion-toggle{
+
+
+  --background-checked:rgb(235, 68, 90);
+
+}
+
+ion-toggle.toggle-checked::part(handle) {
+  background: rgb(235, 68, 90);
 }

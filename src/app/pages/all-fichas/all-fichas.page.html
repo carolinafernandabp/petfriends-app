@@ -13,7 +13,7 @@
           <ion-col>
             <ion-toolbar>
               <ion-segment scrollable="true" [value]="optionSelected"
-              (ionChange)="segmentChanged($event)" value="PERRO">
+              (ionChange)="segmentChanged($event)" value='PERRO'>
                 <ion-segment-button value="PERRO">
                   <ion-label>Perro</ion-label>
                 </ion-segment-button>
@@ -29,7 +29,18 @@
         </ion-row>
       </ion-grid>
 
-      <app-list-fichas></app-list-fichas>
+      <div *ngIf="optionSelected == 'PERRO'">
+        <app-list-fichas [fichas]= "perroFicha$ | async"
+        (fichaEdited)="reloadFichas()" (fichaDeleted)="reloadFichas()"></app-list-fichas>
+      </div>
+      <div *ngIf="optionSelected == 'GATO'">
+        <app-list-fichas [fichas] = "gatoFicha$ | async"
+        (fichaEdited)="reloadFichas()" (fichaDeleted)="reloadFichas()"></app-list-fichas>
+      </div>
+      <div *ngIf="optionSelected == 'OTRO'">
+        <app-list-fichas [fichas] = "otroFicha$ | async"
+        (fichaEdited)="reloadFichas()" (fichaDeleted)="reloadFichas()"></app-list-fichas>
+      </div>
 
     </ion-col>
   </ion-row>

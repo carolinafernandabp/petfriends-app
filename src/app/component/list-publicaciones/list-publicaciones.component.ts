@@ -21,7 +21,7 @@ export class ListPublicacionesComponent implements OnInit {
   @Output() publicacionDeleted = new EventEmitter<Publicacion>();
 
 
-  private path = 'Publicaciones';
+  private path = 'Publicaciones/';
 
   loading: any;
 
@@ -46,8 +46,8 @@ export class ListPublicacionesComponent implements OnInit {
   getPublicaciones() {
     if (this.user.isLoggedOut$) { // si el usuario no ha iniciado sesión
       this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
-        this.publicaciones = res;
         console.log(res);
+        this.publicaciones = res;
       });
     } else { // si el usuario ha iniciado sesión
       this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
@@ -56,26 +56,6 @@ export class ListPublicacionesComponent implements OnInit {
     }
   }
 
-
-/*
-
-  getPublicaciones1() {
-    this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
-        this.publicaciones(res);
-    });
-  }
-
-  */
-
-/*Lista todas las publicaciones
-  getPublicaciones2() {
-    this.firestoreService.getCollection<Publicacion>(this.path).subscribe(  res => {
-
-      this.publicaciones= res.filter(p => p.userId === this.uid);
-      console.log(res);
-    });
-  }
-*/
   async openModal(publicaciones: Publicacion) {
     if (publicaciones && publicaciones.id) {
       const modal = await this.modalCtrl.create({
@@ -113,10 +93,10 @@ export class ListPublicacionesComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.firestoreService.deleteDoc(this.path, publicacion.id).then( res => {
-              this.presentToast('eliminado con exito');
+              this.presentToastSuccess('Eliminado con exito');
               this.alertController.dismiss();
             }).catch( error => {
-                this.presentToast('no se pude eliminar');
+                this.presentToastDanger('No se pude eliminar');
             });
           }
         }
@@ -134,17 +114,37 @@ async presentLoading() {
   await this.loading.present();
 }
 
-async presentToast(msg: string) {
+async presentToastSuccess(msg: string) {
   const toast = await this.toastController.create({
     message: msg,
     cssClass: 'normal',
     duration: 2000,
-    color: 'light',
+    color: "success",
   });
   toast.present();
 }
 
+async presentToastWarning(msg: string) {
+  const toast = await this.toastController.create({
+    message: msg,
+    cssClass: 'normal',
+    duration: 2000,
+    color: "warning",
+  });
+  toast.present();
+}
+
+async presentToastDanger(msg: string) {
+  const toast = await this.toastController.create({
+    message: msg,
+    cssClass: 'normal',
+    duration: 2000,
+    color: 'danger',
+  });
+  toast.present();
+}
   async verMas(publicaciones  : Publicacion) {
+
 
     const modal = await this.modalCtrl.create({
       component: VerPublicacionesComponent,
@@ -164,7 +164,10 @@ async presentToast(msg: string) {
     });
 
 
+    this.router.navigate(['/adoptar', publicaciones.id]);
    return  await modal.present();
+
+
   }
 
 
@@ -174,7 +177,6 @@ async presentToast(msg: string) {
 
 
   postular(){
-
     this.router.navigate(['solicitud']);
   }
 

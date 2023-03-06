@@ -24,7 +24,6 @@
         </ion-row>
       </ion-grid>
 
-
       <div *ngIf="optionSelected == 'MASCOTA'">
         <app-list-publicaciones [publicaciones]="mascotaPublicacion$ | async"
         (publicacionEdited)="reloadPublicaciones()"

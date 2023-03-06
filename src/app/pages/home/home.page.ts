@@ -40,11 +40,9 @@ export class HomePage implements OnInit {
 
   reloadPublicaciones() {
 
-
       this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA');
       this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
       this.publicacionesSeleccionadas();
-
 
 
   }

@@ -12,9 +12,9 @@
     <ng-container *ngIf="user.isLoggedIn$ | async">
       <ng-container *ngIf="(user.roles$ | async) as roles" >
         <ng-container *ngIf="roles.admin == false">
-          <ion-button fill="clear" (click)="verMas(publicacion)" >Ver más</ion-button>
-          <ion-button fill="clear" (click)="singup()">Adoptar</ion-button>
-          <ion-button fill="clear" (click)="postular">Postular</ion-button>
+          <ion-button class="button-petlover"  fill="clear" (click)="verMas(publicacion)" >Ver más</ion-button>
+          <ion-button class="button-petlover" fill="clear" (click)="singup()">Adoptar</ion-button>
+          <ion-button class="button-petlover" fill="clear" (click)="postular()">Apadrinar</ion-button>
         </ng-container>
       </ng-container>
     </ng-container>

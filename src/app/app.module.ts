@@ -22,9 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AllcomponentsModule } from './component/allcomponents.module';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { FilterByCategory } from './pipes/filtro-by-category/filter-by-category.pipe';
 
-
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
 @NgModule({
   declarations: [
@@ -46,6 +45,7 @@ import { FilterByCategory } from './pipes/filtro-by-category/filter-by-category.
     FormsModule,
     CommonModule,
     AllcomponentsModule,
+    AngularFireMessagingModule
 
 
     ],

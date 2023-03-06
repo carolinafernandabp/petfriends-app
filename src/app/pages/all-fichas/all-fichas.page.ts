@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Donacion } from 'src/app/models/models';
+import { Donacion, Ficha } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,10 +12,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AllFichasPage implements OnInit {
 
-  donaciones: Donacion[] = [];
+  perroFicha$!: Observable<Ficha[]>;
+
+  gatoFicha$!: Observable<Ficha[]>;
+
+  otroFicha$!: Observable<Ficha[]>;
+
+  fichas: Ficha[] = [];
   users: any;
 
-  optionSelected:string = "PERRO";
+  optionSelected:string ='PERRO';
 
   constructor( public firestoreService : FirestoreService,
               public user: UserService) { }
@@ -23,15 +29,47 @@ export class AllFichasPage implements OnInit {
   ngOnInit() {
 
     this.users = this.user.getUserId();
-    this.getDonaciones();
+    this.reloadFichas();
 
   }
 
-  getDonaciones() {
-    this.firestoreService.getCollection<Donacion>('Donaciones').subscribe(res => {
-      this.donaciones = res;
+  getFichas() {
+    this.firestoreService.getCollection<Ficha>('Fichas').subscribe(res => {
+      this.fichas = res;
     });
   }
+
+  reloadFichas(){
+
+    this.perroFicha$ = this.firestoreService.loadFichaByEspecie('PERRO');
+    this.gatoFicha$ = this.firestoreService.loadFichaByEspecie('GATO');
+    this.otroFicha$ = this.firestoreService.loadFichaByEspecie('OTRO');
+
+    this.publicacionesSeleccionadas();
+  }
+
+  publicacionesSeleccionadas() {
+    switch (this.optionSelected) {
+      case 'PERRO':
+        this.perroFicha$.subscribe(res => {
+          this.fichas = res;
+        });
+        break;
+      case 'GATO':
+        this.gatoFicha$.subscribe(res => {
+          this.fichas = res;
+        });
+        break;
+      case 'OTRO':
+        this.otroFicha$.subscribe(res => {
+          this.fichas = res;
+        });
+        break;
+      default:
+        this.fichas = [];
+    }
+  }
+
 
   segmentChanged(event: any){
     this.optionSelected = event.detail.value;

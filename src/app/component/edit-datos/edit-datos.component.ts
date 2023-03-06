@@ -95,11 +95,11 @@ export class EditDatosComponent implements OnInit {
             };
             console.log(this.id);
             this.firestoreService.updateDoc(changes,this.path,this.id).then( res => {
-              this.presentToast('Editado con éxito');
+              this.presentToastSuccess('Editado con éxito');
               this.alertController.dismiss();
               this.modalCtrl.dismiss();
             }).catch( error => {
-                this.presentToast('No se pudo editar');
+                this.presentToastDanger('No se pudo editar');
                 this.modalCtrl.dismiss();
             });
           }
@@ -117,16 +117,35 @@ async presentLoading() {
   await this.loading.present();
 }
 
-async presentToast(msg: string) {
+async presentToastSuccess(msg: string) {
   const toast = await this.toastController.create({
     message: msg,
     cssClass: 'normal',
     duration: 2000,
-    color: 'light',
+    color: "success",
   });
   toast.present();
 }
 
+async presentToastWarning(msg: string) {
+  const toast = await this.toastController.create({
+    message: msg,
+    cssClass: 'normal',
+    duration: 2000,
+    color: "warning",
+  });
+  toast.present();
+}
+
+async presentToastDanger(msg: string) {
+  const toast = await this.toastController.create({
+    message: msg,
+    cssClass: 'normal',
+    duration: 2000,
+    color: 'danger',
+  });
+  toast.present();
+}
 
 
 }

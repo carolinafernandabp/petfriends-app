@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+ion-button{
+  color: rgb(235, 68, 90);
+}
+
+ion-toolbar{
+  --background: rgb(252, 252, 252);
+}
+
+ion-content{
+  --background: rgb(252, 252, 252);
+}
+
+ion-item{
+  --background: rgb(252, 252, 252);
+
+}
+
+ion-label{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300, bold;
+}
+
+ion-input{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+

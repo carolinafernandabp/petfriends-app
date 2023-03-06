@@ -49,15 +49,34 @@ export class ListVoluntarioComponent implements OnInit {
     await this.loading.present();
   }
 
-  async presentToast(msg: string) {
+  async presentToastSuccess(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
       cssClass: 'normal',
       duration: 2000,
-      color: 'light',
+      color: "success",
     });
     toast.present();
   }
 
+  async presentToastWarning(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: "warning",
+    });
+    toast.present();
+  }
+
+  async presentToastDanger(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
+  }
 
 }

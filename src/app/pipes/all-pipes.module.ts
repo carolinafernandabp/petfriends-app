@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterByCategory } from './filtro-by-category/filter-by-category.pipe';
 import { AllcomponentsModule } from '../component/allcomponents.module';
+import { FilterPipe } from './filtro-by-category/filter-pipe';
 
 
 
 @NgModule({
-  declarations: [FilterByCategory],
+  declarations: [FilterPipe],
   imports: [
     CommonModule,
   ],
-  exports:[FilterByCategory]
+  exports:[FilterPipe]
 })
 export class AllPipesModule { }

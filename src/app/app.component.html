@@ -1,54 +1,54 @@
 <ion-app>
 
-  <ion-menu contentId="main" side="start" menuId="menuPrincipal">
+  <ion-menu contentId="main" side="start" menuId="menuPrincipal" >
 
 
     <ion-content class="ion-padding">
       <ng-container *ngIf="user.isLoggedOut$ | async" >
-            <ion-list >
+
               <ion-item lines="none" routerLink="/" (click)="closeMenu()">Home
                 <ion-icon name="home" slot="start"></ion-icon>
               </ion-item>
-            </ion-list>
+
       </ng-container>
 
       <ng-container  *ngIf="user.isLoggedIn$ | async" >
         <ng-container *ngIf="(user.roles$ | async) as roles" >
           <ng-container *ngIf="roles.admin == false">
-            <ion-list>
+
               <ion-item lines="none"   routerLink="/" (click)="closeMenu()">Home
                 <ion-icon name="home" slot="start"></ion-icon>
               </ion-item>
               <ion-item lines="none"  routerLink="/all-adoptar" (click)="closeMenu()">Mis Adopciones
                 <ion-icon  slot="start" name="document"></ion-icon>
               </ion-item>
-              <ion-item lines="none"  routerLink="/all-voluntario" (click)="closeMenu()">Soy Voluntario
+              <ion-item lines="none"  routerLink="/all-voluntario" (click)="closeMenu()">Soy Padrino
                 <ion-icon  slot="start" name="document"></ion-icon>
               </ion-item>
-            </ion-list>
+
           </ng-container>
         </ng-container>
       </ng-container>
 
       <ng-container *ngIf="(user.roles$ | async) as roles" >
         <ng-container  *ngIf="roles.admin">
-          <ion-list>
+
             <ion-item lines="none"  routerLink="/" (click)="closeMenu()">Home
               <ion-icon name="home" slot="start"></ion-icon>
             </ion-item>
             <ion-item   lines="none" routerLink="/estado-adopcion" (click)="closeMenu()"> Solicitud Adopción
               <ion-icon slot="start" name="folder"></ion-icon>
             </ion-item>
-            <ion-item   lines="none" routerLink="/estado-voluntario" (click)="closeMenu()"> Solicitud Voluntario
+            <ion-item   lines="none" routerLink="/estado-voluntario" (click)="closeMenu()"> Solicitud Apadrinar
               <ion-icon slot="start" name="folder"></ion-icon>
             </ion-item>
-            <ion-item lines="none"  routerLink="/all-fichas" (click)="closeMenu()"> Fichas
+            <ion-item lines="none"  routerLink="/all-fichas" (click)="closeMenu()"> Fichas Mascotas
               <ion-icon  slot="start" name="paw"></ion-icon>
             </ion-item>
-            <ion-item lines="none"  routerLink="/all-donar" (click)="closeMenu()"> Datos
+            <ion-item lines="none"  routerLink="/all-donar" (click)="closeMenu()"> Datos Bancarios
               <ion-icon slot="start" name="card"></ion-icon>
             </ion-item>
-          </ion-list>
+
         </ng-container>
       </ng-container>
 

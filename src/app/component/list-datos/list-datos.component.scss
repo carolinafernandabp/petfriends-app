@@ -1,9 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+ion-title{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  text-align: center;
+}
+
 ion-button{
 
-  margin-left: 4%;
-  margin-right: 4%;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
 }
-ion-icon{
 
-  color: #F25657;
+ion-card{
+  --background: rgb(252, 252, 252);
+
 }
+ion-card-content{
+  --background: rgb(252, 252, 252);
+}
+ion-list{
+  --background: rgb(252, 252, 252);
+}
+ion-item{
+  --background: rgb(252, 252, 252);
+}
+
+ion-label{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-weight: bold;
+  --background: rgb(252, 252, 252);
+}
+
+ion-text{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  --background: rgb(252, 252, 252);
+}
+
+

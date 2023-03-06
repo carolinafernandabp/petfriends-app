@@ -1,6 +1,43 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 ion-title{
 
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  text-align: center;
+
+}
+
+ion-card{
+
+  --background: rgb(252, 252, 252);
+}
+
+ion-card-title{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+}
+
+ion-card-subtitle{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  text-align: center;
+}
+
+ion-card-content{
+  text-align: justify;
+}
+
+.estado{
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
   text-align: center;
 }

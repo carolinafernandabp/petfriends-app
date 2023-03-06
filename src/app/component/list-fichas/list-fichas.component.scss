@@ -1,3 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+.button-invitado{
+  text-align: center;
+  width: 100%;
+}
+
+.button-admin{
+
+  width: 30%;
+  text-align: center;
+
+}
+
+
+ion-card{
+
+  --background: rgb(252, 252, 252);
+}
+
+ion-card-title{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+ion-card-subtitle{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+
 ion-title{
 
   text-align: center;

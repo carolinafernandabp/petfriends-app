@@ -7,9 +7,9 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import EmailAuthProvider = firebase.auth.EmailAuthProvider;
 
-import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+
 import { ToastController } from '@ionic/angular';
-import { userInfo } from 'os';
+
 
 
 @Component({
@@ -22,31 +22,53 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ui!: firebaseui.auth.AuthUI;
   usuarioActual: string | any;
+  disableSignup!: boolean;
 
   constructor( public router:Router,
                 public afAuth: AngularFireAuth,
                 private toastController : ToastController) {
                 }
 
-  ngOnInit() {
+ngOnInit() {
+  this.afAuth.app.then(app => {
+    const uiConfig: any = {
+      signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
+      ],
+      callbacks: {
+        signInSuccessWithAuthResult: this.onLoginSuccessful.bind(this)
+      },
+      uiShown: () => {
+        const emailInput = <HTMLInputElement>document.querySelector('#firebaseui-auth-container input[type="email"]');
+        const signUpButton = <HTMLInputElement>document.querySelector('.firebaseui-id-submit');
+        const errorContainer = <HTMLDivElement>document.querySelector('.firebaseui-error-container');
 
-    this.afAuth.app.then(app => {
-      const uiConfig:any = {
-          signInOptions: [
-              EmailAuthProvider.PROVIDER_ID,
-          ],
-          callbacks: {
-              signInSuccessWithAuthResult: this.onLoginSuccessful.bind(this)
-          }
-      };
+        if (emailInput && signUpButton && errorContainer) {
+          emailInput.addEventListener('input', () => {
+            const email = emailInput.value;
+            app.auth().fetchSignInMethodsForEmail(email).then(signInMethods => {
+              if (signInMethods.length > 0) {
+                signUpButton.disabled = false;
+                errorContainer.style.display = 'none';
+                this.disableSignup = true; // Agrega esta línea
+              } else {
+                signUpButton.disabled = true;
+                errorContainer.textContent = 'La dirección de correo electrónico no está registrada.';
+                errorContainer.style.display = 'block';
+                this.disableSignup = false; // Agrega esta línea
+              }
+            });
+          });
+        }
+      }
 
-      this.ui = new firebaseui.auth.AuthUI(app.auth());
-
-      this.ui.start("#firebaseui-auth-container", uiConfig);
-
-      this.ui.disableAutoSignIn();
+    };
+    this.ui = new firebaseui.auth.AuthUI(app.auth());
+    this.ui.start("#firebaseui-auth-container", uiConfig);
+    this.ui.disableAutoSignIn();
   });
-  }
+}
+
 
 
   ngOnDestroy() {

@@ -49,11 +49,6 @@ export class ListDatosComponent implements OnInit {
     });
   }
 
-  getDonaciones1() {
-    this.firestoreService.getCollection<Donacion>(this.path).subscribe(  res => {
-           this.donaciones = res;
-    });
-  }
 
   async openModal(donaciones: Donacion) {
     if (donaciones && donaciones.id) {
@@ -88,7 +83,7 @@ export class ListDatosComponent implements OnInit {
           role: 'cancel',
           cssClass: 'normal',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            console.log('Confirmar Cancel: blah');
             // this.alertController.dismiss();
           }
         }, {
@@ -96,10 +91,10 @@ export class ListDatosComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.firestoreService.deleteDoc(this.path, donacion.id).then( res => {
-              this.presentToast('eliminado con exito');
+              this.presentToastSuccess('Eliminado con exito');
               this.alertController.dismiss();
             }).catch( error => {
-                this.presentToast('no se pude eliminar');
+                this.presentToastDanger('No se pudo eliminar');
             });
           }
         }
@@ -118,12 +113,32 @@ export class ListDatosComponent implements OnInit {
     await this.loading.present();
   }
 
-  async presentToast(msg: string) {
+  async presentToastSuccess(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
       cssClass: 'normal',
       duration: 2000,
-      color: 'light',
+      color: "success",
+    });
+    toast.present();
+  }
+
+  async presentToastWarning(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: "warning",
+    });
+    toast.present();
+  }
+
+  async presentToastDanger(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: 'danger',
     });
     toast.present();
   }

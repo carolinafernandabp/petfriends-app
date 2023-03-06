@@ -36,8 +36,6 @@ export class SetPublicacionesComponent implements OnInit {
   newFile: any;
   loading: any;
 
-  uploadProgress: number = 0;
-
 
   constructor(public menucontroler: MenuController,
               public firestoreService: FirestoreService,

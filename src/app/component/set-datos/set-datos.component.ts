@@ -55,17 +55,31 @@ export class SetDatosComponent implements OnInit {
 
   async guardarDonacion() {
     const userId = (await this.afAuth.currentUser)?.uid; // asignar valor id
+
+     // Verificar si el campo título o descripción están vacíos
+     if (this.newDonacion.nombre=== '' || this.newDonacion.rut === '') {
+      this.presentToastWarning('Por favor, complete todos los campos.')
+      return;
+    }
+
     this.presentLoading();
     const path = 'Donaciones';
     const name = this.newDonacion.banco;
 
     this.newDonacion.userId = userId; // asignar el valor de userId a donacion
+
+    if (!this.newDonacion.userId) {
+      this.loading.dismiss();
+      this.presentToastDanger('No se pudo obtener el ID del usuario. Por favor, vuelva a iniciar sesión.');
+      return;
+    }
+
     this.firestoreService.createDoc(this.newDonacion, this.path, this.newDonacion.id).then( res => {
          this.loading.dismiss();
-         this.router.navigate(['/all-datos']);
-         this.presentToast('guardo con exito');
+         this.router.navigate(['/all-donar']);
+         this.presentToastSuccess('Guardado con exito');
     }).catch( error => {
-       this.presentToast('no se pude guardar');
+       this.presentToastDanger('No se pudo guardar');
     });
 }
 
@@ -83,15 +97,34 @@ export class SetDatosComponent implements OnInit {
     await this.loading.present();
   }
 
-  async presentToast(msg: string) {
+  async presentToastSuccess(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
       cssClass: 'normal',
       duration: 2000,
-      color: 'light',
+      color: "success",
     });
     toast.present();
   }
 
+  async presentToastWarning(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: "warning",
+    });
+    toast.present();
+  }
+
+  async presentToastDanger(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
+  }
 
 }

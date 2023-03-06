@@ -16,9 +16,9 @@ export class ListFichasComponent implements OnInit {
 
   @Input() fichas: Ficha[]| any ;
 
-  @Output() fichanEdited = new EventEmitter<void>();
+  @Output() fichaEdited = new EventEmitter<void>();
 
-  @Output() fichanDeleted = new EventEmitter<Ficha>();
+  @Output() fichaDeleted = new EventEmitter<Ficha>();
 
   private path = 'Fichas';
 
@@ -49,11 +49,7 @@ export class ListFichasComponent implements OnInit {
     });
   }
 
-  getFichas1() {
-    this.firestoreService.getCollection<Ficha>(this.path).subscribe(  res => {
-           this.fichas = res;
-    });
-  }
+
 
   async openModal(fichas : Ficha) {
     if (fichas && fichas.id) {
@@ -100,10 +96,10 @@ export class ListFichasComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.firestoreService.deleteDoc(this.path, ficha.id).then( res => {
-              this.presentToast('eliminado con exito');
+              this.presentToastSuccess('Eliminado con exito');
               this.alertController.dismiss();
             }).catch( error => {
-                this.presentToast('no se pude eliminar');
+                this.presentToastDanger('no se pudo eliminar');
             });
           }
         }
@@ -144,16 +140,34 @@ async verMas(fichas : Ficha) {
     await this.loading.present();
   }
 
-  async presentToast(msg: string) {
+  async presentToastSuccess(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
       cssClass: 'normal',
       duration: 2000,
-      color: 'light',
+      color: "success",
     });
     toast.present();
   }
 
+  async presentToastWarning(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: "warning",
+    });
+    toast.present();
+  }
 
+  async presentToastDanger(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
+  }
 
 }

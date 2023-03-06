@@ -6,16 +6,17 @@
 
   <ion-list *ngFor="let adopcion of adopciones">
 
-    <ion-item>
-      <ion-label>
-        <h2>{{ adopcion.description }}</h2>
-        <p>{{ adopcion.fecha.seconds*1000 | date:'dd-MM-YYYY  hh:mm'  }}</p>
-        <p *ngIf="adopcion.estado == 'enviada'">Estado: Enviada</p>
-        <p *ngIf="adopcion.estado == 'aceptada'">Estado: Aceptada</p>
-        <p *ngIf="adopcion.estado == 'rechazada'">Estado: Rechazada</p>
-        <ion-button color="success" expand="block" (click)="updateAdoptar(adopcion,'aceptada')">Aceptar</ion-button>
-        <ion-button color="danger" expand="block" (click)="updateAdoptar(adopcion,'rechazada')">Rechazar</ion-button>
-      </ion-label>
-    </ion-item>
-
+    <ion-card>
+      <ion-card-header>
+        <p  class="estado" *ngIf="adopcion.estado == 'enviada'">Estado: Enviada</p>
+        <p class="estado" *ngIf="adopcion.estado == 'aceptada'">Estado: Aceptada</p>
+        <p class="estado" *ngIf="adopcion.estado == 'rechazada'">Estado: Rechazada</p>
+        <ion-card-subtitle>{{ adopcion.fecha.seconds*1000 | date:'dd-MM-YYYY  hh:mm'  }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ adopcion.description }}
+      </ion-card-content>
+      <ion-button color="success" expand="block" (click)="updateAdoptar(adopcion,'aceptada')">Aceptar</ion-button>
+      <ion-button  color="danger" expand="block" (click)="updateAdoptar(adopcion,'rechazada')">Rechazar</ion-button>
+    </ion-card>
   </ion-list>

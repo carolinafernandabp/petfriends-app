@@ -47,10 +47,10 @@ export class EditVoluntarioComponent implements OnInit {
     const updateData:any = { estado: estado };
     this.firestoreService.updateDoc(updateData, this.path, voluntario.id)
     .then(() => {
-    this.presentToast('Estado actualizado exitosamente');
+    this.presentToastSuccess('Estado actualizado exitosamente');
     })
     .catch(() => {
-    this.presentToast('Error al actualizar el estado');
+    this.presentToastDanger('Error al actualizar el estado');
     });
     }
 
@@ -63,15 +63,34 @@ export class EditVoluntarioComponent implements OnInit {
     await this.loading.present();
   }
 
-  async presentToast(msg: string) {
+  async presentToastSuccess(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
       cssClass: 'normal',
       duration: 2000,
-      color: 'light',
+      color: "success",
     });
     toast.present();
   }
 
+  async presentToastWarning(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: "warning",
+    });
+    toast.present();
+  }
+
+  async presentToastDanger(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
+  }
 
 }

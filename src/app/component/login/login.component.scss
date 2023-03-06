@@ -3,7 +3,33 @@
 .login {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 40px;
 }
+
+.auth-container {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  max-width: 400px;
+  width: 100%;
+  margin: 20px;
+}
+
+.auth-container .firebaseui-id-submit {
+  --background-color: rgb(235, 68, 90) !important;
+}
+
+.auth-container .firebaseui-progress-bar {
+  --background-color: rgb(235, 68, 90) !important;
+}
+
+.auth-container .firebaseui-link {
+  color: rgb(235, 68, 90) !important;
+}
+
+
+
 

@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdoptarComponent } from './component/adoptar/adoptar.component';
 import { AuthGuard } from './guards/auth.guard';
 
 

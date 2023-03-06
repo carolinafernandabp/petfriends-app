@@ -11,38 +11,31 @@
     </ion-grid>
 
  <ion-card *ngFor="let donacion of donaciones">
-    <ion-card-header>
-      <ion-card-title>{{donacion.nombre}}</ion-card-title>
-    </ion-card-header>
-
     <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-icon slot="start" size="small" name="checkmark-outline"></ion-icon>
-          <ion-label> RUT:  </ion-label>
+        <ion-item lines="none">
+          <ion-label position="stacked"> Nombre:  </ion-label>
+          <ion-text>{{donacion.nombre}}</ion-text>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="stacked"> RUT:  </ion-label>
           <ion-text>{{donacion.rut}}</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" size="small" name="checkmark-outline"></ion-icon>
-          <ion-label>Banco: </ion-label>
+        <ion-item lines="none">
+          <ion-label position="stacked">Banco: </ion-label>
           <ion-text>{{donacion.banco}}</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" size="small" name="checkmark-outline"></ion-icon>
-          <ion-label>Tipo: </ion-label>
+        <ion-item lines="none">
+          <ion-label position="stacked">Tipo: </ion-label>
           <ion-text>{{donacion.tipo}}</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" size="small" name="checkmark-outline"></ion-icon>
-          <ion-label>cuenta: </ion-label>
+        <ion-item lines="none">
+          <ion-label position="stacked">N° de cuenta: </ion-label>
           <ion-text>{{donacion.cuenta}}</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" size="small" name="checkmark-outline"></ion-icon>
-          <ion-label >Correo: </ion-label>
+        <ion-item lines="none">
+          <ion-label position="stacked" >Correo: </ion-label>
           <ion-text>{{donacion.correo}}</ion-text>
         </ion-item>
-      </ion-list>
 
     </ion-card-content>
 

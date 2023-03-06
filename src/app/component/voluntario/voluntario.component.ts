@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { Voluntario } from 'src/app/models/models';
@@ -12,13 +13,18 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class VoluntarioComponent implements OnInit {
 
+  usuarioActual: string = ''; // asignar valor
+  publicacionActual: string = '';
+
   voluntarios: Voluntario[] = [];
 
   newVoluntario: Voluntario={
     description: '',
     id: this.firestoreService.getId(),
     fecha: new Date,
-    estado: 'enviada'
+    estado: 'enviada',
+    userId: this.usuarioActual,
+    publicacionId: this.publicacionActual
   }
 
   enableNewVoluntario = false;
@@ -33,21 +39,47 @@ export class VoluntarioComponent implements OnInit {
               public toastController: ToastController,
               public alertController: AlertController,
               public firestorageService: FirestorageService,
-              private router: Router) { }
+              private router: Router,
+              public  afAuth: AngularFireAuth) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.getVoluntario();
+  }
+
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
+
 
 
   async guardarVoluntario() {
+
+    const userId = (await this.afAuth.currentUser)?.uid;
+    if (this.newVoluntario.description === '') {
+      this.presentToastWarning('Por favor, complete todos los campos.')
+      return;
+    }
+
     this.presentLoading();
     const path = 'Voluntaro';
     const name = this.newVoluntario.id;
+
+    this.newVoluntario.userId = userId;
+
+    if (!this.newVoluntario.userId) {
+      this.loading.dismiss();
+      this.presentToastDanger('No se pudo obtener el ID del usuario. Por favor, vuelva a iniciar sesión.');
+      return;
+    }
+
+
     this.firestoreService.createDoc(this.newVoluntario, this.path, this.newVoluntario.id).then( res => {
          this.loading.dismiss();
          this.router.navigate(['/']);
-         this.presentToast('Enivado con exito');
+         this.presentToastSuccess('Enviado con éxito');
     }).catch( error => {
-       this.presentToast('no se pude guardar');
+       this.presentToastDanger('No se pudo enviar');
     });
 }
 
@@ -64,18 +96,35 @@ export class VoluntarioComponent implements OnInit {
     });
     await this.loading.present();
   }
-
-  async presentToast(msg: string) {
+  async presentToastSuccess(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
       cssClass: 'normal',
       duration: 2000,
-      color: 'light',
+      color: "success",
     });
     toast.present();
   }
 
+  async presentToastWarning(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: "warning",
+    });
+    toast.present();
+  }
 
+  async presentToastDanger(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      cssClass: 'normal',
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
+  }
 
 
 }

@@ -23,6 +23,8 @@ export class UserService {
 
   roles$ : Observable<UserInterface>;
 
+  user!: Observable< UserInterface | null>;
+
 
     constructor( public afAuth : AngularFireAuth,
                  public router: Router,
@@ -63,6 +65,7 @@ export class UserService {
   getUserId() {
     return this.userId;
   }
+
 
 
 

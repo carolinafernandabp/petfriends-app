@@ -3,8 +3,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { map, Observable, of } from 'rxjs';
 import { Donacion, Ficha, Publicacion } from '../models/models';
 import { convertSnaps } from './db-util';
-import { where } from 'firebase/firestore';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
 @Injectable({
@@ -14,6 +12,19 @@ export class FirestoreService {
   path!: string;
 
   constructor(public database : AngularFirestore) { }
+
+  getPublicacionesByUserId(userId: string): Observable<Publicacion[]> {
+    return this.database.collection<Publicacion>('publicaciones', ref => ref.where('userId', '==', userId)).valueChanges();
+  }
+
+
+  getPublicacionById(id: string): Observable<Publicacion | undefined> {
+    return this.database
+      .collection<Publicacion>('publicaciones')
+      .doc(id)
+      .valueChanges();
+  }
+
 
   createDoc(data: any, path: string, id: string) {
       const collection = this.database.collection(path);
@@ -98,24 +109,18 @@ loadPublicacionByCategory(category: string): Observable<Publicacion[]> {
     );
 }
 
-
-
-
-loadFichaByEspecie(especie:string): Observable<Ficha[]> {
-  return this.database.collection(
-     "Fichas",
-     ref => ref.where("especie", "array-contains", especie)
-         .orderBy("nacimiento")
-     )
-     .get()
-      .pipe(
-          map(result => convertSnaps<Ficha>(result))
-      );
-
+loadFichaByEspecie(especie: string): Observable<Ficha[]> {
+  return this.database.collection<Ficha>('Fichas', ref => ref.where('especie', '==', especie))
+    .snapshotChanges()
+    .pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Ficha;
+        const id = a.payload.doc.id;
+        return {...data };
+      }))
+    );
 }
 
-
 }
-
 
 

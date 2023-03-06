@@ -1,22 +1,24 @@
 
     <ion-title>
-      Solicitudes voluntarios
+      Solicitudes Padrinos
     </ion-title>
 
 
 
   <ion-list *ngFor="let voluntario of voluntarios">
 
-    <ion-item>
-      <ion-label>
-        <h2>{{ voluntario.description }}</h2>
-        <p>{{ voluntario.fecha.seconds*1000 | date:'dd-MM-YYYY  hh:mm'  }}</p>
-        <p *ngIf="voluntario.estado == 'enviada'">Estado: Enviada</p>
-        <p *ngIf="voluntario.estado == 'aceptada'">Estado: Aceptada</p>
-        <p *ngIf="voluntario.estado == 'rechazada'">Estado: Rechazada</p>
-        <ion-button color="success" expand="block" (click)="updateAdoptar(voluntario,'aceptada')">Aceptar</ion-button>
+    <ion-card>
+      <ion-card-header>
+        <p class="estado" *ngIf="voluntario.estado == 'enviada'">Estado: Enviada</p>
+        <p  class="estado"  *ngIf="voluntario.estado == 'aceptada'">Estado: Aceptada</p>
+        <p class="estado"  *ngIf="voluntario.estado == 'rechazada'">Estado: Rechazada</p>
+        <ion-card-subtitle>{{ voluntario.fecha.seconds*1000 | date:'dd-MM-YYYY  hh:mm'  }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ voluntario.description }}
+      </ion-card-content>
+      <ion-button color="success" expand="block" (click)="updateAdoptar(voluntario,'aceptada')">Aceptar</ion-button>
         <ion-button color="danger" expand="block" (click)="updateAdoptar(voluntario,'rechazada')">Rechazar</ion-button>
-      </ion-label>
-    </ion-item>
+    </ion-card>
 
   </ion-list>
