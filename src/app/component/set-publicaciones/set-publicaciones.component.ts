@@ -19,6 +19,7 @@ export class SetPublicacionesComponent implements OnInit {
   publicaciones: Publicacion[] = [];
 
   newPublicacion: Publicacion ={
+
     titulo: '',
     description: '',
     foto: '',
@@ -26,6 +27,7 @@ export class SetPublicacionesComponent implements OnInit {
     id: this.firestoreService.getId(),
     create: new Date,
     userId: this.usuarioActual,
+
   }
 
   enableNewPublicacion = false;
@@ -59,7 +61,7 @@ export class SetPublicacionesComponent implements OnInit {
     const userId = (await this.afAuth.currentUser)?.uid; // asignar valor id
 
     // Verificar si el campo título o descripción están vacíos
-    if (this.newPublicacion.titulo === '' || this.newPublicacion.description === '') {
+    if (this.newPublicacion.titulo === '' || this.newPublicacion.description === '' || this.newPublicacion.category.length === 0 ) {
       this.presentToastWarning('Por favor, complete todos los campos.')
       return;
     }
@@ -72,6 +74,7 @@ export class SetPublicacionesComponent implements OnInit {
       const res = await this.firestorageService.uploadImage(this.newFile, path, name);
       this.newPublicacion.foto = res;
     }
+
     this.newPublicacion.userId = userId; // asignar el valor de userId a newPublicacion
 
     // Verificar si se pudo obtener el ID del usuario

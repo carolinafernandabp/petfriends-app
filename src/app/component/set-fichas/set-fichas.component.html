@@ -18,7 +18,7 @@
               <ion-label position="stacked">Nombre</ion-label>
                 <ion-input placeholder="Nombre"  [(ngModel)]="newFicha.nombre" type="text" maxlength="20" required></ion-input>
             </ion-item>
-            <ion-item fill="outline">
+            <ion-item fill="outline" id="custom-item" counter="true" >
               <ion-label position="stacked">Fecha de nacimiento</ion-label>
                 <ion-input placeholder="Fecha de nacimiento"  [(ngModel)]="newFicha.nacimiento" type="date" required></ion-input>
             </ion-item>
@@ -56,7 +56,7 @@
                 <ion-label position="stacked">Estado</ion-label>
                 <ion-select placeholder="Estado"  interface="popover" [(ngModel)]="newFicha.estado" required>
                   <ion-select-option value="ADOPTADO">Adoptado</ion-select-option>
-                  <ion-select-option value="NOADOPTADO">No adoptado</ion-select-option>
+                  <ion-select-option value="NO ADOPTADO">No adoptado</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>
@@ -78,7 +78,9 @@
               </ion-buttons>
             </ion-item>
 
-          <ion-item lines="none"></ion-item>
+            <ion-item lines="none">
+              <img alt="" class="image" [src]="newFicha.foto" style="border-color: white;">
+            </ion-item>
 
             <ion-button lines="none" (click)="guardarFicha()">
               Crear Ficha

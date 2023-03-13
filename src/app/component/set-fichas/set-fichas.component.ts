@@ -28,7 +28,7 @@ export class SetFichasComponent implements OnInit {
       foto: '',
       especie: [],
       estado: [],
-      microChip: '',
+      microChip: 0,
       id: this.firestoreService.getId(),
       userId: this.usuarioActual,
 
@@ -63,14 +63,31 @@ export class SetFichasComponent implements OnInit {
 
 
   async guardarFicha() {
+
+    const today = new Date();
+    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
     const userId = (await this.afAuth.currentUser)?.uid;
 
-     // Verificar si el campo título o descripción están vacíos
-     if (this.newFicha.nombre=== '' || this.newFicha.description === '') {
-      this.presentToastWarning('Por favor, complete todos los campos.')
+     // Verificar si los campos están vacíos
+     if (this.newFicha.nombre=== '' || this.newFicha.raza === '' || this.newFicha.color === '' ||
+      this.newFicha.tamanio === ''|| this.newFicha.description === '' || this.newFicha.especie.length === 0 ||
+       this.newFicha.estado.length === 0  ) {
+      this.presentToastWarning('Por favor, complete todos los campos.'   )
       return;
     }
 
+   // verificar la fecha
+   if ( !this.newFicha.nacimiento || new Date(this.newFicha.nacimiento) > today || new Date(this.newFicha.nacimiento) < eighteenYearsAgo) {
+    this.presentToastWarning('Por favor, ingrese una fecha válida.')
+    return;
+  }
+
+ //verificar microChip
+    if (isNaN(Number(this.newFicha.microChip))) {
+      this.presentToastWarning('El valor del campo microChip debe ser numérico.');
+      return;
+    }
 
     this.presentLoading();
     const path = 'Fichas/';

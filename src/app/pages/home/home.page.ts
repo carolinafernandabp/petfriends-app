@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { Publicacion } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,54 +11,44 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePage implements OnInit {
 
+
   mascotaPublicacion$ !: Observable<Publicacion[]> ;
 
   noticiaPublicacion$ !: Observable<Publicacion[]> ;
 
   publicaciones: Publicacion[] = [];
 
-  users: any;
-
   optionSelected = 'MASCOTA';
 
-  constructor(
-              public firestore : FirestoreService,
-              public user: UserService) { }
+
+  constructor(public firestore : FirestoreService,
+              public user: UserService) {  }
 
   ngOnInit() {
 
-    this.users = this.user.getUserId();
-    this.reloadPublicaciones();
-
-  }
-
-  getPublicaciones() {
-    this.firestore.getCollection<Publicacion>('Publicaciones').subscribe(res => {
-      this.publicaciones = res;
-    });
+      this.reloadPublicaciones();
   }
 
   reloadPublicaciones() {
 
-      this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA');
-      this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
-      this.publicacionesSeleccionadas();
+    this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA' );
+    this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
 
+    this.publicacionesSeleccionadas();
 
-  }
+   }
 
-  publicacionesSeleccionadas() {
-    if (this.optionSelected === 'MASCOTA') {
-      this.mascotaPublicacion$.subscribe(res => {
+   publicacionesSeleccionadas() {
+     if (this.optionSelected === 'MASCOTA') {
+       this.mascotaPublicacion$.subscribe(res => {
         this.publicaciones = res;
-      });
-    } else if (this.optionSelected === 'NOTICIA') {
-      this.noticiaPublicacion$.subscribe(res => {
+       });
+     } else if (this.optionSelected === 'NOTICIA') {
+       this.noticiaPublicacion$.subscribe(res => {
         this.publicaciones = res;
-      });
-    }
-  }
-
+       });
+     }
+   }
 
     segmentChanged(event: any){
       this.optionSelected = event.detail.value;
@@ -66,3 +56,4 @@ export class HomePage implements OnInit {
     }
 
   }
+

@@ -34,27 +34,13 @@ export class ListPublicacionesComponent implements OnInit {
                 private router : Router,
                 ) { }
 
-                filterPost = '';
-                uid = '';
-
   ngOnInit() {
 
-    this.uid = this.user.getUserId();
-    this.getPublicaciones();
+
+
   }
 
-  getPublicaciones() {
-    if (this.user.isLoggedOut$) { // si el usuario no ha iniciado sesión
-      this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
-        console.log(res);
-        this.publicaciones = res;
-      });
-    } else { // si el usuario ha iniciado sesión
-      this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
-        this.publicaciones = res.filter(p => p.userId === this.uid);
-      });
-    }
-  }
+
 
   async openModal(publicaciones: Publicacion) {
     if (publicaciones && publicaciones.id) {
@@ -66,7 +52,8 @@ export class ListPublicacionesComponent implements OnInit {
           description: publicaciones.description,
           foto: publicaciones.foto,
           category: publicaciones.category,
-          create: publicaciones.create
+          create: publicaciones.create,
+          userId : publicaciones.userId
         },
       });
       await modal.present();
@@ -93,7 +80,7 @@ export class ListPublicacionesComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.firestoreService.deleteDoc(this.path, publicacion.id).then( res => {
-              this.presentToastSuccess('Eliminado con exito');
+              this.presentToastSuccess('Eliminado con éxito');
               this.alertController.dismiss();
             }).catch( error => {
                 this.presentToastDanger('No se pude eliminar');
@@ -159,22 +146,15 @@ async presentToastDanger(msg: string) {
 
          }
 
-
-
     });
-
-
-    this.router.navigate(['/adoptar', publicaciones.id]);
    return  await modal.present();
 
-
   }
 
 
-  singup(){
+  signup() {
     this.router.navigate(['form-adoptar']);
   }
-
 
   postular(){
     this.router.navigate(['solicitud']);

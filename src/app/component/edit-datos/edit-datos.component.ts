@@ -1,9 +1,8 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
-import { Donacion } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
-
+import { validate } from 'rut.js';
 @Component({
   selector: 'app-edit-datos',
   templateUrl: './edit-datos.component.html',
@@ -18,16 +17,16 @@ export class EditDatosComponent implements OnInit {
   @Input()
   rut!: string;
   @Input()
-  banco!: string;
+  banco!: [];
   @Input()
-  tipo!: string;
-  @Input()
-  foto!: string;
+  tipo!: [];
   @Input()
   cuenta!: string;
   @Input()
   correo!: string;
 
+
+  public showRutError = false;
 
   form!: FormGroup;
 
@@ -49,12 +48,21 @@ export class EditDatosComponent implements OnInit {
       this.form = this.fb.group({
       nombre: ['', Validators.required],
       rut: ['', Validators.required],
+      banco: [[], Validators.required],
+      tipo: [[], Validators.required],
+      cuenta: ['', Validators.required],
+      correo: ['', Validators.required, Validators.email],
     });
   }
 
   dismissModal(){
     this.modalCtrl.dismiss();
   }
+
+  customCounterFormatter(inputLength: number, maxLength: number, minLenght:number) {
+    return `${ maxLength - inputLength} caracteres`;
+  }
+
 
 
   async editDonacion() {
@@ -90,9 +98,28 @@ export class EditDatosComponent implements OnInit {
             }
             const changes = {
               nombre: this.form.value.nombre || this.nombre,
-              rut: this.form.value.rut|| this.rut,
-              // Añade el resto de los campos que quieres editar
+              rut: this.form.value.rut || this.rut,
+              banco: this.form.value.banco || this.banco,
+              tipo: this.form.value.tipo|| this.tipo,
+              cuenta: this.form.value.cuenta || this.cuenta,
+              correo: this.form.value.correo || this.correo,
             };
+
+           // Validar rut
+            if (this.form.value.rut === '' || !validate(this.form.value.rut)) {
+              this.presentToastWarning('Por favor, ingrese un RUT válido.');
+              this.showRutError = true;
+              return;
+            }
+            this.showRutError = false;
+
+            //verificar cuenta
+            if ( isNaN(Number(this.form.value.cuenta))) {
+              this.presentToastWarning('El número de cuenta debe ser numérico.');
+              return;
+            }
+
+
             console.log(this.id);
             this.firestoreService.updateDoc(changes,this.path,this.id).then( res => {
               this.presentToastSuccess('Editado con éxito');

@@ -42,7 +42,7 @@ export class ListDatosComponent implements OnInit {
 
   getDonaciones() {
     this.firestoreService.getCollection<Donacion>(this.path).subscribe(res => {
-      console.log(res); // Verificar que res contiene los datos que esperas
+      console.log(res); // Verificar que res contiene los datos
       this.donaciones = res.filter(d => d.userId === this.uid);
     }, error => {
       console.log(error);
@@ -91,7 +91,7 @@ export class ListDatosComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.firestoreService.deleteDoc(this.path, donacion.id).then( res => {
-              this.presentToastSuccess('Eliminado con exito');
+              this.presentToastSuccess('Eliminado con éxito');
               this.alertController.dismiss();
             }).catch( error => {
                 this.presentToastDanger('No se pudo eliminar');

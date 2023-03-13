@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QueryFn } from '@angular/fire/compat/firestore';
 import { map, Observable, of } from 'rxjs';
 import { Donacion, Ficha, Publicacion } from '../models/models';
 import { convertSnaps } from './db-util';
 import 'firebase/compat/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +13,6 @@ export class FirestoreService {
   path!: string;
 
   constructor(public database : AngularFirestore) { }
-
-  getPublicacionesByUserId(userId: string): Observable<Publicacion[]> {
-    return this.database.collection<Publicacion>('publicaciones', ref => ref.where('userId', '==', userId)).valueChanges();
-  }
-
-
-  getPublicacionById(id: string): Observable<Publicacion | undefined> {
-    return this.database
-      .collection<Publicacion>('publicaciones')
-      .doc(id)
-      .valueChanges();
-  }
 
 
   createDoc(data: any, path: string, id: string) {
@@ -56,6 +45,8 @@ export class FirestoreService {
     return collection.valueChanges();
   }
 
+
+
   getCollectionQuery<tipo>(path: string, parametro: string, condicion: any, busqueda: string) {
     const collection = this.database.collection<tipo>(path,
       ref => ref.where( parametro, condicion, busqueda));
@@ -87,14 +78,6 @@ export class FirestoreService {
     return collection.valueChanges();
   }
 
-  getPublicacionesPorUsuario(userId: string): Observable<Publicacion[]> {
-    if (!userId) {
-      return of([]);
-    }
-    const collection = this.database.collection<Publicacion>('Publicaciones', ref => ref.where("userId", "==", userId));
-    return collection.valueChanges();
-  }
-
 
 
 loadPublicacionByCategory(category: string): Observable<Publicacion[]> {
@@ -109,8 +92,18 @@ loadPublicacionByCategory(category: string): Observable<Publicacion[]> {
     );
 }
 
+
+loadPublicacionByUid(userId: string): Observable<Publicacion[]> {
+  if (userId) {
+    return this.database.collection<Publicacion>('Publicaciones', ref => ref.where('userId', '==', userId)).valueChanges();
+  } else {
+    return of([]);
+  }
+}
+
+
 loadFichaByEspecie(especie: string): Observable<Ficha[]> {
-  return this.database.collection<Ficha>('Fichas', ref => ref.where('especie', '==', especie))
+  return this.database.collection<Ficha>('Fichas', ref => ref.where('especie', '==', especie)  )
     .snapshotChanges()
     .pipe(
       map(actions => actions.map(a => {
@@ -121,6 +114,15 @@ loadFichaByEspecie(especie: string): Observable<Ficha[]> {
     );
 }
 
+
+getCollection2<T>(path: string, queryFn?: QueryFn): Observable<T[]> {
+  const collectionRef = this.database.collection<T>(path, queryFn);
+  return collectionRef.valueChanges();
 }
+
+
+}
+
+
 
 

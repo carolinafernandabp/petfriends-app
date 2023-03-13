@@ -1,6 +1,6 @@
 
   <ion-card *ngFor="let publicacion of publicaciones"  >
-    <img  alt="image" src="{{publicacion.foto}}">
+    <img  alt="" src="{{publicacion.foto}}">
     <ion-card-header>
       <ion-card-title >{{publicacion.titulo}}</ion-card-title>
       <ion-card-subtitle >{{publicacion.category}}</ion-card-subtitle>
@@ -13,7 +13,7 @@
       <ng-container *ngIf="(user.roles$ | async) as roles" >
         <ng-container *ngIf="roles.admin == false">
           <ion-button class="button-petlover"  fill="clear" (click)="verMas(publicacion)" >Ver más</ion-button>
-          <ion-button class="button-petlover" fill="clear" (click)="singup()">Adoptar</ion-button>
+          <ion-button class="button-petlover" fill="clear" (click)="signup()">Adoptar</ion-button>
           <ion-button class="button-petlover" fill="clear" (click)="postular()">Apadrinar</ion-button>
         </ng-container>
       </ng-container>

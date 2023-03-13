@@ -28,9 +28,9 @@ export class EditFichasComponent implements OnInit {
   @Input()
   especie!: string;
   @Input()
-  estado!: string;
+  estado!: [];
   @Input()
-  microChip!: string;
+  microChip!: number;
 
   form!: FormGroup;
 
@@ -55,10 +55,15 @@ export class EditFichasComponent implements OnInit {
       tamanio: ['', Validators.required],
       description: ['', Validators.required],
       especie: ['', Validators.required],
-      estado: ['', Validators.required],
+      estado: [[], Validators.required],
       microChip: ['', Validators.required],
     });
   }
+
+  customCounterFormatter(inputLength: number, maxLength: number, minLenght:number) {
+    return `${ maxLength - inputLength} caracteres`;
+  }
+
 
   dismissModal(){
     this.modalCtrl.dismiss();
@@ -97,9 +102,19 @@ export class EditFichasComponent implements OnInit {
             }
             const changes = {
               nombre: this.form.value.nombre || this.nombre,
+              raza: this.form.value.raza || this.raza,
+              color: this.form.value.color || this.color,
+              tamanio: this.form.value.tamanio || this.tamanio,
               description: this.form.value.description|| this.description,
-              // Añade el resto de los campos que quieres editar
+              estado: this.form.value.estado || this.estado,
+              microChip: this.form.value.microChip || this.microChip,
             };
+
+             //verificar microChip
+            if (isNaN(Number(this.form.value.microChip))) {
+              this.presentToastWarning('El valor del campo microChip debe ser numérico.');
+              return;
+            }
 
             console.log(this.id);
             this.firestoreService.updateDoc(changes,this.path,this.id).then( res => {

@@ -8,6 +8,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { Publicacion} from '../../models/models';
 import { UserService } from 'src/app/services/user.service';
+import { SolicitudService } from 'src/app/services/solicitud.service';
 @Component({
   selector: 'app-adoptar',
   templateUrl: './adoptar.component.html',
@@ -15,11 +16,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AdoptarComponent implements OnInit {
 
+  @Input() adopciones: Adoptar[] | any;
 
-  usuarioActual: string = ''; // asignar valor
-  publicacionActual: string = '';
-
-  adopciones: Adoptar[] = [];
+  usuarioActual: string = ''; // asignar valor;
 
   newAdoptar: Adoptar={
     description: '',
@@ -27,9 +26,6 @@ export class AdoptarComponent implements OnInit {
     fecha: new Date,
     estado: 'enviada',
     userId: this.usuarioActual,
-    publicacionId: this.publicacionActual
-
-
   }
   enableNewAdoptar = false;
 
@@ -44,49 +40,52 @@ export class AdoptarComponent implements OnInit {
               public alertController: AlertController,
               public firestorageService: FirestorageService,
               private router: Router,
-              public  afAuth: AngularFireAuth) {
+              public  afAuth: AngularFireAuth,
+              public solicitudService : SolicitudService) {
 
               }
 
   ngOnInit() {
 
     this.getAdoptar();
+
   }
+
 
 
   customCounterFormatter(inputLength: number, maxLength: number) {
-    return `${maxLength - inputLength} characters remaining`;
+    return `${maxLength - inputLength} caracteres`;
   }
 
 
-  async guardarAdoptar( ) {
+async guardarAdoptar() {
+  const userId = (await this.afAuth.currentUser)?.uid;
 
-   const userId = (await this.afAuth.currentUser)?.uid;
-    if (this.newAdoptar.description === '') {
-      this.presentToastWarning('Por favor, complete todos los campos.')
-      return;
-    }
-
-    this.presentLoading();
-    const path = 'Adoptar';
-    const name = this.newAdoptar.id;
-
-   this.newAdoptar.userId = userId;
-
-    if (!this.newAdoptar.userId) {
-      this.loading.dismiss();
-      this.presentToastDanger('No se pudo obtener el ID del usuario. Por favor, vuelva a iniciar sesión.');
-      return;
-    }
-
-    this.firestoreService.createDoc(this.newAdoptar, this.path, this.newAdoptar.id).then( res => {
-         this.loading.dismiss();
-         this.router.navigate(['/']);
-         this.presentToastSuccess('Enviado con éxito');
-    }).catch( error => {
-       this.presentToastDanger('No se pudo enviar');
-    });
+  if (this.newAdoptar.description === '') {
+    this.presentToastWarning('Por favor, complete todos los campos.')
+    return;
   }
+
+  this.presentLoading();
+  const path = 'Adoptar';
+  const name = this.newAdoptar.id;
+
+  this.newAdoptar.userId = userId;
+
+  if (!this.newAdoptar.userId) {
+    this.loading.dismiss();
+    this.presentToastDanger('No se pudo obtener el ID del usuario. Por favor, vuelva a iniciar sesión.');
+    return;
+  }
+
+  this.firestoreService.createDoc(this.newAdoptar, this.path, this.newAdoptar.id).then( res => {
+    this.loading.dismiss();
+    this.router.navigate(['/']);
+    this.presentToastSuccess('Enviado con éxito');
+  }).catch( error => {
+    this.presentToastDanger('No se pudo enviar');
+  });
+}
 
 
   getAdoptar() {

@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/compat
 import { Router } from "@angular/router";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { map, Observable } from "rxjs";
+import { BehaviorSubject, map, Observable } from "rxjs";
 import { UserInterface } from "../models/user-roles";
 
 
@@ -13,11 +13,12 @@ import { UserInterface } from "../models/user-roles";
 })
 export class UserService {
 
+
   public userId!: string;
 
   isLoggedIn$ : Observable<boolean>;
 
-  isLoggedOut$: Observable<boolean>;
+  isLoggedOut$: Observable<boolean> ;
 
   pictureUrl$: Observable<string> | any;
 
@@ -43,17 +44,13 @@ export class UserService {
                       map(token => <any>token?.claims ?? {admin:false})
                   )
 
-                  this.afAuth.authState.subscribe(user => {
-                    if (user) {
-                      this.userId = user.uid;
-                    }
-                  });
 
 
                   }
 
     stateAuth() {
       return this.afAuth.authState;
+
     }
 
     logout() {
@@ -62,10 +59,9 @@ export class UserService {
   }
 
 
-  getUserId() {
+   getUserId() {
     return this.userId;
   }
-
 
 
 

@@ -25,6 +25,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -45,11 +46,13 @@ import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
     FormsModule,
     CommonModule,
     AllcomponentsModule,
-    AngularFireMessagingModule
+    AngularFireMessagingModule,
+
 
 
     ],
   providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
 
 /*

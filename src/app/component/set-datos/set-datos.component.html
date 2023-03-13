@@ -62,8 +62,9 @@
 
         <ion-item fill="outline" >
           <ion-label position="stacked" >Correo</ion-label>
-            <ion-input placeholder="Correo"  [(ngModel)]="newDonacion.correo" type="text" required></ion-input>
+            <ion-input type="text"  placeholder="Correo"  [(ngModel)]="newDonacion.correo" name="correo"  #correo="ngModel" email></ion-input>
         </ion-item>
+        <p *ngIf="correo.errors?.email">error message</p>
 
 
         <ion-item lines="none"></ion-item>

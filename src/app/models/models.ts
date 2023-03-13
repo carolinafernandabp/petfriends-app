@@ -28,7 +28,7 @@ export interface Ficha {
   foto:string;
   especie: string[];
   estado:string[];
-  microChip: string;
+  microChip: number;
   userId: string | any; // para coincidir Id
 }
 
@@ -38,9 +38,9 @@ export interface Donacion {
   nombre: string,
   rut: string,
   banco: string[],
-  tipo:string,
-  cuenta:string,
-  correo: string
+  tipo:string[],
+  cuenta:number,
+  correo: string,
   userId: string | any; // para coincidir Id
 }
 export interface Adoptar {
@@ -50,7 +50,6 @@ export interface Adoptar {
   estado: EstadoPedido;
   fecha: Date;
   userId: string | any; // Agregamops Id para coincidir Id de la sesión iniciada
-  publicacionId: string | any;
 }
 
 export interface Voluntario {
@@ -59,8 +58,12 @@ export interface Voluntario {
   description: string;
   estado: EstadoPedido;
   fecha: Date;
-  userId: string | any; // Agregamops Id para coincidir Id de la sesión iniciada
+  userId: string | any;
   publicacionId: string | any;
+
+
 }
 
 export type  EstadoPedido = 'enviada' | 'aceptada' | 'rechazada';
+
+

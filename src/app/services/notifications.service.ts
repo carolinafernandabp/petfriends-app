@@ -67,16 +67,18 @@ export class NotificationsService {
 
   addListeners() {
 
-    PushNotifications.addListener('pushNotificationActionPerformed',
-      (notification: PushNotificationActionPerformed) => {
-        console.log('Push action performed en segundo plano -> ', notification);
-
-        this.router.navigate(['/']);
-      }
-    );
+    PushNotifications.addListener('registration',
+    (token: PushNotificationToken) => {
+      console.log('The token is:', token);
+      this.guadarToken(token.value);
+    }
+  );
 
 
 }
+
+
+
   async guadarToken(value: string) {
     const Uid = await this.firebaseauthService.getUid();
 
@@ -98,12 +100,12 @@ export class NotificationsService {
   newNotication() {
 
   const receptor = 'CHpQBloQ36ZRsLoGz9RmUwBAstR2'
-  const path = 'Clientes/';
+  const path = 'users/';
   this.firestoreService.getDoc<any>(path, receptor).subscribe( res => {
         if (res) {
             const token = res.token;
             const dataNotification = {
-              enlace: '/mis-pedidos',
+              enlace: '/list-adoptar',
             }
             const notification = {
               title: 'Mensaje enviado manuelmente',

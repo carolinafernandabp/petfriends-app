@@ -10,45 +10,36 @@
   </ion-toolbar>
 </ion-header>
 <ion-content  class="ion-padding" [formGroup]="form">
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Nombre</ion-label>
-    <ion-input type="text" placeholder="{{nombre}}"  formControlName="nombre"></ion-input>
+    <ion-input type="text" placeholder="{{nombre}}"  formControlName="nombre" minlenght="0" maxlength="20"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Nacimiento </ion-label>
-    <ion-input type="text" placeholder="{{nacimiento}}"formControlName="nacimiento" ></ion-input>
-  </ion-item>
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Raza</ion-label>
-    <ion-input type="text" placeholder="{{raza}}"formControlName="raza" ></ion-input>
+    <ion-input type="text" placeholder="{{raza}}"formControlName="raza" minlenght="0" maxlength="20" ></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Color</ion-label>
-    <ion-input type="text" placeholder="{{color}}"formControlName="color" ></ion-input>
+    <ion-input type="text" placeholder="{{color}}"formControlName="color" minlenght="0" maxlength="20"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Tamaño</ion-label>
-    <ion-input type="text" placeholder="{{tamanio}}"formControlName="tamanio" ></ion-input>
+    <ion-input type="text" placeholder="{{tamanio}}"formControlName="tamanio" minlenght="0" maxlength="20"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Carácter</ion-label>
-    <ion-input type="text" placeholder="{{description}}"formControlName="description" ></ion-input>
+    <ion-input type="text" placeholder="{{description}}"formControlName="description" minlenght="0" maxlength="100"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Especie</ion-label>
-    <ion-input type="text" placeholder="{{especie}}"formControlName="especie" ></ion-input>
-  </ion-item>
-
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Estado</ion-label>
     <ion-select type="text" placeholder="{{estado}}" formControlName="estado"  interface="popover" >
       <ion-select-option  value="ADOPTADO">Adoptado</ion-select-option>
-      <ion-select-option value="NOADOPTADO">No adoptado</ion-select-option>
+      <ion-select-option value="NO ADOPTADO">No adoptado</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">MicroChip</ion-label>
-    <ion-input type="text" placeholder="{{microChip}}"formControlName="microChip" ></ion-input>
+    <ion-input type="text" placeholder="{{microChip}}"formControlName="microChip" minlenght="0" maxlength="20" ></ion-input>
   </ion-item>
 
 

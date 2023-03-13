@@ -54,6 +54,10 @@ export class EditPublicacionesComponent implements OnInit {
 
   }
 
+  customCounterFormatter(inputLength: number, maxLength: number, minLenght:number) {
+    return `${ maxLength - inputLength} caracteres`;
+  }
+
 
   dismissModal(){
     this.modalCtrl.dismiss();
@@ -92,8 +96,7 @@ export class EditPublicacionesComponent implements OnInit {
 
             const changes = {
               titulo: this.form.value.titulo || this.titulo,
-              description: this.form.value.description || this.description,
-              // Añade el resto de los campos que quieres editar
+
             };
 
             console.log(this.id);

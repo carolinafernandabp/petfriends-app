@@ -37,12 +37,11 @@ export class ListFichasComponent implements OnInit {
   ngOnInit() {
 
     this.uid = this.user.getUserId();
-    this.getFichas();
   }
 
   getFichas() {
     this.firestoreService.getCollection<Ficha>(this.path).subscribe(res => {
-      console.log(res); // Verificar que res contiene los datos que esperas
+      console.log(res); // Verificar que res contiene los datos
       this.fichas= res.filter(f => f.userId === this.uid);
     }, error => {
       console.log(error);
@@ -96,7 +95,7 @@ export class ListFichasComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.firestoreService.deleteDoc(this.path, ficha.id).then( res => {
-              this.presentToastSuccess('Eliminado con exito');
+              this.presentToastSuccess('Eliminado con éxito');
               this.alertController.dismiss();
             }).catch( error => {
                 this.presentToastDanger('no se pudo eliminar');

@@ -1,56 +1,61 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="dismissModal()">Cancel</ion-button>
+      <ion-button (click)="dismissModal()">Cancelar</ion-button>
     </ion-buttons>
     <ion-title></ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="editDonacion()" [strong]="true">Confirm</ion-button>
+      <ion-button (click)="editDonacion()" [strong]="true">Confirmar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content  class="ion-padding" [formGroup]="form">
-  <ion-item>
+  <ion-item  counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Nombre</ion-label>
-    <ion-input type="text" placeholder="{{nombre}}"  formControlName="nombre"></ion-input>
+    <ion-input type="text" placeholder="{{nombre}}"  formControlName="nombre" minlenght="0" maxlength="50"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Rut</ion-label>
-    <ion-input type="text" placeholder="{{rut}}" formControlName="rut" ></ion-input>
+    <ion-input type="text" placeholder="{{rut}}" formControlName="rut" minlenght="0" maxlength="9"></ion-input>
   </ion-item>
-  <ion-list>
-    <ion-item>
+
+    <ion-item >
       <ion-label position="stacked">Banco</ion-label>
-      <ion-select placeholder="{{banco}}"  interface="popover" formControlName="banco" >
+      <ion-select placeholder="{{banco}}"  formControlName="banco"  interface="popover"  >
         <ion-select-option value="Banco Estado">Banco Estado</ion-select-option>
         <ion-select-option value="Banco Santander Chile">Banco Santander Chile</ion-select-option>
-        <ion-select-option value="Bancho de Chile">Bancho de Chile</ion-select-option>
-        <ion-select-option value="Bancho Internacional">Bancho Internacional</ion-select-option>
+        <ion-select-option value="Banco de Chile">Banco de Chile</ion-select-option>
+        <ion-select-option value="Banco Internacional">Banco Internacional</ion-select-option>
         <ion-select-option value="Scotiobank Chile">Scotiobank Chile</ion-select-option>
-        <ion-select-option value="Bancho de crédito e inversiones">Bancho de crédito e inversiones</ion-select-option>
-        <ion-select-option value="Bancho Bice">Bancho Bice</ion-select-option>
+        <ion-select-option value="Banco de crédito e inversiones">Banco de crédito e inversiones</ion-select-option>
+        <ion-select-option value="Banco Bice">Banco Bice</ion-select-option>
         <ion-select-option value="HSBC BANK">HSBC BANK</ion-select-option>
         <ion-select-option value="Itaú Corpbanca">Itaú Corpbanca</ion-select-option>
-        <ion-select-option value="Bancho Security">Bancho Security</ion-select-option>
-        <ion-select-option value="Bancho Falabella">Bancho Falabella</ion-select-option>
-        <ion-select-option value="Bancho Ripley">Bancho Ripley</ion-select-option>
-        <ion-select-option value="Bancho Consorcio">Bancho Consorcio</ion-select-option>
+        <ion-select-option value="Banco Security">Banco Security</ion-select-option>
+        <ion-select-option value="Banco Falabella">Banco Falabella</ion-select-option>
+        <ion-select-option value="Banco Ripley">Banco Ripley</ion-select-option>
+        <ion-select-option value="Banco Consorcio">Banco Consorcio</ion-select-option>
       </ion-select>
     </ion-item>
-  </ion-list>
 
-  <ion-list>
+
     <ion-item >
       <ion-label position="stacked">Tipo</ion-label>
-      <ion-select placeholder="{{tipo}}"  interface="popover"  formControlName="tipo">
+      <ion-select placeholder="{{tipo}}"  formControlName="tipo"  interface="popover">
         <ion-select-option value="CORRIENTE">Cuenta Corriente /Cuenta Vista</ion-select-option>
         <ion-select-option value="AHORRO">Cuenta de ahorro</ion-select-option>
       </ion-select>
     </ion-item>
-  </ion-list>
-  <ion-item>
+
+
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">N° de Cuenta</ion-label>
-    <ion-input type="text" placeholder="{{cuenta}}" formControlName="cuenta" ></ion-input>
+    <ion-input type="text" placeholder="{{cuenta}}" formControlName="cuenta"minlenght="0" maxlength="20" ></ion-input>
+  </ion-item>
+
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
+    <ion-label position="stacked">Correo</ion-label>
+    <ion-input type="text" placeholder="{{correo}}" formControlName="correo" minlenght="0" maxlength="20"></ion-input>
   </ion-item>
 
 </ion-content>

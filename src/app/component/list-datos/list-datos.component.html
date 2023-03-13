@@ -42,7 +42,7 @@
     <ng-container *ngIf="(user.roles$ | async) as roles" >
       <ng-container *ngIf="roles.admin">
         <ion-button fill="clear" (click)="openModal(donacion)">Editar</ion-button>
-        <ion-button fill="clear"(click)="deleteDonacion(donacion)" >Delete</ion-button>
+        <ion-button fill="clear"(click)="deleteDonacion(donacion)" >Eliminar</ion-button>
       </ng-container>
     </ng-container>
 

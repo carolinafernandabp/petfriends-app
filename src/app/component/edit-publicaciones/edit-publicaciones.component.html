@@ -11,13 +11,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content  class="ion-padding" [formGroup]="form">
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Título</ion-label>
-    <ion-input type="text"  placeholder="{{titulo}}" formControlName="titulo"></ion-input>
+    <ion-input type="text"  placeholder="{{titulo}}" formControlName="titulo" ngModel text minlenght="0" maxlength="20"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Descripción</ion-label>
-    <ion-input type="text" placeholder="{{description}}" formControlName="description" class="ion-text-wrap"></ion-input>
+    <ion-input type="text" placeholder="{{description}}" formControlName="description" class="ion-text-wrap" ngModel text minlenght="0" maxlength="500"></ion-input>
   </ion-item>
 </ion-content>
 

@@ -5,6 +5,8 @@ import { AuthTokenService } from './services/auth-token.service';
 import { NotificationsService } from './services/notifications.service';
 import { UserService } from './services/user.service';
 import { Platform } from '@ionic/angular';
+import { PushNotificationService } from './services/push-notification.service';
+
 
 @Component({
   selector: 'app-root',
@@ -20,8 +22,25 @@ export class AppComponent {
                   private toastController : ToastController,
                   private menu: MenuController,
                   private notificationsService : NotificationsService,
-                  private platform: Platform ) { }
+                  private platform: Platform,
+                  private pushNotificationService: PushNotificationService
+                 ) {
 
+                  this.initializeApp();
+
+                   }
+                   initializeApp() {
+                    this.platform.ready().then(() => {
+                      this.pushNotificationService.requestPermission();
+                      this.pushNotificationService.receiveMessage();
+                    });
+                  }
+
+                  ngOnInit() {
+                    this.pushNotificationService.currentMessage.subscribe((message) => {
+                      console.log('Push notification received', message);
+                    });
+                  }
 
   closeMenu() {
     this.menu.close(); // Cierra el menú lateral
@@ -40,4 +59,7 @@ export class AppComponent {
 
       await toast.present();
   }
+
+
+
 }

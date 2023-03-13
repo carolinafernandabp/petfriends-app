@@ -50,12 +50,12 @@ ngOnInit() {
               if (signInMethods.length > 0) {
                 signUpButton.disabled = false;
                 errorContainer.style.display = 'none';
-                this.disableSignup = true; // Agrega esta línea
+                this.disableSignup = true; // desabilita
               } else {
                 signUpButton.disabled = true;
                 errorContainer.textContent = 'La dirección de correo electrónico no está registrada.';
                 errorContainer.style.display = 'block';
-                this.disableSignup = false; // Agrega esta línea
+                this.disableSignup = false; // desabilita
               }
             });
           });
@@ -79,11 +79,10 @@ ngOnInit() {
 
   console.log('Firebase UI result:', result);
   this.usuarioActual = (await this.afAuth.currentUser)?.uid;
-
   this.router.navigateByUrl("/");
 
   const toast = await this.toastController.create({
-    message: 'Sesión iniciada exitosamente ',
+    message: 'Sesión iniciada correctamente ',
     duration: 1500,
     cssClass: 'toast-success',
     icon: 'enter-outline'
