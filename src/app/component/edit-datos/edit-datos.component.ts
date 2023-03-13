@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { validate } from 'rut.js';
+
 @Component({
   selector: 'app-edit-datos',
   templateUrl: './edit-datos.component.html',
@@ -105,13 +105,17 @@ export class EditDatosComponent implements OnInit {
               correo: this.form.value.correo || this.correo,
             };
 
-           // Validar rut
-            if (this.form.value.rut === '' || !validate(this.form.value.rut)) {
-              this.presentToastWarning('Por favor, ingrese un RUT válido.');
-              this.showRutError = true;
+
+              // Verificar si campo vacíos
+            if (this.form.value.banco.length === 0 ) {
+              this.presentToastWarning('Por favor, Re- ingrese Nombre del banco ')
               return;
             }
-            this.showRutError = false;
+
+            if ( this.form.value.tipo.length === 0 ) {
+              this.presentToastWarning('Por favor, Re- ingrese el tipo de cuenta ')
+              return;
+            }
 
             //verificar cuenta
             if ( isNaN(Number(this.form.value.cuenta))) {

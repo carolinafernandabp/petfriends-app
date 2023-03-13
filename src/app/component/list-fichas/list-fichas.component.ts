@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { Ficha } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UserService } from 'src/app/services/user.service';
@@ -24,6 +25,11 @@ export class ListFichasComponent implements OnInit {
 
   loading: any;
 
+  userId: string | null = null;
+
+
+
+
   constructor(public user : UserService,
               public firestoreService: FirestoreService,
               private modalCtrl : ModalController,
@@ -32,17 +38,24 @@ export class ListFichasComponent implements OnInit {
               public loadingController: LoadingController) { }
 
               filterPost = '';
-              uid = '';
+             // uid = '';
 
   ngOnInit() {
 
-    this.uid = this.user.getUserId();
+
+    this.user.getUserId2().subscribe(userId => {
+      this.userId = userId;
+    });
+    this.getFichas();
+
+
   }
 
   getFichas() {
+    console.log("Valor de uid: ", this.userId);
     this.firestoreService.getCollection<Ficha>(this.path).subscribe(res => {
       console.log(res); // Verificar que res contiene los datos
-      this.fichas= res.filter(f => f.userId === this.uid);
+      this.fichas= res.filter(f => f.userId === this.userId);
     }, error => {
       console.log(error);
     });

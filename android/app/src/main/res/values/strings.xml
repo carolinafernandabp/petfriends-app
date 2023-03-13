@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Petfriends</string>
+    <string name="title_activity_main">Petfriends</string>
+    <string name="package_name">com.petfriends.petfriends</string>
+    <string name="custom_url_scheme">com.petfriends.petfriends</string>
+</resources>

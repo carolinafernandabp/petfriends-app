@@ -3,10 +3,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
+
 import { Donacion } from 'src/app/models/models';
 import { FirestorageService } from 'src/app/services/firestorage.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { validate } from 'rut.js';
 
 @Component({
   selector: 'app-set-datos',
@@ -73,12 +73,10 @@ export class SetDatosComponent implements OnInit {
     }
 
     //verificar rut
-    if (this.newDonacion.rut === '' || !validate(this.newDonacion.rut)) {
+    if (this.newDonacion.rut === '' ) {
       this.presentToastWarning('Por favor, ingrese un RUT válido.');
-      this.showRutError = true;
       return;
     }
-    this.showRutError = false;
 
     //verificar correo
     if (this.newDonacion.correo === '' || !this.isValidEmail(this.newDonacion.correo)) {

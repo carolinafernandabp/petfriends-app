@@ -21,9 +21,11 @@ export class ListPublicacionesComponent implements OnInit {
   @Output() publicacionDeleted = new EventEmitter<Publicacion>();
 
 
-  private path = 'Publicaciones/';
+  private path = 'Publicaciones';
 
   loading: any;
+
+  userId: string | null = null;
 
   constructor( public user : UserService,
                 public firestoreService: FirestoreService,
@@ -36,10 +38,32 @@ export class ListPublicacionesComponent implements OnInit {
 
   ngOnInit() {
 
-
-
+    this.user.getUserId2().subscribe(userId => {
+      this.userId = userId;
+    });
+    this.getPublicaciones();
+    this.getPublicaciones2();
   }
 
+  getPublicaciones() {
+      // Si el usuario está logueado, mostrar solo sus publicaciones
+      this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
+        console.log(res); // Verificar que res contiene los datos
+        this.publicaciones = res.filter(f => f.userId === this.userId);
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  getPublicaciones2(){
+
+    if(this.user.isLoggedOut$){
+      this.firestoreService.getCollection<Publicacion>(this.path).subscribe(res => {
+        console.log(res); // Verificar que res contiene los dato
+        this.publicaciones  = res;
+      });
+  }
+}
 
 
   async openModal(publicaciones: Publicacion) {

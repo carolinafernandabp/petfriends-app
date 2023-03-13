@@ -23,6 +23,7 @@ export class ListDatosComponent implements OnInit {
 
   loading: any;
 
+  userId: string | null = null;
 
   constructor(public user : UserService,
               public firestoreService: FirestoreService,
@@ -31,15 +32,32 @@ export class ListDatosComponent implements OnInit {
               public alertController: AlertController ,
               public loadingController: LoadingController) { }
 
+            //  uid = '';
               filterPost = '';
-              uid = '';
+
 
   ngOnInit() {
 
-    this.uid = this.user.getUserId();
+    this.user.getUserId2().subscribe(userId => {
+      this.userId = userId;
+    });
     this.getDonaciones();
   }
 
+
+
+  getDonaciones() {
+    console.log("Valor de uid: ", this.userId);
+    this.firestoreService.getCollection<Donacion>(this.path).subscribe(  res => {
+      console.log(res); // Verificar que res contiene los datos
+       this.donaciones = res.filter(d => d.userId === this.userId);
+     } , error => {
+        console.log(error);
+    });
+  }
+
+
+/*
   getDonaciones() {
     this.firestoreService.getCollection<Donacion>(this.path).subscribe(res => {
       console.log(res); // Verificar que res contiene los datos
@@ -48,7 +66,7 @@ export class ListDatosComponent implements OnInit {
       console.log(error);
     });
   }
-
+*/
 
   async openModal(donaciones: Donacion) {
     if (donaciones && donaciones.id) {

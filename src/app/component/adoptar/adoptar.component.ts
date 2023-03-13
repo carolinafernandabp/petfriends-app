@@ -20,7 +20,9 @@ export class AdoptarComponent implements OnInit {
 
   usuarioActual: string = ''; // asignar valor;
 
-  newAdoptar: Adoptar={
+  loggedInUserId!: string;
+
+  newAdoptar: Adoptar= {
     description: '',
     id: this.firestoreService.getId(),
     fecha: new Date,
@@ -41,7 +43,13 @@ export class AdoptarComponent implements OnInit {
               public firestorageService: FirestorageService,
               private router: Router,
               public  afAuth: AngularFireAuth,
-              public solicitudService : SolicitudService) {
+              public solicitudService : SolicitudService,
+              private user : UserService) {
+
+                this.user.getUserId2().subscribe(user => {
+                  this.loggedInUserId = this.user.userId;
+                });
+
 
               }
 

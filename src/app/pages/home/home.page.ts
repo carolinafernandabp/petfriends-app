@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
 
   publicaciones: Publicacion[] = [];
 
-  optionSelected = 'MASCOTA';
+  optionSelected:string ='MASCOTA';
 
 
   constructor(public firestore : FirestoreService,
@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
 
   reloadPublicaciones() {
 
-    this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA' );
+    this.mascotaPublicacion$ = this.firestore.loadPublicacionByCategory('MASCOTA');
     this.noticiaPublicacion$ = this.firestore.loadPublicacionByCategory('NOTICIA');
 
     this.publicacionesSeleccionadas();
@@ -39,15 +39,22 @@ export class HomePage implements OnInit {
    }
 
    publicacionesSeleccionadas() {
-     if (this.optionSelected === 'MASCOTA') {
-       this.mascotaPublicacion$.subscribe(res => {
-        this.publicaciones = res;
-       });
-     } else if (this.optionSelected === 'NOTICIA') {
-       this.noticiaPublicacion$.subscribe(res => {
-        this.publicaciones = res;
-       });
-     }
+    switch (this.optionSelected) {
+      case 'MASCOTA':
+        this.mascotaPublicacion$.subscribe(res => {
+          this.publicaciones = res;
+        });
+        break;
+      case 'NOTICIA':
+        this.noticiaPublicacion$.subscribe(res => {
+          this.publicaciones = res;
+        });
+        break;
+      default:
+        this.publicaciones = [];
+
+    }
+
    }
 
     segmentChanged(event: any){

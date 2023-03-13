@@ -8,6 +8,7 @@
     <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
 
 
+
       <ion-grid [fixed]="true" >
         <ion-row>
           <ion-col>
@@ -29,7 +30,8 @@
         </ion-row>
       </ion-grid>
 
-      <div *ngIf="optionSelected == 'PERRO'">
+
+      <div *ngIf="optionSelected == 'PERRO' " >
         <app-list-fichas [fichas]= "perroFicha$ | async"
         (fichaEdited)="reloadFichas()" (fichaDeleted)="reloadFichas()"></app-list-fichas>
       </div>

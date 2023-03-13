@@ -4,6 +4,7 @@ import { map, Observable, of } from 'rxjs';
 import { Donacion, Ficha, Publicacion } from '../models/models';
 import { convertSnaps } from './db-util';
 import 'firebase/compat/firestore';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -12,7 +13,8 @@ import 'firebase/compat/firestore';
 export class FirestoreService {
   path!: string;
 
-  constructor(public database : AngularFirestore) { }
+  constructor(public database : AngularFirestore,
+                  public user : UserService) { }
 
 
   createDoc(data: any, path: string, id: string) {
@@ -92,14 +94,19 @@ loadPublicacionByCategory(category: string): Observable<Publicacion[]> {
     );
 }
 
-
-loadPublicacionByUid(userId: string): Observable<Publicacion[]> {
-  if (userId) {
-    return this.database.collection<Publicacion>('Publicaciones', ref => ref.where('userId', '==', userId)).valueChanges();
-  } else {
-    return of([]);
-  }
+loadPublicacionByUserId(userId: string): Observable<Publicacion[]> {
+  return this.database.collection<Publicacion>('Publicaciones', ref => ref.where('userId', '==', userId))
+    .snapshotChanges()
+    .pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Publicacion;
+        const id = a.payload.doc.id;
+        return { ...data };
+      }))
+    );
 }
+
+
 
 
 loadFichaByEspecie(especie: string): Observable<Ficha[]> {
@@ -114,11 +121,21 @@ loadFichaByEspecie(especie: string): Observable<Ficha[]> {
     );
 }
 
-
-getCollection2<T>(path: string, queryFn?: QueryFn): Observable<T[]> {
-  const collectionRef = this.database.collection<T>(path, queryFn);
-  return collectionRef.valueChanges();
+loadFichasByUserId(userId: string): Observable<Ficha[]> {
+  return this.database.collection<Ficha>('Fichas', ref => ref.where('userId', '==', userId))
+    .snapshotChanges()
+    .pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Ficha;
+        const id = a.payload.doc.id;
+        return { ...data };
+      }))
+    );
 }
+
+
+
+
 
 
 }

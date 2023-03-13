@@ -14,7 +14,8 @@ import { UserInterface } from "../models/user-roles";
 export class UserService {
 
 
-  public userId!: string;
+  public userId: string = '';
+
 
   isLoggedIn$ : Observable<boolean>;
 
@@ -30,7 +31,6 @@ export class UserService {
     constructor( public afAuth : AngularFireAuth,
                  public router: Router,
                  public firestore: AngularFirestore) {
-
 
 
                   this.isLoggedIn$ = afAuth.authState.pipe(map(user => !!user));
@@ -59,9 +59,16 @@ export class UserService {
   }
 
 
-   getUserId() {
-    return this.userId;
+  getUserId2() {
+    return this.afAuth.authState.pipe(
+      map(user => user ? user.uid : null)
+    );
   }
+
+
+      getUserId() {
+        return this.userId;
+      }
 
 
 

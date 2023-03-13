@@ -9,11 +9,13 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content  class="ion-padding" [formGroup]="form">
   <ion-item  counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Nombre</ion-label>
     <ion-input type="text" placeholder="{{nombre}}"  formControlName="nombre" minlenght="0" maxlength="50"></ion-input>
   </ion-item>
+
   <ion-item counter="true" [counterFormatter]="customCounterFormatter">
     <ion-label position="stacked">Rut</ion-label>
     <ion-input type="text" placeholder="{{rut}}" formControlName="rut" minlenght="0" maxlength="9"></ion-input>
@@ -37,7 +39,6 @@
         <ion-select-option value="Banco Consorcio">Banco Consorcio</ion-select-option>
       </ion-select>
     </ion-item>
-
 
     <ion-item >
       <ion-label position="stacked">Tipo</ion-label>

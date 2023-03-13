@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Donacion, Ficha } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UserService } from 'src/app/services/user.service';
-
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-all-fichas',
@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AllFichasPage implements OnInit {
 
+
   perroFicha$!: Observable<Ficha[]>;
 
   gatoFicha$!: Observable<Ficha[]>;
@@ -19,34 +20,35 @@ export class AllFichasPage implements OnInit {
   otroFicha$!: Observable<Ficha[]>;
 
   fichas: Ficha[] = [];
-  users: any;
 
   optionSelected:string ='PERRO';
+
+  userId: string | null = null;
 
   constructor( public firestoreService : FirestoreService,
               public user: UserService) { }
 
   ngOnInit() {
 
-    this.users = this.user.getUserId();
+
     this.reloadFichas();
 
   }
 
-  getFichas() {
-    this.firestoreService.getCollection<Ficha>('Fichas').subscribe(res => {
-      this.fichas = res;
-    });
+
+
+  reloadFichas() {
+
+      this.perroFicha$ = this.firestoreService.loadFichasByUserId(this.user.userId)
+      this.perroFicha$ = this.firestoreService.loadFichaByEspecie('PERRO');
+      this.gatoFicha$ = this.firestoreService.loadFichasByUserId(this.user.userId)
+      this.gatoFicha$ = this.firestoreService.loadFichaByEspecie('GATO');
+      this.otroFicha$ = this.firestoreService.loadFichasByUserId(this.user.userId)
+      this.otroFicha$ = this.firestoreService.loadFichaByEspecie('OTRO');
+      this.publicacionesSeleccionadas();
+
   }
 
-  reloadFichas(){
-
-    this.perroFicha$ = this.firestoreService.loadFichaByEspecie('PERRO');
-    this.gatoFicha$ = this.firestoreService.loadFichaByEspecie('GATO');
-    this.otroFicha$ = this.firestoreService.loadFichaByEspecie('OTRO');
-
-    this.publicacionesSeleccionadas();
-  }
 
   publicacionesSeleccionadas() {
     switch (this.optionSelected) {
@@ -58,6 +60,7 @@ export class AllFichasPage implements OnInit {
       case 'GATO':
         this.gatoFicha$.subscribe(res => {
           this.fichas = res;
+
         });
         break;
       case 'OTRO':
@@ -67,6 +70,7 @@ export class AllFichasPage implements OnInit {
         break;
       default:
         this.fichas = [];
+
     }
   }
 
